@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { auth, signOut, signIn } from "@/auth";
 
-const NavBar = async () => {
+const Navbar = async () => {
     const session = await auth()
     return (
         <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
@@ -47,4 +47,4 @@ const NavBar = async () => {
     );
 };
 
-export default NavBar;
+export default Navbar;
