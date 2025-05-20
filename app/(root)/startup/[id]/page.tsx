@@ -1,4 +1,4 @@
-// import {Suspense} from 'react';
+import {Suspense} from 'react';
 import {client} from "@/sanity/lib/client";
 import {STARTUP_BY_ID_QUERY} from "@/sanity/lib/queries";
 import {notFound} from "next/navigation";
@@ -7,7 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import markdownit from "markdown-it";
-// import {Skeleton} from "@/components/ui/skeleton";
+import {Skeleton} from "@/components/ui/skeleton";
+import View from "@/components/View";
 
 const md = markdownit();
 
@@ -61,9 +62,9 @@ const Page = async ({params} : {params: Promise<{id: string}>}) => {
                 <hr className="divider"/>
 
                 {/* //TODO: EDITOR SELECTED STARTUPS   */}
-                {/*<Suspense fallback={<Skeleton className="view_skeleton" />}>*/}
-
-                {/*</Suspense>*/}
+                <Suspense fallback={<Skeleton className="view_skeleton" />}>
+                    <View id={id} />
+                </Suspense>
             </section>
         </>
     );
