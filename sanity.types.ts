@@ -236,6 +236,36 @@ export type STARTUP_VIEW_QUERYResult = {
   _id: string;
   views: number | null;
 } | null;
+// Variable: AUTHOR_BY_ID_QUERY
+// Query: *[_type == "author" && _id == $id][0] {  _id,  id,  name,   username,  email,   image,   bio}
+export type AUTHOR_BY_ID_QUERYResult = {
+  _id: string;
+  id: number | null;
+  name: string | null;
+  username: string | null;
+  email: string | null;
+  image: string | null;
+  bio: string | null;
+} | null;
+// Variable: STARTUPS_BY_AUTHOR_QUERY
+// Query: *[_type == "startup" && author._ref == $id] | order(_createdAt desc) {  _id,  title,  slug,  _createdAt,  author -> {    _id, image, name, username, bio  },  views,  description,  category,  image}
+export type STARTUPS_BY_AUTHOR_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  _createdAt: string;
+  author: {
+    _id: string;
+    image: string | null;
+    name: string | null;
+    username: string | null;
+    bio: string | null;
+  } | null;
+  views: number | null;
+  description: string | null;
+  category: string | null;
+  image: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -244,5 +274,7 @@ declare module "@sanity/client" {
     "*[_type == \"startup\" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc) {\n  _id,\n  title,\n  slug,\n  _createdAt,\n  author -> {\n    _id, image, name, username, bio\n  },\n  views,\n  description,\n  category,\n  image\n}": STARTUPS_QUERYResult;
     "\n*[_type == \"startup\" && _id == $id][0] {\n  _id,\n  title,\n  slug,\n  _createdAt,\n  author -> {\n    _id, image, name, username, bio\n  },\n  views,\n  description,\n  category,\n  image,\n  pitch\n}": STARTUP_BY_ID_QUERYResult;
     "\n    *[_type == \"startup\" && _id == $id][0] {\n        _id, views\n    }\n": STARTUP_VIEW_QUERYResult;
+    "\n*[_type == \"author\" && _id == $id][0] {\n  _id,\n  id,\n  name, \n  username,\n  email, \n  image, \n  bio\n}\n": AUTHOR_BY_ID_QUERYResult;
+    "*[_type == \"startup\" && author._ref == $id] | order(_createdAt desc) {\n  _id,\n  title,\n  slug,\n  _createdAt,\n  author -> {\n    _id, image, name, username, bio\n  },\n  views,\n  description,\n  category,\n  image\n}": STARTUPS_BY_AUTHOR_QUERYResult;
   }
 }
