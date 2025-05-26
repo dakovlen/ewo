@@ -63,8 +63,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={workSans.variable}>
-        <Analytics></Analytics>
         {children}
+        <Analytics />
       </body>
     </html>
   );
