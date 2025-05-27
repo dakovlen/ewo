@@ -1,5 +1,5 @@
-import { StartupCardSkeleton } from '@/components/StartupCard';
-import UserStartups from '@/components/UserStartups';
+import { PostCardSkeleton } from '@/components/PostCard';
+import UserPosts from '@/components/UserPosts';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
@@ -28,8 +28,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <Image
             src={user.image}
             alt={user.name}
-            width={220}
-            height={220}
+            width={120}
+            height={120}
             className="profile_image"
           />
 
@@ -41,11 +41,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <div className="flex-1 flex flex-col gap-5 lg:-mt-5">
           <p className="text-30-bold">
-            Startups
+            Posts
           </p>
           <ul className="card_grid-sm">
-            <Suspense fallback={<StartupCardSkeleton />}>
-              <UserStartups id={id} />
+            <Suspense fallback={<PostCardSkeleton />}>
+              <UserPosts id={id} />
             </Suspense>
           </ul>
         </div>

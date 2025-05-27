@@ -3,12 +3,12 @@ import {EyeIcon} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
-import { Startup, Author } from "@/sanity.types";
+import { Post, Author } from "@/sanity.types";
 import { Skeleton } from "./ui/skeleton";
 
-export type StartupTypeCard = Omit<Startup, "author"> & {author?: Author }
+export type PostTypeCard = Omit<Post, "author"> & {author?: Author }
 
-const StartupCard = ({ post }: { post: StartupTypeCard }) => {
+const PostCard = ({ post }: { post: PostTypeCard }) => {
     const { _createdAt, views, author, title, image, category, _id, description  } = post;
     return (
         <li className="startup-card group">
@@ -25,7 +25,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                         <p className="text-16-medium line-clamp-1">{author?.name}</p>
                     </Link>
 
-                    <Link href={`/startup/${_id}`}>
+                    <Link href={`/blog/${_id}`}>
                         <h3 className="text-26-semibold line-clamp-1">{title}</h3>
                     </Link>
                 </div>
@@ -40,7 +40,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                 </Link>
             </div>
 
-            <Link href={`/startup/${_id}`}>
+            <Link href={`/blog/${_id}`}>
                 <p className="startup-card_desc">
                     { description }
                 </p>
@@ -53,14 +53,14 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                     <p className="text-16-medium">{category}</p>
                 </Link>
                 <Button className="startup-card_btn" asChild>
-                    <Link href={`/startup/${_id}`}>Details</Link>
+                    <Link href={`/blog/${_id}`}>Details</Link>
                 </Button>
             </div>
         </li>
     );
 };
 
-export const StartupCardSkeleton = () => (
+export const PostCardSkeleton = () => (
     <>
         {[0,1,2,3,4].map((index: number) => (
             <li key={cn('skeleton', index)}>
@@ -70,4 +70,4 @@ export const StartupCardSkeleton = () => (
     </>
 )
 
-export default StartupCard;
+export default PostCard;
