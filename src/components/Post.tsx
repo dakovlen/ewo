@@ -28,6 +28,7 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
             width={400}
             height={400}
             alt=""
+            className="rounded-bl-xl w-full"
           />
         </figure>
       ) : null}
