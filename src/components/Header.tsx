@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Header() {
   return (
@@ -8,7 +9,13 @@ export function Header() {
           className="text-pink-700 md:text-xl font-bold tracking-tight"
           href="/"
         >
-          Elderly Wisdom
+          <Image
+            src="./logo.svg"
+            width={140}
+            height={40}
+            alt="Logo"
+            className="main-logo" />
+
         </Link>
         <ul className="flex items-center gap-4 font-semibold text-slate-700">
           <li>
@@ -16,17 +23,17 @@ export function Header() {
               className="hover:text-pink-500 transition-colors"
               href="/blog"
             >
-              Posts
+              Blog
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               className="hover:text-pink-500 transition-colors"
               href="/studio"
             >
               Sanity Studio
             </Link>
-          </li>
+          </li> */}
         </ul>
       </header>
     </div>

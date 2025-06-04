@@ -34,6 +34,9 @@ export const POST_QUERY =
   body,
   mainImage,
   publishedAt,
+  "seo": {
+    "title": coalesce(seo.title, title, ""),
+  },
   "categories": coalesce(
     categories[]->{
       _id,
