@@ -80,6 +80,13 @@ export type Post = {
     _key: string;
   }>;
   seo?: Seo;
+  relatedPosts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "post";
+  }>;
 };
 
 export type Seo = {
@@ -369,7 +376,7 @@ export type POSTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "seo": {    "title": coalesce(seo.title, title, ""),  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "seo": {    "title": coalesce(seo.title, title, ""),  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  },  relatedPosts[]{    _key, // required for drag and drop    ...@->{_id, title, slug} // get fields from the referenced post  }}
 export type POST_QUERYResult = {
   _id: string;
   title: string | null;
@@ -441,6 +448,12 @@ export type POST_QUERYResult = {
       _type: "image";
     } | null;
   } | null;
+  relatedPosts: Array<{
+    _key: string;
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
 } | null;
 
 // Query TypeMap
@@ -449,6 +462,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  },\n  relatedPosts[]{\n    _key, // required for drag and drop\n    ...@->{_id, title, slug} // get fields from the referenced post\n  }\n}": POST_QUERYResult;
   }
 }
