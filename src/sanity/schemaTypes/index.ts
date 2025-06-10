@@ -12,6 +12,7 @@ import { faqsType } from "./blocks/faqsType";
 import { featuresType } from "./blocks/featuresType";
 import { heroType } from "./blocks/heroType";
 import { splitImageType } from "./blocks/splitImageType";
+import { siteSettingsType } from "./siteSettingsType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -27,5 +28,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     featuresType,
     heroType,
     splitImageType,
+    siteSettingsType,
   ],
 }
