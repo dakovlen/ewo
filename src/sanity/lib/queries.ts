@@ -58,6 +58,9 @@ export const POST_QUERY =
 export const PAGE_QUERY =
   defineQuery(`*[_type == "page" && slug.current == $slug][0]{
   ...,
+  "seo": {
+    "title": coalesce(seo.title, title, ""),
+  },
   content[]{
     ...,
     _type == "faqs" => {
