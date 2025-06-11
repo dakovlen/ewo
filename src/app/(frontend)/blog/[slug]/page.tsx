@@ -3,6 +3,7 @@ import { client, sanityFetch } from '@/sanity/lib/client';
 import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Post } from '@/components/Post';
 import { notFound } from 'next/navigation';
+import { urlFor } from "@/sanity/lib/image";
 
 export async function generateStaticParams() {
   const slugs = await client
@@ -26,15 +27,15 @@ export async function generateMetadata({
     description: page.seo.description,
   };
 
-  if (page.seo.image) {
-    metadata.openGraph = {
-      images: {
-        url: urlFor(page.seo.image).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-      },
-    };
-  }
+  metadata.openGraph = {
+    images: {
+      url: page.seo.image
+        ? urlFor(page.seo.image).width(1200).height(630).url()
+        : `/api/og?id=${page._id}`,
+      width: 1200,
+      height: 630,
+    },
+  };
 
   if (page.seo.noIndex) {
     metadata.robots = "noindex";
