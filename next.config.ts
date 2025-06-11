@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
 
 const nextConfig: NextConfig = {
   images: {
@@ -19,6 +20,9 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  async redirects() {
+    return await fetchRedirects();
   },
 };
 
