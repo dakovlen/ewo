@@ -6,13 +6,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const paths = await client.fetch(SITEMAP_QUERY);
 
-    if (!paths) return [];
+    console.log("Fetched paths:", paths); // 🔍 показує все, що прийшло з Sanity
+
+    const validPaths = paths.filter(
+      (path) => typeof path.href === "string" && path.href.startsWith("/")
+    );
+
+    console.log("Valid paths:", validPaths); // 🔍 лише ті, що реально підуть у sitemap
+
+    if (!validPaths.length) return [];
 
     const baseUrl = process.env.VERCEL
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
 
-    return paths.map((path) => ({
+    return validPaths.map((path) => ({
       url: new URL(path.href!, baseUrl).toString(),
       lastModified: new Date(path._updatedAt),
       changeFrequency: "weekly",

@@ -788,7 +788,7 @@ export type POST_QUERYResult = {
   }> | null;
 } | null;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  ...,    "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    }  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{  ...,    "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->{        _id,        title,        body,        "text": pt::text(body)      }    }  }}
 export type PAGE_QUERYResult = {
   _id: string;
   _type: "page";
@@ -803,12 +803,8 @@ export type PAGE_QUERYResult = {
     title?: string;
     faqs: Array<{
       _id: string;
-      _type: "faq";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      body?: Array<{
+      title: string | null;
+      body: Array<{
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -838,7 +834,8 @@ export type PAGE_QUERYResult = {
         alt?: string;
         _type: "image";
         _key: string;
-      }>;
+      }> | null;
+      text: string;
     }> | null;
   } | {
     _key: string;
@@ -1118,8 +1115,11 @@ export type OG_IMAGE_QUERYResult = {
   } | null;
 } | null;
 // Variable: SITEMAP_QUERY
-// Query: *[_type in ["page", "post"] && defined(slug.current)] {    "href": select(      _type == "page" => "/" + slug.current,      _type == "post" => "/blog/" + slug.current,      slug.current    ),    _updatedAt}
+// Query: *[_type in ["page", "post"] && defined(slug.current)] {  "href": select(    _type == "page" && slug.current == "/" => "/",    _type == "page" => "/" + slug.current,    _type == "post" => "/blog/" + slug.current  ),  _updatedAt}
 export type SITEMAP_QUERYResult = Array<{
+  href: string | "/" | null;
+  _updatedAt: string;
+} | {
   href: string | null;
   _updatedAt: string;
 }>;
@@ -1131,10 +1131,10 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n    \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n    \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->{\n        _id,\n        title,\n        body,\n        \"text\": pt::text(body)\n      }\n    }\n  }\n}": PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }\n    }\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
     "\n  *[_id == $id][0]{\n    title,\n    \"image\": mainImage.asset->{\n      url,\n      metadata {\n        palette\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
-    "\n*[_type in [\"page\", \"post\"] && defined(slug.current)] {\n    \"href\": select(\n      _type == \"page\" => \"/\" + slug.current,\n      _type == \"post\" => \"/blog/\" + slug.current,\n      slug.current\n    ),\n    _updatedAt\n}\n": SITEMAP_QUERYResult;
+    "\n*[_type in [\"page\", \"post\"] && defined(slug.current)] {\n  \"href\": select(\n    _type == \"page\" && slug.current == \"/\" => \"/\",\n    _type == \"page\" => \"/\" + slug.current,\n    _type == \"post\" => \"/blog/\" + slug.current\n  ),\n  _updatedAt\n}\n": SITEMAP_QUERYResult;
   }
 }
