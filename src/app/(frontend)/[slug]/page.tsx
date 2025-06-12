@@ -24,6 +24,7 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
+    metadataBase: new URL('https://acme.com'),
     title: page.seo.title,
     description: page.seo.description,
   };
