@@ -14,6 +14,7 @@ import { heroType } from "./blocks/heroType";
 import { splitImageType } from "./blocks/splitImageType";
 import { siteSettingsType } from "./siteSettingsType";
 import { redirectType } from "./redirectType";
+import { socialType } from './socialType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -31,5 +32,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     splitImageType,
     siteSettingsType,
     redirectType,
+    socialType,
   ],
 }

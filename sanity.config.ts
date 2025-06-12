@@ -14,6 +14,7 @@ import { resolve } from '@/sanity/presentation/resolve'
 import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
+import { assist } from "@sanity/assist";
 
 export default defineConfig({
   basePath: '/studio',
@@ -34,6 +35,7 @@ export default defineConfig({
         },
       },
     }),
+    assist(),
   ],
   document: {
     newDocumentOptions: (prev) => prev.filter((item) => item.templateId !== "siteSettings"),
