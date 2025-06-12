@@ -1,14 +1,14 @@
-import {createClient, type QueryParams} from 'next-sanity'
+import { createClient, type QueryParams } from "next-sanity";
 
-import {apiVersion, dataset, projectId} from '../env'
+import { apiVersion, dataset, projectId } from "../env";
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: true,
-  stega: { studioUrl: '/studio' },
-})
+  stega: { studioUrl: "/studio" },
+});
 
 export async function sanityFetch<const QueryString extends string>({
   query,
@@ -16,15 +16,15 @@ export async function sanityFetch<const QueryString extends string>({
   revalidate = 60,
   tags = [],
 }: {
-  query: QueryString
-  params?: QueryParams
-  revalidate?: number | false
-  tags?: string[]
+  query: QueryString;
+  params?: QueryParams;
+  revalidate?: number | false;
+  tags?: string[];
 }) {
   return client.fetch(query, params, {
     next: {
-      revalidate: tags.length ? false : revalidate, // for simple, time-based revalidation
-      tags, // for tag-based revalidation
+      revalidate: tags.length ? false : revalidate,
+      tags,
     },
-  })
+  });
 }
