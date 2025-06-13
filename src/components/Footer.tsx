@@ -1,22 +1,25 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-export function Header() {
+export function Footer() {
   return ( 
-    <div className="sticky top-0 px-4 w-full z-10 backdrop-blur bg-white">
-      <header className="flex items-center justify-between p-6 rounded-lg container mx-auto shadow-teal-50">
+    
+      <footer className="bg-slate-900">
+        <div className="container flex items-center justify-between p-6 rounded-lg mx-auto">
+
+        
         <Link
-          className="text-teal-700 md:text-xl font-bold tracking-tight"
+          className="text-teal-900 md:text-xl font-bold tracking-tight"
           href="/"
         >
           <Image
-            src="./logo.svg"
-            width={140}
-            height={40}
+            src="./logo-white.svg"
+            width={240}
+            height={60}
             alt="Logo"
             className="main-logo" />
         </Link>
-        <ul className="flex items-center gap-4 font-semibold text-slate-700">
+        <ul className="flex items-center gap-4 font-semibold text-slate-100">
           <li>
             <Link
               className="hover:text-teal-700 transition-colors"
@@ -42,7 +45,7 @@ export function Header() {
             </Link>
           </li> */}
         </ul>
-      </header>
-    </div>
+        </div>
+      </footer>
   )
 }
