@@ -19,7 +19,13 @@ export const POSTS_QUERY =
   author->{
     name,
     image
-  }
+  },
+  "seo": {
+    "title": coalesce(seo.title, title, ""),
+    "description": coalesce(seo.description,  ""),
+    "image": seo.image,
+    "noIndex": seo.noIndex == true
+  },
 }`);
 
 export const POSTS_SLUGS_QUERY =
@@ -36,6 +42,9 @@ export const POST_QUERY =
   publishedAt,
   "seo": {
     "title": coalesce(seo.title, title, ""),
+    "description": coalesce(seo.description,  ""),
+    "image": seo.image,
+    "noIndex": seo.noIndex == true
   },
   "categories": coalesce(
     categories[]->{
@@ -81,6 +90,12 @@ export const PAGE_QUERY =
 export const HOME_PAGE_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
     homePage->{
       ...,
+      "seo": {
+        "title": coalesce(seo.title, title, ""),
+        "description": coalesce(seo.description,  ""),
+        "image": seo.image,
+        "noIndex": seo.noIndex == true
+      },
       content[]{
         ...,
         _type == "faqs" => {
@@ -111,16 +126,6 @@ export const OG_IMAGE_QUERY = defineQuery(`
   }    
 `);
 
-// export const SITEMAP_QUERY = defineQuery(`
-// *[_type in ["page", "post"] && defined(slug.current)] {
-//     "href": select(
-//       _type == "page" => "/" + slug.current,
-//       _type == "post" => "/blog/" + slug.current,
-//       slug.current
-//     ),
-//     _updatedAt
-// }
-// `)
 export const SITEMAP_QUERY = defineQuery(`
 *[_type in ["page", "post"] && defined(slug.current)] {
   "href": select(

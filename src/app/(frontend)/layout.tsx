@@ -11,7 +11,7 @@ export default async function FrontendLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="bg-white min-h-screen">
+    <section className="bg-white min-h-screen flex flex-col">
       <Header />
       {children}
       <Footer />
