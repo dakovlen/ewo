@@ -51,6 +51,7 @@ export function PageBuilder({
         type: documentType,
         path: "content",
       }).toString()}
+      className="flex-1"
     >
       {blocks.map((block) => {
         const DragHandle = ({ children }: { children: React.ReactNode }) => (

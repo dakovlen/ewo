@@ -11,7 +11,7 @@ export function Header() {
         >
           <Image
             src="./logo.svg"
-            width={140}
+            width={240}
             height={40}
             alt="Logo"
             className="main-logo" />

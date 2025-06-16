@@ -11,28 +11,29 @@ type HeroProps = Extract<
 
 export function Hero({ title, text, image }: HeroProps) {
   return (
-    <section className="isolate w-full aspect-[2/1] py-16 relative overflow-hidden">
-      <div className="relative flex flex-col justify-center items-center gap-8 h-full z-20">
+    <section className="w-full bg-gray-100 dark:bg-gray-900 py-30 relative overflow-hidden">
+      <div className="container mx-auto px-4 text-center z-10">
         {title ? (
-          // <h1 className="text-2xl md:text-4xl lg:text-6xl font-semibold text-white text-pretty max-w-3xl">
-          //   {title}
-          // </h1>
-          <Title>{title}</Title>
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 max-w-5xl mx-auto">
+            {title}
+          </h1>
         ) : null}
-        <div className="prose-lg lg:prose-xl prose-invert flex items-center">
+        <div className="text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto">
           {text ? <PortableText value={text} /> : null}
         </div>
+        {/* <Button className="text-lg px-8 py-4">Get Started</Button> */}
       </div>
-      <div className="absolute inset-0 bg-teal-700 z-10" />
-      {image ? (
-        <Image
-          className="absolute inset-0 object-cover blur-sm"
-          src={urlFor(image).width(1600).height(800).url()}
-          width={1600}
-          height={800}
-          alt=""
-        />
-      ) : null}
+      {/* <div className="absolute inset-0 bg-teal-900 opacity-50 z-0">
+        {image ? (
+          <Image
+            className="absolute inset-0 object-cover blur-sm w-full"
+            src={urlFor(image).width(1600).height(800).url()}
+            width={1600}
+            height={800}
+            alt=""
+          />
+        ) : null}
+      </div> */}
     </section>
   );
 }
