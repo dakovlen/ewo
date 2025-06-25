@@ -38,6 +38,7 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
             width={400}
             height={400}
             alt=""
+            className="rounded-lg object-center"
           />
         </figure>
       ) : null}
