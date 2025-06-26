@@ -19,7 +19,7 @@ export function LatestPosts({ posts }: Props) {
   if (!posts?.length) return null;
 
   return (
-    <section className="my-12 container mx-auto">
+    <section className="my-12 container mx-auto px-4">
       <h2 className="title text-center">Latest Posts</h2>
       <div className="grid md:grid-cols-3 gap-6">
         {posts.map((post) => (
