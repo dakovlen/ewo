@@ -136,3 +136,14 @@ export const SITEMAP_QUERY = defineQuery(`
   _updatedAt
 }
 `);
+
+export const LATEST_POSTS_QUERY = `
+  *[_type == "post"] | order(_createdAt desc)[0...3] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    mainImage,
+    _createdAt
+  }
+`;

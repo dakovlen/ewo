@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import { PageBuilder } from "@/components/PageBuilder";
+import { LatestPosts } from "@/components/LatestPosts";
 import { sanityFetch } from "@/sanity/lib/live";
-import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import { HOME_PAGE_QUERY, LATEST_POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
-const getHomePage = async () =>
+const getHomePage = () =>
   sanityFetch({
     query: HOME_PAGE_QUERY,
   });
 
+const getLatestPosts = () =>
+  sanityFetch({
+    query: LATEST_POSTS_QUERY,
+  });
+
 export async function generateMetadata(): Promise<Metadata> {
   const { data: page } = await getHomePage();
-
   const homePage = page?.homePage;
 
   if (!homePage) {
@@ -22,15 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL("https://acme.com"),
     title: homePage.seo?.title || "Default title",
     description: homePage.seo?.description || "Default description",
-  };
-
-  metadata.openGraph = {
-    images: {
-      url: homePage.seo?.image
-        ? urlFor(homePage.seo.image).width(1200).height(630).url()
-        : `/api/og?id=${homePage._id}`,
-      width: 1200,
-      height: 630,
+    openGraph: {
+      images: {
+        url: homePage.seo?.image
+          ? urlFor(homePage.seo.image).width(1200).height(630).url()
+          : `/api/og?id=${homePage._id}`,
+        width: 1200,
+        height: 630,
+      },
     },
   };
 
@@ -42,14 +46,27 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { data: page } = await getHomePage();
-  const homePage = page?.homePage;
+  const [homePageData, latestPostsData] = await Promise.all([
+    getHomePage(),
+    getLatestPosts(),
+  ]);
 
-  return homePage?.content ? (
-    <PageBuilder
-      documentId={homePage._id}
-      documentType={homePage._type}
-      content={homePage.content}
-    />
-  ) : null;
+  const homePage = homePageData?.data?.homePage;
+  const latestPosts = latestPostsData?.data || [];
+
+  if (!homePage?.content) {
+    return null;
+  }
+
+  return (
+    <>
+      <PageBuilder
+        documentId={homePage._id}
+        documentType={homePage._type}
+        content={homePage.content}
+      />
+
+      <LatestPosts posts={latestPosts} />
+    </>
+  );
 }

@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+
+.title {
+  @apply text-xl mx-auto md:text-2xl lg:text-5xl font-semibold text-slate-800 text-pretty mb-3;
+}
