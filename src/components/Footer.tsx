@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function Footer() {
   return (
 
     <footer className="bg-slate-900 pt-10 pb-6">
-      <div className="container flex items-center justify-between rounded-lg mx-auto">
+      <div className="container flex items-center justify-between mx-auto">
         <Link
           className="text-teal-900 md:text-xl font-bold tracking-tight"
           href="/"
@@ -43,12 +44,15 @@ export function Footer() {
             </Link>
           </li> */}
         </ul>
+
+        <SocialLinks size="sm" />
       </div>
       <div className="container mx-auto">
-        <hr className="text-white my-5"/>
+        <hr className="text-white my-5" />
 
         <div className="flex flex-col">
-          <p className="text-white">© All rights reserved. 
+          <p className="text-white text-center">
+            ElderlyWisdom.org © {new Date().getFullYear()} All rights reserved.
             {/* Made by D */}
           </p>
         </div>
