@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { Button } from "@/components/ui/button";
 
 type Post = {
   _id: string;
@@ -44,6 +45,11 @@ export function LatestPosts({ posts }: Props) {
             </Link>
           </article>
         ))}
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2 md:flex-row my-10">
+        <Button asChild size="lg" className="bg-teal-700">
+          <Link href="/blog">All article</Link>
+        </Button>
       </div>
     </section>
   );
