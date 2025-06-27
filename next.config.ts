@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
+// import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
 
 const nextConfig: NextConfig = {
   images: {
@@ -22,7 +22,13 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   async redirects() {
-    return await fetchRedirects();
+    return [
+      {
+        source: "/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits/",
+        destination: "/blog/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits",
+        permanent: true, // true = 301, false = 302
+      },
+    ];
   },
 };
 
