@@ -3,6 +3,7 @@ import { PageBuilder } from "@/components/PageBuilder";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { notFound } from "next/navigation";
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
@@ -20,7 +21,7 @@ export async function generateMetadata({
   const { data: page } = await getPage(params);
 
   if (!page) {
-    return {}
+    notFound();
   }
 
   const metadata: Metadata = {
