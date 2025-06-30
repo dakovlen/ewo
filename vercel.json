@@ -1,47 +1,49 @@
-"redirects": [
-  {
-    destination: '/blog/can-curiosity-actually-make-you-healthier-lets-dive-in',
-    permanent: true,
-    source: '/can-curiosity-actually-make-you-healthier-lets-dive-in/'
-  },
-  {
-    destination: '/blog/when-your-kids-dont-respect-you-do-this-instead-6-powerful-ways-to-reclaim-your-respect',
-    permanent: true,
-    source: '/when-your-kids-dont-respect-you-do-this-instead-6-powerful-ways-to-reclaim-your-respect/'
-  },
-  {
-    destination: '/blog/7-tips-to-help-seniors-sleep-soundly-through-the-night',
-    permanent: true,
-    source: '/7-tips-to-help-seniors-sleep-soundly-through-the-night/'
-  },
-  {
-    destination: '/blog/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected',
-    permanent: true,
-    source: '/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected/'
-  },
-  {
-    destination: '/blog/reclaiming-your-joy-how-to-stop-caring-what-others-think-after-60',
-    permanent: true,
-    source: '/reclaiming-your-joy-how-to-stop-caring-what-others-think-after-60/'
-  },
-  {
-    destination: '/blog/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits',
-    permanent: true,
-    source: '/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits'
-  },
-  {
-    destination: '/blog/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier',
-    permanent: true,
-    source: '/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier/'
-  },
-  {
-    destination: '/blog/5-foods-that-turn-back-the-clock-after-65',
-    permanent: true,
-    source: '/5-foods-that-turn-back-the-clock-after-65/'
-  },
-  {
-    destination: '/blog/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life',
-    permanent: true,
-    source: '/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life/'
-  }
-]
+{
+  "redirects": [
+    {
+      "destination": "/blog/can-curiosity-actually-make-you-healthier-lets-dive-in",
+      "permanent": true,
+      "source": "/can-curiosity-actually-make-you-healthier-lets-dive-in/"
+    },
+    {
+      "destination": "/blog/when-your-kids-dont-respect-you-do-this-instead-6-powerful-ways-to-reclaim-your-respect",
+      "permanent": true,
+      "source": "/when-your-kids-dont-respect-you-do-this-instead-6-powerful-ways-to-reclaim-your-respect/"
+    },
+    {
+      "destination": "/blog/7-tips-to-help-seniors-sleep-soundly-through-the-night",
+      "permanent": true,
+      "source": "/7-tips-to-help-seniors-sleep-soundly-through-the-night/"
+    },
+    {
+      "destination": "/blog/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected",
+      "permanent": true,
+      "source": "/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected/"
+    },
+    {
+      "destination": "/blog/reclaiming-your-joy-how-to-stop-caring-what-others-think-after-60",
+      "permanent": true,
+      "source": "/reclaiming-your-joy-how-to-stop-caring-what-others-think-after-60/"
+    },
+    {
+      "destination": "/blog/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits",
+      "permanent": true,
+      "source": "/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits"
+    },
+    {
+      "destination": "/blog/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier",
+      "permanent": true,
+      "source": "/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier/"
+    },
+    {
+      "destination": "/blog/5-foods-that-turn-back-the-clock-after-65",
+      "permanent": true,
+      "source": "/5-foods-that-turn-back-the-clock-after-65/"
+    },
+    {
+      "destination": "/blog/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life",
+      "permanent": true,
+      "source": "/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life/"
+    }
+  ]
+}
