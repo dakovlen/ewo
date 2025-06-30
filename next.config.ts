@@ -21,20 +21,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-    async redirects() {
-    try {
-      const sanityRedirects = await fetchRedirects();
-      
-      return sanityRedirects.map((redirect) => ({
-        source: redirect.source,
-        destination: redirect.destination,
-        permanent: redirect.permanent,
-      }));
-    } catch (error) {
-      console.error('Failed to fetch redirects for next.config.js:', error);
-      return [];
-    }
-  },
+  async redirects() {
+    const redirects = await fetchRedirects();
+    console.log('Fetched redirects:', redirects);
+    return redirects;
+  }
 };
 
 export default nextConfig;
