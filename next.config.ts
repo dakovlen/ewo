@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-// import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
+import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
 
 const nextConfig: NextConfig = {
   images: {
@@ -21,14 +21,19 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  async redirects() {
-    return [
-      {
-        source: "/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits/",
-        destination: "/blog/after-60-do-this-every-morning-to-potentially-live-10-years-longer-5-science-backed-habits",
-        permanent: true, // true = 301, false = 302
-      },
-    ];
+    async redirects() {
+    try {
+      const sanityRedirects = await fetchRedirects();
+      
+      return sanityRedirects.map((redirect) => ({
+        source: redirect.source,
+        destination: redirect.destination,
+        permanent: redirect.permanent,
+      }));
+    } catch (error) {
+      console.error('Failed to fetch redirects for next.config.js:', error);
+      return [];
+    }
   },
 };
 
