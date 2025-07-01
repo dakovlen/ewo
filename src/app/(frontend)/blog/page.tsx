@@ -2,6 +2,8 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { POSTS_QUERY } from '@/sanity/lib/queries'
 import { PostCard } from '@/components/PostCard'
 import { Title } from '@/components/Title'
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Page() {
   const posts = await sanityFetch({
@@ -19,9 +21,13 @@ export default async function Page() {
             Our blog
           </h1>
           
-          <div className="text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto">
+          <div className="text-2xl text-gray-700 dark:text-gray-300 max-w-5xl mx-auto">
             Welcome to the ElderlyWisdom blog! Here you will find all of our best guides related to senior living.
           </div>
+
+           <Button asChild size="xl" className="bg-teal-700 mt-10">
+            <Link href="https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1">🌟 Get Inspired – Watch Us on YouTube</Link>
+          </Button>
         </div>
       </section>
       <main className="container mx-auto grid grid-cols-1 gap-6 p-12 flex-1">

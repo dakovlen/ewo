@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Title } from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult } from "@/sanity/types";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 type HeroProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -21,7 +23,9 @@ export function Hero({ title, text, image }: HeroProps) {
         <div className="text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto">
           {text ? <PortableText value={text} /> : null}
         </div>
-        {/* <Button className="text-lg px-8 py-4">Get Started</Button> */}
+        <Button asChild size="xl" className="bg-teal-700 mt-10">
+          <Link href="https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1">🌟 Get Inspired – Watch Us on YouTube</Link>
+        </Button>
       </div>
       {/* <div className="absolute inset-0 bg-teal-900 opacity-50 z-0">
         {image ? (
