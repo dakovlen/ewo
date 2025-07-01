@@ -35,11 +35,11 @@ export function FAQs({ _key, title, faqs }: FAQsProps) {
         </h2>
       ) : null}
       {Array.isArray(faqs) ? (
-        <div className="max-w-2xl mx-auto border-b border-pink-200">
+        <div className="border-b border-teal-600">
           {faqs.map((faq) => (
             <details
               key={faq._id}
-              className="group [&[open]]:bg-pink-50 transition-colors duration-100 px-4 border-t border-pink-200"
+              className="group [&[open]]:bg-teal-50 transition-colors duration-100 px-4 border-t border-teal-600"
               name={_key}
             >
               <summary className="text-xl font-semibold text-slate-800 list-none cursor-pointer py-4 flex items-center justify-between">
