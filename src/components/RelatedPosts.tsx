@@ -61,7 +61,7 @@ export function RelatedPosts({
                 path: `relatedPosts[_key=="${post._key}"]`,
               }).toString()}
             >
-              <Link href={`/posts/${post?.slug?.current}`}>{post.title}</Link>
+              <Link href={`/blog/${post?.slug?.current}`}>{post.title}</Link>
             </li>
           ))}
         </ul>
