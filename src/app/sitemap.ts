@@ -16,9 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (!validPaths.length) return [];
 
-    const baseUrl = process.env.VERCEL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+    const baseUrl = process.env.SITE_URL || "http://localhost:3000";
 
     return validPaths.map((path) => ({
       url: new URL(path.href!, baseUrl).toString(),
