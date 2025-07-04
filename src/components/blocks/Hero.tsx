@@ -16,7 +16,7 @@ export function Hero({ title, text, image }: HeroProps) {
     <section className="w-full bg-gray-100 dark:bg-gray-900 py-30 relative overflow-hidden">
       <div className="container mx-auto px-4 text-center z-10">
         {title ? (
-          <h1 className="text-xl md:text-7xl font-bold mb-6 max-w-5xl mx-auto bg-gradient-to-r from-teal-600 to-teal-300 inline-block text-transparent bg-clip-text leading-[1.2]">
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 max-w-5xl mx-auto bg-gradient-to-r from-teal-600 to-teal-300 inline-block text-transparent bg-clip-text leading-[1.2]">
             {title}
           </h1>
         ) : null}
