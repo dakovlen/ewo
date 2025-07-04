@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { PortableText, PortableTextComponents } from "next-sanity";
 import { components as baseComponents } from "@/sanity/portableTextComponents";
