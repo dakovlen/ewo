@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://elderlywisdom.org/sitemap.xml
+Host: https://elderlywisdom.org
