@@ -85,7 +85,7 @@ export default async function Page({ params }: RouteProps) {
   }
 
   return (
-    <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
+    <main className="container mx-auto grid grid-cols-1 gap-6 py-3 md:py-10">
       <Post {...post} />
     </main>
   );

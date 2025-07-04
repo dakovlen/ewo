@@ -86,7 +86,7 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <TableOfContents headings={headings} />
-        <section className="lg:col-span-9 prose lg:prose-lg">
+        <section className="lg:col-span-9 lg:prose-xl prose max-w-none">
           <PortableText value={body} components={extendedComponents} />
           <RelatedPosts
             relatedPosts={relatedPosts}

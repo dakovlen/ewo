@@ -7,33 +7,36 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export function PostCard(props: POSTS_QUERYResult[0]) {
-  const { title, author, mainImage, publishedAt, categories } = props
+  const { title, author, mainImage, publishedAt, categories, slug } = props
 
   return (
-    <Link className="group" href={`/blog/${props.slug!.current}`}>
-      <article className="flex flex-col-reverse gap-4 md:grid md:grid-cols-12 md:gap-0">
-        <div className="md:col-span-2 md:pt-1">
-          <Categories categories={categories} />
-        </div>
-        <div className="md:col-span-5 md:w-full">
-          <h2 className="text-2xl text-pretty font-semibold text-slate-800 group-hover:text-pink-600 transition-colors relative">
-            <span className="relative z-[1]">{title}</span>
-            <span className="bg-pink-50 z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
-          </h2>
-          <div className="flex items-center mt-2 md:mt-6 gap-x-6">
+    <Link href={`/blog/${slug!.current}`} className="group block rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow bg-white dark:bg-gray-800">
+      <article className="flex flex-col h-full">
+        {mainImage && (
+          <div className="relative w-full h-48 sm:h-56 md:h-64 lg:h-48 xl:h-56">
+            <Image
+              src={urlFor(mainImage).width(800).height(400).url()}
+              alt={mainImage.alt || title || ''}
+              fill
+              className="object-cover object-center"
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              priority
+            />
+          </div>
+        )}
+
+        <div className="p-5 flex flex-col flex-1 justify-between">
+          <div className="mb-4">
+            <Categories categories={categories} />
+            <h2 className="text-2xl font-semibold text-slate-800 dark:text-white group-hover:text-teal-600 transition-colors leading-snug mt-2">
+              {title}
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
             <Author author={author} />
             <PublishedAt publishedAt={publishedAt} />
           </div>
-        </div>
-        <div className="md:col-start-9 md:col-span-4 rounded-lg overflow-hidden flex">
-          {mainImage ? (
-            <Image
-              src={urlFor(mainImage).width(400).height(200).url()}
-              width={400}
-              height={200}
-              alt={mainImage.alt || title || ''}
-            />
-          ) : null}
         </div>
       </article>
     </Link>
