@@ -8,6 +8,43 @@ import { Pagination } from "@/components/Pagination";
 
 const POSTS_PER_PAGE = 12;
 
+export async function generateMetadata() {
+  return {
+    title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
+    description:
+      'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+    alternates: {
+      canonical: 'https://elderlywisdom.org/blog',
+    },
+    openGraph: {
+      title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
+      description:
+        'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+      url: 'https://elderlywisdom.org/blog',
+      siteName: 'ElderlyWisdom',
+      locale: 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: 'https://elderlywisdom.org/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'ElderlyWisdom – A Blog for Seniors',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
+      description:
+        'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+      site: '@SolanVoss',
+      images: ['https://elderlywisdom.org/og-image.jpg'],
+    },
+  };
+}
+
+
 export default async function Page({
   searchParams,
 }: {
