@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
+import { siteConfig } from '@/lib/siteConfig';
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
@@ -23,11 +24,17 @@ export async function generateMetadata({
   if (!page) {
     notFound();
   }
+  
+  const resolvedParams = await params;
+  const canonicalUrl = `${siteConfig.baseUrl}/${resolvedParams.slug}`;
 
   const metadata: Metadata = {
     metadataBase: new URL('https://acme.com'),
     title: page.seo.title,
     description: page.seo.description,
+     alternates: {
+      canonical: canonicalUrl,
+    },
   };
 
   metadata.openGraph = {

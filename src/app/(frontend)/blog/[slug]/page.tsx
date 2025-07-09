@@ -4,6 +4,7 @@ import { Post } from '@/components/Post';
 import { notFound } from 'next/navigation';
 import { urlFor } from '@/sanity/lib/image';
 import { Metadata } from 'next';
+import { siteConfig } from '@/lib/siteConfig';
 
 // Типи для кращої типізації
 interface RouteProps {
@@ -47,10 +48,16 @@ export async function generateMetadata({
   if (!post) {
     return {};
   }
+  
+  const resolvedParams = await params;
+  const canonicalUrl = `${siteConfig.baseUrl}/blog/${resolvedParams.slug}`;
 
   const metadata: Metadata = {
     title: post.seo?.title || 'Blog Post',
     description: post.seo?.description || '',
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 
   if (post.seo?.image) {

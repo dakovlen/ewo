@@ -4,6 +4,7 @@ import { LatestPosts } from "@/components/LatestPosts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY, LATEST_POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { siteConfig } from '@/lib/siteConfig';
 
 const getHomePage = () =>
   sanityFetch({
@@ -35,6 +36,9 @@ export async function generateMetadata(): Promise<Metadata> {
         width: 1200,
         height: 630,
       },
+    },
+    alternates: {
+      canonical: siteConfig.baseUrl,
     },
   };
 
