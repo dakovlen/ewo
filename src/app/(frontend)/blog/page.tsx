@@ -12,14 +12,14 @@ export async function generateMetadata() {
   return {
     title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
     description:
-      'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+      'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
     alternates: {
       canonical: 'https://elderlywisdom.org/blog',
     },
     openGraph: {
       title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
       description:
-        'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+        'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
       url: 'https://elderlywisdom.org/blog',
       siteName: 'ElderlyWisdom',
       locale: 'en_US',
@@ -37,7 +37,7 @@ export async function generateMetadata() {
       card: 'summary_large_image',
       title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
       description:
-        'Explore our thoughtful blog posts focused on senior living, health, hobbies, and aging gracefully – brought to you by ElderlyWisdom.',
+        'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
       site: '@SolanVoss',
       images: ['https://elderlywisdom.org/og-image.jpg'],
     },
@@ -72,11 +72,11 @@ export default async function Page({
       <section className="w-full bg-gray-100 dark:bg-gray-900 py-30 relative overflow-hidden">
         <div className="container mx-auto px-4 text-center z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-5xl mx-auto bg-gradient-to-r from-teal-600 to-teal-300 inline-block text-transparent bg-clip-text leading-[1.2]">
-            Our blog
+            ElderlyWisdom Blog: Inspiring Reads for Seniors
           </h1>
-          <div className="text-2xl text-gray-700 dark:text-gray-300 max-w-5xl mx-auto">
-            Welcome to the ElderlyWisdom blog! Here you will find all of our best guides related to senior living.
-          </div>
+          <h2 className="text-2xl text-gray-700 dark:text-gray-300 max-w-5xl mx-auto">
+            Discover thoughtful articles on senior well-being, hobbies, brain health, and graceful aging — written to uplift and empower life after 60.
+          </h2>
           <Button asChild size="xl" className="bg-teal-700 mt-10">
             <Link href="https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1">
               🌟 Get Inspired – Watch Us on YouTube
