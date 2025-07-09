@@ -1,32 +1,39 @@
 import { defineQuery } from "next-sanity";
 
-export const POSTS_QUERY =
-  defineQuery(`*[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{
-  _id,
-  title,
-  slug,
-  body,
-  mainImage,
-  publishedAt,
-  "categories": coalesce(
-    categories[]->{
+// Пагінований запит для постів
+export const getPostsQuery = (offset = 0, limit = 12) =>
+  defineQuery(`*[_type == "post" && defined(slug.current)] 
+    | order(publishedAt desc) 
+    [${offset}...${offset + limit}]{
       _id,
+      title,
       slug,
-      title
-    },
-    []
-  ),
-  author->{
-    name,
-    image
-  },
-  "seo": {
-    "title": coalesce(seo.title, title, ""),
-    "description": coalesce(seo.description,  ""),
-    "image": seo.image,
-    "noIndex": seo.noIndex == true
-  },
-}`);
+      body,
+      mainImage,
+      publishedAt,
+      "categories": coalesce(
+        categories[]->{
+          _id,
+          slug,
+          title
+        },
+        []
+      ),
+      author->{
+        name,
+        image
+      },
+      "seo": {
+        "title": coalesce(seo.title, title, ""),
+        "description": coalesce(seo.description,  ""),
+        "image": seo.image,
+        "noIndex": seo.noIndex == true
+      }
+  }`);
+
+// Загальна кількість постів (для пагінації)
+export const POSTS_TOTAL_COUNT_QUERY =
+  defineQuery(`count(*[_type == "post" && defined(slug.current)])`);
 
 export const POSTS_SLUGS_QUERY =
   defineQuery(`*[_type == "post" && defined(slug.current)]{ 
