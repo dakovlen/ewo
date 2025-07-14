@@ -67,7 +67,7 @@ export async function GET(request: Request) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={urlFor(data.image).width(500).height(630).url()}
-                alt=""
+                alt={text || 'Open Graph image'}
                 tw="w-full h-full object-cover"
               />
             </div>
