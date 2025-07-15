@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import Script from "next/script";
+import { Toaster } from 'sonner';
 
 export default function RootLayout({
   children,
@@ -24,16 +25,22 @@ export default function RootLayout({
           }}
         />
       </head>
-      {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-59QTTF7Q"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-      <body>{children}</body>
+      <body>
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `
+              <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59QTTF7Q"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            `,
+          }}
+        />
+        {children}
+        <Toaster
+          position="top-center"
+          richColors
+          closeButton
+        />
+      </body>
     </html>
   );
 }

@@ -6,6 +6,9 @@ import clsx from "clsx";
 import { FacebookIcon } from "./icons/FacebookIcon";
 import { YoutubeIcon } from "./icons/YoutubeIcon";
 import { EmailIcon } from "./icons/EmailIcon";
+import { PinterestIcon } from "./icons/PinterestIcon";
+import { TwitterIcon } from "./icons/TwitterIcon";
+import { AmazonIcon } from "./icons/AmazonIcon";
 
 type Size = "sm" | "md" | "lg";
 
@@ -20,11 +23,27 @@ const socials = [
     icon: YoutubeIcon,
     label: "YouTube",
   },
+   {
+    href: "https://pinterest.com/SolanVossPro",
+    icon: PinterestIcon,
+    label: "Pinterest",
+  },
+   {
+    href: "https://x.com/SolanVoss",
+    icon: TwitterIcon,
+    label: "Twitter",
+  },
+  {
+    href: "https://www.amazon.de/stores/Solan-Voss/author/B0F8QWL2FP",
+    icon: AmazonIcon,
+    label: "Amazon KDP",
+  },
   {
     href: "mailto:elderly.wisdom.daily@gmail.com",
     icon: EmailIcon,
     label: "elderly.wisdom.daily@gmail.com",
   },
+  
 ];
 
 export function SocialLinks({ size = "md" }: { size?: Size }) {
