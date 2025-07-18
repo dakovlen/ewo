@@ -5,7 +5,6 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY, LATEST_POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { siteConfig } from '@/lib/siteConfig';
-import SubscribeForm from "@/components/SubscribeForm";
 
 const getHomePage = () =>
   sanityFetch({
@@ -72,7 +71,6 @@ export default async function Page() {
       />
 
       <LatestPosts posts={latestPosts} />
-      <SubscribeForm />
     </>
   );
 }

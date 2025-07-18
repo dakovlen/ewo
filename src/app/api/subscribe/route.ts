@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import validator from 'validator';
+import { addContactToBrevo } from '@/lib/brevo';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -11,16 +12,15 @@ export async function POST(req: NextRequest) {
   try {
     const { email, token } = await req.json();
 
-    // 🔐 Валідація email
+    // Валідація email
     if (!email || typeof email !== 'string') {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
-
     if (!validator.isEmail(email)) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    // 🔐 Перевірка reCAPTCHA
+    // Перевірка reCAPTCHA
     const captchaSecret = process.env.RECAPTCHA_SECRET_KEY;
     const verifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed reCAPTCHA verification' }, { status: 400 });
     }
 
-    // 🔍 Перевірка на дублі
+    // Перевірка дубліката
     const { data: existing } = await supabase
       .from('emails')
       .select('email')
@@ -47,11 +47,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Email already subscribed' }, { status: 200 });
     }
 
-    // 💾 Збереження
+    // Збереження email у Supabase
     const { error } = await supabase.from('emails').insert([{ email }]);
-
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // Додавання до Brevo
+    try {
+      await addContactToBrevo(email);
+    } catch (brevoErr: any) {
+      console.error('Brevo error:', brevoErr);
     }
 
     return NextResponse.json({ message: 'Subscription successful' }, { status: 200 });

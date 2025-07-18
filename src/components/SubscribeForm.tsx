@@ -19,7 +19,7 @@ async function waitForRecaptcha(): Promise<void> {
 
     const interval = setInterval(() => {
       elapsed += intervalTime;
-      if (window.grecaptcha) {
+      if ((window as any).grecaptcha) {
         clearInterval(interval);
         resolve();
       } else if (elapsed >= maxTime) {
@@ -36,10 +36,12 @@ async function subscribe(email: string, token: string) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, token }),
   });
+
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
     throw new Error(errorData.error || 'Subscription failed');
   }
+
   return res.json();
 }
 
@@ -70,7 +72,8 @@ export default function SubscribeForm() {
 
     try {
       await waitForRecaptcha();
-      const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'subscribe' });
+      const token = await (window as any).grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'subscribe' });
+
       await subscribe(email, token);
 
       setStatus('success');
@@ -78,10 +81,11 @@ export default function SubscribeForm() {
       toast.success('Thank you for subscribing!');
     } catch (error: any) {
       setStatus('error');
+      console.error(error);
       toast.error(error.message || 'Something went wrong.');
     }
   };
-console.log('Button disabled:', status === 'loading');
+
   return (
     <>
       <Script
