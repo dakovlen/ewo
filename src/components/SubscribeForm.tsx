@@ -1,33 +1,15 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { toast } from 'sonner';
 import Script from 'next/script';
+import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Button } from './ui/button';
+import { getRecaptchaToken } from '@/lib/getRecaptchaToken';
 
 function validateEmail(email: string) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email.toLowerCase());
-}
-
-async function waitForRecaptcha(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const maxTime = 5000;
-    const intervalTime = 100;
-    let elapsed = 0;
-
-    const interval = setInterval(() => {
-      elapsed += intervalTime;
-      if ((window as any).grecaptcha) {
-        clearInterval(interval);
-        resolve();
-      } else if (elapsed >= maxTime) {
-        clearInterval(interval);
-        reject(new Error('reCAPTCHA not loaded'));
-      }
-    }, intervalTime);
-  });
 }
 
 async function subscribe(email: string, token: string) {
@@ -64,16 +46,12 @@ export default function SubscribeForm() {
       setInputError(true);
       toast.error('Please enter a valid email address.');
       return;
-    } else {
-      setInputError(false);
     }
 
     setStatus('loading');
 
     try {
-      await waitForRecaptcha();
-      const token = await (window as any).grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'subscribe' });
-
+      const token = await getRecaptchaToken('subscribe');
       await subscribe(email, token);
 
       setStatus('success');
@@ -81,7 +59,6 @@ export default function SubscribeForm() {
       toast.success('Thank you for subscribing!');
     } catch (error: any) {
       setStatus('error');
-      console.error(error);
       toast.error(error.message || 'Something went wrong.');
     }
   };
