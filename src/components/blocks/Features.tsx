@@ -7,21 +7,23 @@ type FeaturesProps = Extract<
 
 export function Features({ features, title }: FeaturesProps) {
   return (
-    <section className="container mx-auto flex flex-col gap-8 py-16">
+    <section className="container mx-auto flex flex-col gap-12 py-16 px-4 sm:px-6 lg:px-8">
       {title ? (
-        <h2 className="text-xl mx-auto md:text-2xl lg:text-5xl font-semibold text-slate-800 text-pretty max-w-3xl">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-center text-slate-800 max-w-4xl mx-auto text-pretty">
           {title}
         </h2>
       ) : null}
 
       {Array.isArray(features) ? (
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature) => (
-            <div key={feature._key} className="flex flex-col gap-4">
-              <h3 className="text-xl font-semibold text-slate-800">
+            <div key={feature._key} className="flex flex-col gap-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-800">
                 {feature.title}
               </h3>
-              <p className="text-lg text-slate-600">{feature.text}</p>
+              <p className="text-base sm:text-lg text-slate-600">
+                {feature.text}
+              </p>
             </div>
           ))}
         </div>
