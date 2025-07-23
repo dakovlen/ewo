@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY, LATEST_POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { siteConfig } from '@/lib/siteConfig';
+import { StructuredDataHome } from "@/components/StructuredDataHome";
 
 const getHomePage = () =>
   sanityFetch({
@@ -64,6 +65,7 @@ export default async function Page() {
 
   return (
     <>
+      <StructuredDataHome />
       <PageBuilder
         documentId={homePage._id}
         documentType={homePage._type}
