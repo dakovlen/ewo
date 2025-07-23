@@ -8,6 +8,8 @@ import { Author } from "@/components/Author";
 import { PublishedAt } from "@/components/PublishedAt";
 import { Title } from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
+import { generateArticleSchema } from "@/utils/generateArticleSchema";
+
 
 import { extractHeadings, generateId } from "@/utils/extractHeadings";
 import { TableOfContents } from "@/components/TableOfContents";
@@ -55,13 +57,22 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
     publishedAt,
     categories,
     relatedPosts,
+    slug,
+    seo,
   } = props;
 
   const headings = extractHeadings(body);
+  
   const extendedComponents = createExtendedComponents(baseComponents);
+  const schema = generateArticleSchema({ _id, title, publishedAt, author, mainImage, slug, seo });
 
   return (
     <article className="mx-auto p-4 space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
       <header className="flex flex-col gap-4 items-start">
         <div className="flex flex-wrap gap-4 items-center">
           <Categories categories={categories} />
@@ -98,3 +109,4 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
     </article>
   );
 }
+

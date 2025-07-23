@@ -20,7 +20,7 @@ const websiteSchema: WithContext<WebSite> = {
   url: siteConfig.baseUrl,
 };
 
-export const StructuredDataHome = () => {
+export const HomeSchema = () => {
   return (
     <>
       <script
