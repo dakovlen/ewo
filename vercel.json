@@ -35,12 +35,12 @@
 
     {
       "source": "/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected",
-      "destination": "/blog/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected/",
-      "destination": "/blog/5-things-seniors-should-never-say-if-they-want-to-stay-independent-respected",
+      "destination": "/",
       "permanent": true
     },
 
