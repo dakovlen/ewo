@@ -68,12 +68,12 @@
 
     {
       "source": "/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier",
-      "destination": "/blog/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier/",
-      "destination": "/blog/why-you-dont-need-friends-after-70-6-reasons-to-embrace-independence-live-happier",
+      "destination": "/",
       "permanent": true
     },
 
