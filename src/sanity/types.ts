@@ -13,6 +13,11 @@
  */
 
 // Source: schema.json
+export type YoutubeEmbed = {
+  _type: "youtubeEmbed";
+  url?: string;
+};
+
 export type Redirect = {
   _id: string;
   _type: "redirect";
@@ -90,7 +95,9 @@ export type Hero = {
     alt?: string;
     _type: "image";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & YoutubeEmbed>;
   image?: {
     asset?: {
       _ref: string;
@@ -165,7 +172,9 @@ export type Faq = {
     alt?: string;
     _type: "image";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & YoutubeEmbed>;
 };
 
 export type PageBuilder = Array<{
@@ -268,7 +277,9 @@ export type Post = {
     alt?: string;
     _type: "image";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & YoutubeEmbed>;
   relatedPosts?: Array<{
     _ref: string;
     _type: "reference";
@@ -386,7 +397,9 @@ export type BlockContent = Array<{
   alt?: string;
   _type: "image";
   _key: string;
-}>;
+} | {
+  _key: string;
+} & YoutubeEmbed>;
 
 export type SanityAssistInstructionTask = {
   _type: "sanity.assist.instructionTask";
@@ -627,7 +640,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Redirect | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Seo | Author | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = YoutubeEmbed | Redirect | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Seo | Author | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_TOTAL_COUNT_QUERY
@@ -644,6 +657,8 @@ export type POST_QUERYResult = {
   _id: string;
   title: string | null;
   body: Array<{
+    _key: string;
+  } & YoutubeEmbed | {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -750,6 +765,8 @@ export type PAGE_QUERYResult = {
       _id: string;
       title: string | null;
       body: Array<{
+        _key: string;
+      } & YoutubeEmbed | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -797,6 +814,8 @@ export type PAGE_QUERYResult = {
     _type: "hero";
     title?: string;
     text?: Array<{
+      _key: string;
+    } & YoutubeEmbed | {
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -913,6 +932,8 @@ export type HOME_PAGE_QUERYResult = {
         _rev: string;
         title?: string;
         body?: Array<{
+          _key: string;
+        } & YoutubeEmbed | {
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -959,6 +980,8 @@ export type HOME_PAGE_QUERYResult = {
       _type: "hero";
       title?: string;
       text?: Array<{
+        _key: string;
+      } & YoutubeEmbed | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;

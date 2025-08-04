@@ -15,6 +15,7 @@ import { splitImageType } from "./blocks/splitImageType";
 import { siteSettingsType } from "./siteSettingsType";
 import { redirectType } from "./redirectType";
 import { socialType } from './socialType'
+import { youtubeEmbed } from './blocks/youtubeEmbed'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -33,5 +34,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     siteSettingsType,
     redirectType,
     socialType,
+    youtubeEmbed,
   ],
 }
