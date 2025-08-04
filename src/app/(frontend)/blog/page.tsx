@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Pagination } from "@/components/Pagination";
+import { Hero } from "@/components/blocks/Hero";
+
 
 const POSTS_PER_PAGE = 12;
 
@@ -69,25 +71,28 @@ export default async function Page({
 
   return (
     <>
-      <section className="w-full bg-gray-100 dark:bg-gray-900 py-30 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-5xl mx-auto bg-gradient-to-r from-teal-600 to-teal-300 inline-block text-transparent bg-clip-text leading-[1.2]">
-            ElderlyWisdom Blog: Inspiring Reads for Seniors
-          </h1>
-          <h3 className="text-2xl text-gray-700 dark:text-gray-300 max-w-5xl mx-auto">
-            Discover a wealth of thoughtful articles dedicated to enriching life after 60. 
-            Explore engaging pieces on cultivating new hobbies and interests, fostering a sense of purpose, and finding joy in everyday moments. 
-            Delve into articles specifically designed to support brain health, with tips on maintaining cognitive vitality and sharpness.
-            Our goal is to uplift, inform, and inspire, ensuring you feel empowered to live your fullest, most vibrant life.
-          </h3>
-          <Button asChild size="xl" className="bg-teal-700 mt-10">
-            <Link href="https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1">
-              🌟 Get Inspired – Watch Us on YouTube
-            </Link>
-          </Button>
-        </div>
-      </section>
-
+      <Hero
+        _key="hero-section"
+        _type="hero"
+        title="ElderlyWisdom Blog: Inspiring Reads for Seniors"
+        text={[
+          {
+            _type: "block",
+            style: "normal",
+            markDefs: [],
+            _key: "block1",
+            children: [
+              {
+                _type: "span",
+                text:
+                  "Discover a wealth of thoughtful articles dedicated to enriching life after 60. Explore engaging pieces on cultivating new hobbies and interests, fostering a sense of purpose, and finding joy in everyday moments. Delve into articles specifically designed to support brain health, with tips on maintaining cognitive vitality and sharpness. Our goal is to uplift, inform, and inspire, ensuring you feel empowered to live your fullest, most vibrant life.",
+                _key: "span1",
+              },
+            ],
+          },
+        ]}
+        image={undefined}
+      />
       <main className="container mx-auto px-5 py-8 md:p-10 flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
