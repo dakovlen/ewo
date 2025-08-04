@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 // Пагінований запит для постів
 export const getPostsQuery = (offset = 0, limit = 12) =>
   defineQuery(`*[_type == "post" && defined(slug.current)] 
-    | order(publishedAt desc) 
+    | order(publishedAt desc, _createdAt desc, _id desc)
     [${offset}...${offset + limit}]{
       _id,
       title,

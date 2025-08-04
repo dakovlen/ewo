@@ -47,7 +47,7 @@ export function LatestPosts({ posts }: Props) {
         ))}
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2 md:flex-row my-10">
-        <Button asChild size="lg" className="bg-teal-700">
+        <Button asChild size="xl" className="bg-teal-700">
           <Link href="/blog">All article</Link>
         </Button>
       </div>
