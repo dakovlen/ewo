@@ -1,51 +1,17 @@
 import { sanityFetch } from "@/sanity/lib/client";
-import { getPostsQuery, POSTS_TOTAL_COUNT_QUERY } from '@/sanity/lib/queries'
-import { PostCard } from '@/components/PostCard'
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { getPostsQuery, POSTS_TOTAL_COUNT_QUERY } from '@/sanity/lib/queries';
+import { PostCard } from '@/components/PostCard';
 import { notFound } from "next/navigation";
 import { Pagination } from "@/components/Pagination";
 import { Hero } from "@/components/blocks/Hero";
-
+import { blogMetadata } from "@/lib/metadata/blogMetadata";
+import type { Metadata } from "next";
 
 const POSTS_PER_PAGE = 12;
 
-export async function generateMetadata() {
-  return {
-    title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
-    description:
-      'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
-    alternates: {
-      canonical: 'https://elderlywisdom.org/blog',
-    },
-    openGraph: {
-      title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
-      description:
-        'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
-      url: 'https://elderlywisdom.org/blog',
-      siteName: 'ElderlyWisdom',
-      locale: 'en_US',
-      type: 'website',
-      images: [
-        {
-          url: 'https://elderlywisdom.org/og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'ElderlyWisdom – A Blog for Seniors',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'ElderlyWisdom Blog – Insightful Articles & Inspiration for Seniors',
-      description:
-        'Explore thoughtful and uplifting articles for seniors focused on wellness, hobbies, mental clarity, aging with grace, meaningful living, and joyful routines – only on ElderlyWisdom.',
-      site: '@SolanVoss',
-      images: ['https://elderlywisdom.org/og-image.jpg'],
-    },
-  };
+export async function generateMetadata(): Promise<Metadata> {
+  return blogMetadata;
 }
-
 
 export default async function Page({
   searchParams,
@@ -100,7 +66,6 @@ export default async function Page({
           ))}
         </div>
 
-        {/* Pagination */}
         <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/blog" />
       </main>
     </>
