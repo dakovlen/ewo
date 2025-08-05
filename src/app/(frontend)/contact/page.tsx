@@ -1,6 +1,11 @@
-import { Hero } from "@/components/blocks/Hero"
+import { Hero } from "@/components/blocks/Hero";
 import { SocialTiles } from "@/components/social/SocialTiles";
+import { contactMetadata } from "@/lib/metadata/contactMetadata";
+import type { Metadata } from "next";
 
+export const generateMetadata = async (): Promise<Metadata> => {
+  return contactMetadata;
+};
 
 export default function ContactPage() {
   return (

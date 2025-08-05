@@ -1,8 +1,12 @@
 export const siteConfig = {
-  baseUrl: process.env.SITE_URL || 'https://elderlywisdom.org',
+  baseUrl: process.env.SITE_URL || "https://elderlywisdom.org",
   name: "Elderly Wisdom",
   logo: "https://elderlywisdom.org/logo.svg",
-  description: "Inspiring books, videos, and articles for seniors seeking meaning and joy after 60.",
+  description:
+    "Inspiring books, videos, and articles for seniors seeking meaning and joy after 60.",
+  twitterHandle: "@SolanVoss", // ← додали
+  locale: "en_US", // ← додали
+  creator: "Solan Voss", // ← додали
   sameAs: [
     "https://www.facebook.com/groups/1286296679591129",
     "https://www.youtube.com/@ElderlyWisdomDailyTop",
