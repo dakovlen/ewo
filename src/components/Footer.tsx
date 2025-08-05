@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SocialLinks } from "@/components/SocialLinks";
+import { SocialIconsRow } from "./social/SocialIconsRow";
 import SubscribeForm from "./SubscribeForm";
 
 export function Footer() {
@@ -42,8 +42,7 @@ export function Footer() {
               </Link>
             </li>
           </ul>
-
-          <SocialLinks size="sm" />
+          <SocialIconsRow />
         </div>
 
         <div className="container mx-auto px-4 mt-6">

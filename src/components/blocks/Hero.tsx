@@ -30,13 +30,13 @@ export function Hero({ title, text, image }: HeroProps) {
 
       <div className="container mx-auto px-4 text-center relative z-9">
         {title && (
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 max-w-5xl mx-auto bg-gradient-to-r from-teal-700 via-teal-500 to-emerald-400 inline-block text-transparent bg-clip-text leading-tight drop-shadow-md">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 max-w-7xl mx-auto bg-gradient-to-r from-teal-700 via-teal-500 to-emerald-400 inline-block text-transparent bg-clip-text leading-tight drop-shadow-md">
             {title}
           </h1>
         )}
 
         {text && (
-          <div className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          <div className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-5xl mx-auto leading-relaxed">
             <PortableText value={text} />
           </div>
         )}
