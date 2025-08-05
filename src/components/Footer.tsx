@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SocialIconsRow } from "./social/SocialIconsRow";
 import SubscribeForm from "./SubscribeForm";
+import { menuItems } from "@/lib/data/menu";
 
 export function Footer() {
   return (
@@ -23,24 +24,17 @@ export function Footer() {
             />
           </Link>
 
-          {/* Навігація */}
           <ul className="flex flex-wrap justify-center md:justify-start gap-4 font-semibold text-slate-100">
-            <li>
-              <Link
-                className="hover:text-teal-400 transition-colors"
-                href="/about"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="hover:text-teal-400 transition-colors"
-                href="/blog"
-              >
-                Blog
-              </Link>
-            </li>
+            {menuItems.map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  className="hover:text-teal-600 transition-colors"
+                  href={href}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <SocialIconsRow />
         </div>

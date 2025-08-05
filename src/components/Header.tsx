@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { menuItems } from "@/lib/data/menu";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,29 +40,20 @@ export function Header() {
             ${menuOpen ? "flex" : "hidden md:flex"}
           `}
         >
-          <li className="w-full text-center border-b border-t border-slate-700 py-4 md:border-0 md:py-0">
-            <Link
-              className="text-2xl md:text-lg hover:text-teal-700 transition-colors"
-              href="/about"
-              onClick={() => setMenuOpen(false)}
+          {menuItems.map(({ href, label }) => (
+            <li
+              key={href}
+              className="w-full text-center border-b border-t border-slate-700 py-4 md:border-0 md:py-0"
             >
-              About
-            </Link>
-          </li>
-          <li className="w-full text-center border-b border-slate-700 py-4 md:border-0 md:py-0">
-            <Link
-              className="text-2xl md:text-lg hover:text-teal-700 transition-colors"
-              href="/blog"
-              onClick={() => setMenuOpen(false)}
-            >
-              Blog
-            </Link>
-          </li>
-          {/* <li>
-            <Link className="hover:text-pink-500 transition-colors" href="/studio">
-              Studio
-            </Link>
-          </li> */}
+              <Link
+                className="text-2xl md:text-lg hover:text-teal-700 transition-colors"
+                href={href}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </header>
     </div>
