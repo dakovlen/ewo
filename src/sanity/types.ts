@@ -644,7 +644,7 @@ export type AllSanitySchemaTypes = YoutubeEmbed | Redirect | SiteSettings | Spli
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_TOTAL_COUNT_QUERY
-// Query: count(*[_type == "post" && defined(slug.current)])
+// Query: count(*[  _type == "post" &&  defined(slug.current) &&  !(_id in path("drafts.**")) &&  publishedAt < now()])
 export type POSTS_TOTAL_COUNT_QUERYResult = number;
 // Variable: POSTS_SLUGS_QUERY
 // Query: *[_type == "post" && defined(slug.current)]{   "slug": slug.current}
@@ -1112,7 +1112,7 @@ export type SITEMAP_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "count(*[_type == \"post\" && defined(slug.current)])": POSTS_TOTAL_COUNT_QUERYResult;
+    "count(*[\n  _type == \"post\" &&\n  defined(slug.current) &&\n  !(_id in path(\"drafts.**\")) &&\n  publishedAt < now()\n])": POSTS_TOTAL_COUNT_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n    \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->{\n        _id,\n        title,\n        body,\n        \"text\": pt::text(body)\n      }\n    }\n  }\n}": PAGE_QUERYResult;
