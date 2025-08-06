@@ -29,19 +29,20 @@ export function LatestPosts({ posts }: Props) {
             className="bg-white rounded-lg shadow p-4 hover:shadow-md transition"
           >
             <Link
+              className="relative w-full h-40 sm:h-56 md:h-64 lg:h-40 xl:h-45"
               href={`/blog/${post.slug.current}`}>
               {post.mainImage && (
                 <img
-                  src={urlFor(post.mainImage).width(600).height(400).url()}
+                  src={urlFor(post.mainImage).width(600).height(300).url()}
                   alt={post.title}
-                  className="w-full h-48 object-cover rounded-md mb-4"
+                  className="rounded-md mb-4"
                 />
               )}
-              <h3 className="text-lg font-bold mb-2">{post.title}</h3>
+              <h3 className="text-xl font-bold mb-2">{post.title}</h3>
               {post.excerpt && (
-                <p className="text-sm text-gray-700 mb-2">{post.excerpt}</p>
+                <p className="text-2xl text-gray-700 mb-2">{post.excerpt}</p>
               )}
-              <p className="text-teal-600 font-medium hover:underline">Read more → </p>
+              <p className="text-teal-600 font-medium text-xl hover:underline">Read more → </p>
             </Link>
           </article>
         ))}
