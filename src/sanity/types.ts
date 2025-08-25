@@ -1107,6 +1107,111 @@ export type SITEMAP_QUERYResult = Array<{
   href: string | null;
   _updatedAt: string;
 }>;
+// Variable: CATEGORY_QUERY
+// Query: *[_type == "category" && slug.current == $slug][0]{    _id,    title,    slug,    description,    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description, description, ""),      "image": seo.image,      "noIndex": seo.noIndex == true    }  }
+export type CATEGORY_QUERYResult = {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  description: string | null;
+  seo: {
+    title: string | "";
+    description: string | "";
+    image: null;
+    noIndex: false;
+  };
+} | null;
+// Variable: CATEGORY_POSTS_QUERY
+// Query: *[    _type == "post" &&    defined(slug.current) &&    !(_id in path("drafts.**")) &&    publishedAt < now() &&    $slug in categories[]->slug.current  ]  | order(publishedAt desc, _createdAt desc)[0...100]{    _id,    title,    slug,    body,    mainImage,    publishedAt,    "categories": coalesce(      categories[]->{        _id,        slug,        title      },      []    ),    author->{      name,      image    },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "noIndex": seo.noIndex == true    }  }
+export type CATEGORY_POSTS_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  body: Array<{
+    _key: string;
+  } & YoutubeEmbed | {
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+  mainImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  publishedAt: string | null;
+  categories: Array<{
+    _id: string;
+    slug: Slug | null;
+    title: string | null;
+  }> | Array<never>;
+  author: {
+    name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  seo: {
+    title: string | "";
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1120,5 +1225,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
     "\n  *[_id == $id][0]{\n    title,\n    \"image\": mainImage.asset->{\n      url,\n      metadata {\n        palette\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
     "\n*[_type in [\"page\", \"post\"] && defined(slug.current)] {\n  \"href\": select(\n    _type == \"page\" && slug.current == \"/\" => \"/\",\n    _type == \"page\" => \"/\" + slug.current,\n    _type == \"post\" => \"/blog/\" + slug.current\n  ),\n  _updatedAt\n}\n": SITEMAP_QUERYResult;
+    "\n  *[_type == \"category\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_QUERYResult;
+    "\n  *[\n    _type == \"post\" &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\")) &&\n    publishedAt < now() &&\n    $slug in categories[]->slug.current\n  ]\n  | order(publishedAt desc, _createdAt desc)[0...100]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n      categories[]->{\n        _id,\n        slug,\n        title\n      },\n      []\n    ),\n    author->{\n      name,\n      image\n    },\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_POSTS_QUERYResult;
   }
 }

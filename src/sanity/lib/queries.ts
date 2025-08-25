@@ -161,3 +161,56 @@ export const LATEST_POSTS_QUERY = `
     _createdAt
   }
 `;
+
+// Категорія з описом + SEO
+export const CATEGORY_QUERY = defineQuery(`
+  *[_type == "category" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    description,
+    "seo": {
+      "title": coalesce(seo.title, title, ""),
+      "description": coalesce(seo.description, description, ""),
+      "image": seo.image,
+      "noIndex": seo.noIndex == true
+    }
+  }
+`);
+
+// Всі пости в категорії (до 100)
+export const CATEGORY_POSTS_QUERY = defineQuery(`
+  *[
+    _type == "post" &&
+    defined(slug.current) &&
+    !(_id in path("drafts.**")) &&
+    publishedAt < now() &&
+    $slug in categories[]->slug.current
+  ]
+  | order(publishedAt desc, _createdAt desc)[0...100]{
+    _id,
+    title,
+    slug,
+    body,
+    mainImage,
+    publishedAt,
+    "categories": coalesce(
+      categories[]->{
+        _id,
+        slug,
+        title
+      },
+      []
+    ),
+    author->{
+      name,
+      image
+    },
+    "seo": {
+      "title": coalesce(seo.title, title, ""),
+      "description": coalesce(seo.description,  ""),
+      "image": seo.image,
+      "noIndex": seo.noIndex == true
+    }
+  }
+`);
