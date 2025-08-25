@@ -158,9 +158,15 @@ export const LATEST_POSTS_QUERY = `
     slug,
     excerpt,
     mainImage,
-    _createdAt
+    _createdAt,
+    categories[]->{
+      _id,
+      title,
+      slug
+    }
   }
 `;
+
 
 // Категорія з описом + SEO
 export const CATEGORY_QUERY = defineQuery(`
