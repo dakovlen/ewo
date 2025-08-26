@@ -220,3 +220,18 @@ export const CATEGORY_POSTS_QUERY = defineQuery(`
     }
   }
 `);
+
+export const ALL_CATEGORIES_QUERY = defineQuery(`
+  *[_type == "category" && defined(slug.current)] | order(title asc) {
+    _id,
+    title,
+    slug,
+    description,
+    "seo": {
+      "title": coalesce(seo.title, title, ""),
+      "description": coalesce(seo.description, description, ""),
+      "image": seo.image,
+      "noIndex": seo.noIndex == true
+    }
+  }
+`);

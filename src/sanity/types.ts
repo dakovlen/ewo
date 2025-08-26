@@ -1212,6 +1212,20 @@ export type CATEGORY_POSTS_QUERYResult = Array<{
     noIndex: boolean | false;
   };
 }>;
+// Variable: ALL_CATEGORIES_QUERY
+// Query: *[_type == "category" && defined(slug.current)] | order(title asc) {    _id,    title,    slug,    description,    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description, description, ""),      "image": seo.image,      "noIndex": seo.noIndex == true    }  }
+export type ALL_CATEGORIES_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  description: string | null;
+  seo: {
+    title: string | "";
+    description: string | "";
+    image: null;
+    noIndex: false;
+  };
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1227,5 +1241,6 @@ declare module "@sanity/client" {
     "\n*[_type in [\"page\", \"post\"] && defined(slug.current)] {\n  \"href\": select(\n    _type == \"page\" && slug.current == \"/\" => \"/\",\n    _type == \"page\" => \"/\" + slug.current,\n    _type == \"post\" => \"/blog/\" + slug.current\n  ),\n  _updatedAt\n}\n": SITEMAP_QUERYResult;
     "\n  *[_type == \"category\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\")) &&\n    publishedAt < now() &&\n    $slug in categories[]->slug.current\n  ]\n  | order(publishedAt desc, _createdAt desc)[0...100]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n      categories[]->{\n        _id,\n        slug,\n        title\n      },\n      []\n    ),\n    author->{\n      name,\n      image\n    },\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_POSTS_QUERYResult;
+    "\n  *[_type == \"category\" && defined(slug.current)] | order(title asc) {\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": ALL_CATEGORIES_QUERYResult;
   }
 }
