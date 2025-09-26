@@ -1,79 +1,82 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
-import { generateVideoSchema, extractYouTubeId, type VideoSchemaInput } from '@/utils/generateVideoSchema'
+
+import { useMemo, useState } from 'react'
 
 type YouTubeEmbedProps = {
   url: string
-  schema?: Partial<VideoSchemaInput> // опційно: щоб перекинути title/description/contentUrl тощо
+  title?: string
+  className?: string
 }
 
-export function YouTubeEmbed({ url, schema }: YouTubeEmbedProps) {
-  const id = useMemo(() => extractYouTubeId(url), [url])
-  const thumbnail = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-  const embed = `https://www.youtube.com/embed/${id}?autoplay=1`
+/** Надійно витягуємо YouTube ID із різних форматів URL/ID */
+function extractYouTubeId(input: string): string | null {
+  try {
+    const url = new URL(input)
+    const host = url.hostname.replace(/^www\./, '')
 
-  const [isLoaded, setLoaded] = useState(false)
-  const [contentUrl, setContentUrl] = useState<string | undefined>(schema?.contentUrl)
+    if (host === 'youtu.be') return url.pathname.slice(1) || null
 
-  // Якщо contentUrl не передали — візьмемо поточну адресу (клієнт)
-  useEffect(() => {
-    if (!schema?.contentUrl && typeof window !== 'undefined') {
-      setContentUrl(window.location.href)
+    if (host.endsWith('youtube.com')) {
+      const v = url.searchParams.get('v')
+      if (v) return v
+      const m1 = url.pathname.match(/\/embed\/([^/?#]+)/)
+      if (m1) return m1[1]
+      const m2 = url.pathname.match(/\/shorts\/([^/?#]+)/)
+      if (m2) return m2[1]
     }
-  }, [schema?.contentUrl])
 
-  const videoSchema = useMemo(() => {
-    if (!contentUrl) return null
-    return generateVideoSchema({
-      url,
-      title: schema?.title || 'YouTube video',
-      description: schema?.description || '',
-      contentUrl,
-      uploadDate: schema?.uploadDate,
-      durationSeconds: schema?.durationSeconds,
-      thumbnailUrl: schema?.thumbnailUrl || thumbnail,
-      keywords: schema?.keywords,
-    })
-  }, [url, schema, contentUrl, thumbnail])
+    const last = url.pathname.split('/').filter(Boolean).pop()
+    return last && /^[a-zA-Z0-9_-]{6,}$/.test(last) ? last : null
+  } catch {
+    return /^[a-zA-Z0-9_-]{6,}$/.test(input) ? input : null
+  }
+}
+
+export function YouTubeEmbed({ url, title, className }: YouTubeEmbedProps) {
+  const id = useMemo(() => extractYouTubeId(url), [url])
+  const [isPlaying, setPlaying] = useState(false)
+
+  if (!id) {
+    return <p className="text-red-600">Invalid YouTube URL or ID</p>
+  }
+
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${id}`
+  const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
 
   return (
-    <div className="aspect-video w-full rounded-2xl overflow-hidden relative shadow-lg border border-gray-200">
-      {/* JSON-LD */}
-      {videoSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
-        />
-      )}
-
-      {isLoaded ? (
-        <iframe
-          src={embed}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-          className="absolute inset-0 w-full h-full rounded-2xl"
-          title={schema?.title || 'YouTube video'}
-        />
-      ) : (
-        <button
-          onClick={() => setLoaded(true)}
-          className="absolute inset-0 w-full h-full flex justify-center items-center bg-black/30 hover:bg-black/40 transition cursor-pointer"
-          aria-label="Play YouTube video"
-        >
-          <img
-            src={thumbnail}
-            alt="YouTube video thumbnail"
-            className="w-full h-full object-cover brightness-95 transition duration-300 ease-in-out"
+    <figure className={['not-prose w-full', className].filter(Boolean).join(' ')}>
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+        {isPlaying ? (
+          <iframe
+            src={`${embedUrl}?autoplay=1`}
+            title={title || 'YouTube video'}
+            className="absolute inset-0 w-full h-full rounded-2xl"
             loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
           />
-          <div className="absolute flex items-center justify-center w-16 h-16 bg-white/80 backdrop-blur-md rounded-full shadow-md hover:scale-105 transition">
-            <svg className="w-8 h-8 text-teal-700" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </button>
-      )}
-    </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/30 hover:bg-black/40 transition cursor-pointer"
+            aria-label="Play YouTube video"
+          >
+            <img
+              src={thumb}
+              alt={title ? `${title} – thumbnail` : 'YouTube video thumbnail'}
+              className="w-full h-full object-cover brightness-95 transition"
+              loading="lazy"
+            />
+            <div className="absolute flex items-center justify-center w-16 h-16 bg-white/80 backdrop-blur-md rounded-full shadow-md hover:scale-105 transition">
+              <svg className="w-8 h-8 text-teal-700" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </button>
+        )}
+      </div>
+    </figure>
   )
 }

@@ -9,10 +9,9 @@ import { PublishedAt } from "@/components/PublishedAt";
 import { Title } from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
 import { generateArticleSchema } from "@/utils/generateArticleSchema";
-
-
 import { extractHeadings, generateId } from "@/utils/extractHeadings";
 import { TableOfContents } from "@/components/TableOfContents";
+import { VideoSchema } from "@/components/schema_org/VideoSchema";
 
 type HeadingLevel = 2 | 3 | 4;
 
@@ -22,7 +21,6 @@ interface HeadingWithIdProps {
 }
 
 function HeadingWithId({ children, level }: HeadingWithIdProps) {
-  // Функція для вилучення тексту з children рекурсивно, щоб коректно працювати з React-елементами
   function extractText(node: React.ReactNode): string {
     if (typeof node === "string") return node;
     if (Array.isArray(node)) return node.map(extractText).join("");
@@ -36,16 +34,15 @@ function HeadingWithId({ children, level }: HeadingWithIdProps) {
   return <Tag id={generateId(text)}>{children}</Tag>;
 }
 
-// Визначимо тип extended components строго, щоб не втрачати підказки IDE
-const createExtendedComponents = (base: PortableTextComponents) => ({
-  ...base,
+const extendedComponents: PortableTextComponents = {
+  ...baseComponents,
   block: {
-    ...base.block,
+    ...(baseComponents.block || {}),
     h2: (props: { children: React.ReactNode }) => <HeadingWithId level={2} {...props} />,
     h3: (props: { children: React.ReactNode }) => <HeadingWithId level={3} {...props} />,
     h4: (props: { children: React.ReactNode }) => <HeadingWithId level={4} {...props} />,
   },
-});
+};
 
 export function Post(props: NonNullable<POST_QUERYResult>) {
   const {
@@ -62,15 +59,35 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
   } = props;
 
   const headings = extractHeadings(body);
-  
-  const extendedComponents = createExtendedComponents(baseComponents);
-  const schema = generateArticleSchema({ _id, title, publishedAt, author, mainImage, slug, seo });
+
+  // Канонічна URL сторінки (за потреби змінити шлях під свій роутинг)
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://elderlywisdom.org";
+  const pageUrl = slug?.current ? `${site}/${slug.current}` : undefined;
+
+  const articleSchema = generateArticleSchema({
+    _id,
+    title,
+    publishedAt,
+    author,
+    mainImage,
+    slug,
+    seo,
+  });
 
   return (
     <article className="mx-auto p-4 space-y-8">
+      {/* Article schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      {/* VideoObject schema(s) */}
+      <VideoSchema
+        body={body}
+        pageUrl={pageUrl}
+        defaultTitle={title}
+        defaultDescription={seo?.description}
+        defaultUploadDate={publishedAt}
       />
 
       <header className="flex flex-col gap-4 items-start">
@@ -99,14 +116,9 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
         <TableOfContents headings={headings} />
         <section className="lg:col-span-9 lg:prose-xl prose max-w-none">
           <PortableText value={body} components={extendedComponents} />
-          <RelatedPosts
-            relatedPosts={relatedPosts}
-            documentId={_id}
-            documentType="post"
-          />
+          <RelatedPosts relatedPosts={relatedPosts} documentId={_id} documentType="post" />
         </section>
       </div>
     </article>
   );
 }
-
