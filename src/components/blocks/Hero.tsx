@@ -46,7 +46,7 @@ export function Hero({ title, text, image }: HeroProps) {
           size="xl"
           className="bg-teal-600 hover:bg-teal-700 text-white font-semibold mt-10 px-8 py-4 rounded-full shadow-lg transition-transform transform hover:scale-105"
         >
-          <Link href="https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1">
+          <Link href="https://www.youtube.com/@ElderlyWisdomMind?sub_confirmation=1">
             🌟 Get Inspired – Watch Us on YouTube
           </Link>
         </Button>

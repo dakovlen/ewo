@@ -9,14 +9,14 @@ export const siteConfig = {
   creator: "Solan Voss",
   sameAs: [
     "https://www.facebook.com/groups/1286296679591129",
-    "https://www.youtube.com/@ElderlyWisdomDailyTop",
+    "https://www.youtube.com/@ElderlyWisdomMind",
     "https://pinterest.com/SolanVossPro",
     "https://x.com/SolanVoss",
     "https://www.amazon.de/stores/Solan-Voss/author/B0F8QWL2FP",
   ],
 
   fbLink: "https://www.facebook.com/groups/1286296679591129",
-  youtubeLink: "https://www.youtube.com/@ElderlyWisdomDailyTop?sub_confirmation=1",
+  youtubeLink: "https://www.youtube.com/@ElderlyWisdomMind?sub_confirmation=1",
   pinterestLink: "https://pinterest.com/SolanVossPro",
   xLink: "https://x.com/SolanVoss",
   amazonLink: "https://www.amazon.com/stores/Solan-Voss/author/B0F8QWL2FP",
