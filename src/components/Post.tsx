@@ -99,22 +99,21 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
         <Author author={author} />
       </header>
 
-      {mainImage && (
-        <figure className="w-full">
-          <Image
-            src={urlFor(mainImage).width(800).height(400).url()}
-            width={800}
-            height={400}
-            alt={title}
-            className="rounded-lg object-center w-full"
-            priority
-          />
-        </figure>
-      )}
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <TableOfContents headings={headings} />
         <section className="lg:col-span-9 lg:prose-xl prose max-w-none">
+          {mainImage && (
+            <figure className="w-full">
+              <Image
+                src={urlFor(mainImage).width(800).height(400).url()}
+                width={800}
+                height={400}
+                alt={title}
+                className="rounded-lg object-center w-full"
+                priority
+              />
+            </figure>
+          )}
           <PortableText value={body} components={extendedComponents} />
           <RelatedPosts relatedPosts={relatedPosts} documentId={_id} documentType="post" />
         </section>
