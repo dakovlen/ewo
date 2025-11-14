@@ -1,6 +1,5 @@
 import {defineType, defineArrayMember} from 'sanity'
 import {ImageIcon} from '@sanity/icons'
-
 /**
  * This is the schema type for block content used in the post document type
  * Importing this type into the studio configuration's `schema` property
@@ -74,6 +73,9 @@ export const blockContentType = defineType({
     }),
     defineArrayMember({
       type: 'youtubeEmbed',
+    }),
+    defineArrayMember({ 
+      type: "htmlBlock",
     }),
   ],
 })

@@ -36,6 +36,12 @@ function HeadingWithId({ children, level }: HeadingWithIdProps) {
 
 const extendedComponents: PortableTextComponents = {
   ...baseComponents,
+  types: {
+    ...(baseComponents.types || {}),
+    htmlBlock: ({ value }) => (
+      <div dangerouslySetInnerHTML={{ __html: value.code }} />
+    ),
+  },
   block: {
     ...(baseComponents.block || {}),
     h2: (props: { children: React.ReactNode }) => <HeadingWithId level={2} {...props} />,
