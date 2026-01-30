@@ -12,8 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       (path) => typeof path.href === "string" && path.href.startsWith("/")
     );
 
-    console.log("Valid paths:", validPaths); // 🔍 лише ті, що реально підуть у sitemap
-
     if (!validPaths.length) return [];
 
     const baseUrl = process.env.SITE_URL || "http://localhost:3000";
