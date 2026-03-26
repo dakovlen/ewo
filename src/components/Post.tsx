@@ -12,6 +12,7 @@ import { generateArticleSchema } from "@/utils/generateArticleSchema";
 import { extractHeadings, generateId } from "@/utils/extractHeadings";
 import { TableOfContents } from "@/components/TableOfContents";
 import { VideoSchema } from "@/components/schema_org/VideoSchema";
+import { siteConfig } from "@/lib/siteConfig";
 
 type HeadingLevel = 2 | 3 | 4;
 
@@ -51,24 +52,15 @@ const extendedComponents: PortableTextComponents = {
 };
 
 export function Post(props: NonNullable<POST_QUERYResult>) {
-  const {
-    _id,
-    title,
-    author,
-    mainImage,
-    body,
-    publishedAt,
-    categories,
-    relatedPosts,
-    slug,
-    seo,
-  } = props;
+  const { _id, title, author, mainImage, body, publishedAt, categories, relatedPosts, slug, seo } = props;
 
   const headings = extractHeadings(body);
 
-  // Канонічна URL сторінки (за потреби змінити шлях під свій роутинг)
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://elderlywisdom.org";
-  const pageUrl = slug?.current ? `${site}/${slug.current}` : undefined;
+  // FIX: was `${site}/${slug.current}` — missing /blog/ prefix
+  // Correct: elderlywisdom.org/blog/[slug]
+  const pageUrl = slug?.current
+    ? `${siteConfig.baseUrl}/blog/${slug.current}`
+    : undefined;
 
   const articleSchema = generateArticleSchema({
     _id,
@@ -82,12 +74,13 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
 
   return (
     <article className="mx-auto p-4 space-y-8">
-      {/* Article schema */}
+      {/* Article Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      {/* VideoObject schema(s) */}
+
+      {/* VideoObject Schema — only rendered when post body contains YouTube embeds */}
       <VideoSchema
         body={body}
         pageUrl={pageUrl}
@@ -121,7 +114,11 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
             </figure>
           )}
           <PortableText value={body} components={extendedComponents} />
-          <RelatedPosts relatedPosts={relatedPosts} documentId={_id} documentType="post" />
+          <RelatedPosts
+            relatedPosts={relatedPosts}
+            documentId={_id}
+            documentType="post"
+          />
         </section>
       </div>
     </article>

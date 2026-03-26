@@ -15,51 +15,71 @@ type FAQsProps = {
   faqs?: FAQItem[];
 };
 
-const generateFaqData = (faqs: FAQItem[] | undefined): WithContext<FAQPage> => {
-  const mainEntity =
-    (faqs ?? [])
-      .map((f) => {
-        const name = f.title?.trim();
-        const answer = f.text?.trim();
-        if (!name || !answer) return null;
+/**
+ * Extracts plain text from a PortableText block array.
+ * Used as a fallback when `text` field is empty but `body` exists.
+ */
+function ptToPlainText(blocks: PortableTextBlock[]): string {
+  return blocks
+    .map((block) => {
+      if (block._type !== "block" || !Array.isArray(block.children)) return "";
+      return (block.children as { text?: string }[])
+        .map((child) => child.text ?? "")
+        .join("");
+    })
+    .join(" ")
+    .trim();
+}
 
-        return {
-          "@type": "Question" as const,
-          name,
-          acceptedAnswer: {
-            "@type": "Answer" as const,
-            text: answer,
-          },
-        };
-      })
-      .filter(Boolean) ?? [];
+function generateFaqSchema(faqs: FAQItem[] | undefined): WithContext<FAQPage> {
+  const mainEntity = (faqs ?? [])
+    .map((f) => {
+      const name = f.title?.trim();
+      // FIX: was only using f.text — if body is filled but text is empty, schema was empty.
+      // Now falls back to extracting plain text from PortableText body.
+      const answer =
+        f.text?.trim() ||
+        (f.body?.length ? ptToPlainText(f.body) : "");
+
+      if (!name || !answer) return null;
+
+      return {
+        "@type": "Question" as const,
+        name,
+        acceptedAnswer: {
+          "@type": "Answer" as const,
+          text: answer,
+        },
+      };
+    })
+    .filter(Boolean) as NonNullable<WithContext<FAQPage>["mainEntity"]>;
 
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity,
   };
-};
+}
 
 export function FAQs({ _key, title, faqs }: FAQsProps) {
-  const faqData = generateFaqData(faqs);
+  const faqSchema = generateFaqSchema(faqs);
 
   return (
     <section className="container mx-auto flex flex-col gap-8 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqData).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
         }}
       />
 
-      {title ? (
+      {title && (
         <h2 className="text-xl mx-auto md:text-2xl lg:text-5xl font-semibold text-slate-800 text-pretty max-w-3xl">
           {title}
         </h2>
-      ) : null}
+      )}
 
-      {Array.isArray(faqs) && faqs.length > 0 ? (
+      {Array.isArray(faqs) && faqs.length > 0 && (
         <div className="border-b border-teal-600">
           {faqs.map((faq) => (
             <details
@@ -73,7 +93,6 @@ export function FAQs({ _key, title, faqs }: FAQsProps) {
                   &larr;
                 </span>
               </summary>
-
               <div className="pb-4">
                 {faq.body && faq.body.length > 0 ? (
                   <PortableText value={faq.body} />
@@ -84,7 +103,7 @@ export function FAQs({ _key, title, faqs }: FAQsProps) {
             </details>
           ))}
         </div>
-      ) : null}
+      )}
     </section>
   );
 }
