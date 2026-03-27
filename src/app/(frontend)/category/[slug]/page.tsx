@@ -27,7 +27,6 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   const description = category.seo?.description || category.description || "";
 
   return {
-    metadataBase: new URL(siteConfig.baseUrl),
     title,
     description,
     alternates: {
