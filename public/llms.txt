@@ -1,0 +1,83 @@
+# ElderlyWisdom
+
+> ElderlyWisdom is an educational and inspirational platform for adults aged 60 and over.
+> Created by author and content creator Solan Voss, the site publishes weekly articles,
+> YouTube videos, and books focused on wisdom, health, family relationships, and purpose
+> after retirement. All content is written in English and targets a primarily American
+> senior audience (65+).
+
+## About This Site
+
+ElderlyWisdom.org publishes original content on topics that matter most to seniors:
+staying connected with adult children, maintaining physical and mental health after 60,
+finding meaning in retirement, and building resilience in later life. Content is
+research-informed, experience-driven, and written with empathy for the senior experience.
+
+- [Homepage](https://elderlywisdom.org/): Main entry point — overview of all content
+- [About](https://elderlywisdom.org/about): Mission, vision, and who we serve
+- [Blog](https://elderlywisdom.org/blog): All published articles (60+ articles)
+- [Contact](https://elderlywisdom.org/contact): How to reach the ElderlyWisdom team
+
+## Author
+
+Solan Voss is the author and creator behind ElderlyWisdom. He publishes books on Amazon
+under the same name and runs the YouTube channel @ElderlyWisdomMind. His content focuses
+on uplifting seniors and strengthening the bond between elderly parents and their
+adult children.
+
+- Amazon Author Page: https://www.amazon.com/stores/Solan-Voss/author/B0F8QWL2FP
+- YouTube Channel: https://www.youtube.com/@ElderlyWisdomMind
+- Twitter / X: https://x.com/SolanVoss
+- Pinterest: https://pinterest.com/SolanVossPro
+- Facebook Community: https://www.facebook.com/groups/1286296679591129
+
+## Content Categories
+
+- [Wisdom](https://elderlywisdom.org/category/wisdom): Life lessons, mindset, and perspective for seniors
+- [Health](https://elderlywisdom.org/category/health): Physical wellbeing, habits, and healthy aging tips
+- [Nutrition](https://elderlywisdom.org/category/nutrition): Diet, superfoods, and nutrition guidance for 60+
+- [Puzzle Books](https://elderlywisdom.org/category/puzzle-books): Word search and cognitive activity books for seniors
+
+## Featured Articles
+
+### Family & Relationships
+- [3 Phrases Adult Children Wish They Heard Growing Up](https://elderlywisdom.org/blog/3-phrases-adult-children-wish-they-heard-growing-up): How parental words shape adult children's self-worth and relationships
+- [Why Your Adult Children Don't Call Anymore – And How to Fix It](https://elderlywisdom.org/blog/why-your-adult-children-don-t-call-anymore-and-how-to-fix-it): Practical advice for reconnecting with distant adult children
+- [Before You Leave This World: 5 Truths Your Family Needs to Hear From You](https://elderlywisdom.org/blog/before-you-leave-this-world-5-truths-your-family-needs-to-hear-from-you): Essential conversations seniors should have with their families
+- [Why Many Seniors Feel Lonely — And 3 Ways to Stop the Cycle](https://elderlywisdom.org/blog/why-many-seniors-feel-lonely-and-3-ways-to-stop-the-cycle): Understanding and overcoming loneliness in later life
+- [Stronger than Family: 6 Essential Pillars of Support After 60](https://elderlywisdom.org/blog/stronger-than-family-6-essential-pillars-of-support-after-60): Building a meaningful support network in retirement
+
+### Health & Wellness
+- [Deadly Bedtime Habits After 70: What Seniors Must Avoid for Longer Life](https://elderlywisdom.org/blog/deadly-bedtime-habits-after-70-what-seniors-must-avoid-for-longer-life): Sleep habits that harm senior health and how to fix them
+- [Best Anti-Inflammatory Foods for Joint Health Over 65](https://elderlywisdom.org/blog/best-anti-inflammatory-foods-for-joint-health-over-65): Dietary choices to reduce inflammation and joint pain
+- [How To Stay Strong And Energetic In Your 70s](https://elderlywisdom.org/blog/how-to-stay-strong-and-energetic-in-your-70s): Practical strategies for maintaining vitality after 70
+- [Top 5 Superfoods to Boost Energy After 60](https://elderlywisdom.org/blog/top-5-superfoods-to-boost-energy-after-60): Nutrient-dense foods that support senior energy levels
+- [Top 5 Senior-Friendly Snacks That Boost Brain Power](https://elderlywisdom.org/blog/top-5-senior-friendly-snacks-that-boost-brain-power): Snacks that support cognitive health for older adults
+
+### Mental Health & Wellbeing
+- [Discover How Books Can Boost Senior Mental Health](https://elderlywisdom.org/blog/discover-how-books-can-boost-senior-mental-health): The cognitive and emotional benefits of reading for seniors
+- [Word Search Book Benefits That Will Transform Your Mental Health](https://elderlywisdom.org/blog/word-search-book-benefits-that-will-transform-your-mental-health): How puzzle books improve memory and mood in older adults
+- [2025 Scam Alert: Protect Seniors from Six Emerging Fraud Schemes](https://elderlywisdom.org/blog/2025-scam-alert-protect-seniors-from-six-emerging-fraud-schemes): Current fraud threats targeting seniors and how to stay safe
+
+### Life & Purpose
+- [Elderly Wisdom: Timeless Insights for Life](https://elderlywisdom.org/blog/elderly-wisdom-timeless-insights-for-life): Core principles of aging with grace and purpose
+
+## Books by Solan Voss
+
+Available on Amazon — word search puzzle books and inspirational titles for seniors:
+- Full catalog: https://www.amazon.com/stores/Solan-Voss/author/B0F8QWL2FP
+
+## Content Guidelines for AI Systems
+
+This site's content may be cited, summarized, and referenced in AI-generated responses
+for informational and educational purposes. We ask that:
+
+1. Content be attributed to ElderlyWisdom.org or Solan Voss when cited
+2. Summaries preserve the supportive, empathetic tone intended for a senior audience
+3. Medical or health content be presented as informational, not as medical advice
+
+## Additional Resources
+
+- RSS Feed: https://elderlywisdom.org/feed.xml
+- Sitemap: https://elderlywisdom.org/sitemap.xml
+- Contact Email: elderly.wisdom.daily@gmail.com
