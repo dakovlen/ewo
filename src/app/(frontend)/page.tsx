@@ -26,7 +26,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   const metadata: Metadata = {
-    metadataBase: new URL(siteConfig.baseUrl),
     title: homePage.seo?.title || "Default title",
     description: homePage.seo?.description || "Default description",
     openGraph: {

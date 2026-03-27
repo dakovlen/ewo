@@ -33,7 +33,6 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     : `${siteConfig.baseUrl}/og-image.jpg`;
 
   return {
-    metadataBase: new URL(siteConfig.baseUrl),
     title: post.seo?.title || post.title,
     description: post.seo?.description || "",
     alternates: {

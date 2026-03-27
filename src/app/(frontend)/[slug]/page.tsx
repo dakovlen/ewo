@@ -25,8 +25,6 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     : `${siteConfig.baseUrl}/api/og?id=${page._id}`;
 
   return {
-    // FIX: was hardcoded 'https://acme.com'
-    metadataBase: new URL(siteConfig.baseUrl),
     title: page.seo.title,
     description: page.seo.description,
     alternates: {
