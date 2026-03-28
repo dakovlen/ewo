@@ -1,0 +1,49 @@
+/* ── Burger кнопка ── */
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--ew-radius);
+  transition: background-color 0.2s;
+}
+
+.burger:hover {
+  background-color: var(--ew-cream-mid);
+}
+
+.burger:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+  border-radius: var(--ew-radius);
+}
+
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+}
+
+
+/* ── Три лінії ── */
+
+.line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--ew-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.25s ease;
+  transform-origin: center;
+  pointer-events: none;
+}

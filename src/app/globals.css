@@ -221,3 +221,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+/* REDESIGN */
+/* Підключення шрифтів */
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap'); */
+
+/* Дизайн токени — Variant A "Warm Editorial" */
+:root {
+  /* Кольори */
+  --ew-cream:        #fdf9f2;
+  --ew-cream-mid:    #f5ede0;
+  --ew-cream-dark:   #e8ddd0;
+  --ew-forest:       #2a5f4a;
+  --ew-forest-dark:  #1e4a38;
+  --ew-forest-deep:  #1a2e1f;
+  --ew-gold:         #e8c97e;
+  --ew-brown:        #b08a5c;
+  --ew-text:         #1a2e1f;
+  --ew-text-mid:     #5a5048;
+  --ew-text-light:   #8a8075;
+
+  /* Шрифти */
+  --ew-font-serif: 'Playfair Display', Georgia, serif;
+  --ew-font-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Розміри */
+  --ew-nav-height:    74px;
+  --ew-container-max: 1400px;
+  --ew-radius:        4px;
+
+  /* Тіні */
+  --ew-shadow-nav:  0 2px 24px rgba(42, 95, 74, 0.08);
+  --ew-shadow-card: 0 8px 32px rgba(42, 95, 74, 0.1);
+  --ew-shadow-cta:  0 6px 20px rgba(42, 95, 74, 0.25);
+}

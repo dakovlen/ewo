@@ -1,0 +1,281 @@
+/* ── Nav wrapper ── */
+
+.navWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgba(253, 249, 242, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ew-cream-dark);
+  box-shadow: 0 1px 0 rgba(42, 95, 74, 0.04);
+}
+
+@supports (animation-timeline: scroll()) {
+  .navWrapper {
+    animation: navShadow linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0px 80px;
+  }
+}
+
+@keyframes navShadow {
+  from { box-shadow: 0 1px 0 rgba(42, 95, 74, 0.04); }
+  to   { box-shadow: var(--ew-shadow-nav); }
+}
+
+
+/* ── Nav ── */
+
+.nav {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  max-width: var(--ew-container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .nav {
+    height: var(--ew-nav-height);
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: 0 40px;
+    gap: 0;
+  }
+}
+
+
+/* ── Логотип ── */
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+  border-radius: var(--ew-radius);
+}
+
+.logoImage {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .logoImage {
+    height: 32px;
+  }
+}
+
+
+/* ── Nav посилання ─────────────────────────────────────────────
+   Селектор змінено з :checked на [aria-expanded="true"].
+   Семантично правильно і screen readers розуміють стан.
+──────────────────────────────────────────────────────────────── */
+
+.navLinks {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navWrapper:has(#menu-toggle[aria-expanded="true"]) .navLinks {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--ew-cream);
+  border-top: 1px solid var(--ew-cream-dark);
+  border-bottom: 1px solid var(--ew-cream-dark);
+  padding: 8px 20px 16px;
+  z-index: 50;
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    position: static;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+}
+
+
+/* ── Nav link ── */
+
+.navLink {
+  display: block;
+  padding: 11px 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ew-text-mid);
+  text-decoration: none;
+  font-family: var(--ew-font-sans);
+  border-bottom: 1px solid var(--ew-cream-dark);
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.navLinks li:last-child .navLink {
+  border-bottom: none;
+}
+
+.navLink:hover {
+  color: var(--ew-forest);
+  background-color: var(--ew-cream-mid);
+  border-radius: var(--ew-radius);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+  border-radius: var(--ew-radius);
+}
+
+@media (min-width: 768px) {
+  .navLink {
+    position: relative;
+    padding: 6px 14px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: none;
+  }
+
+  .navLink:hover {
+    background-color: transparent;
+  }
+
+  .navLink::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background-color: var(--ew-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.22s ease;
+  }
+
+  .navLink:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+
+/* ── CTA кнопка ── */
+
+.ctaButton {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ctaButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background-color: var(--ew-forest);
+    color: var(--ew-cream);
+    text-decoration: none;
+    font-family: var(--ew-font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 9px 18px;
+    border-radius: var(--ew-radius);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .ctaButton:hover {
+    background-color: var(--ew-forest-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--ew-shadow-cta);
+  }
+
+  .ctaButton:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .ctaButton:focus-visible {
+    outline: 2px solid var(--ew-cream);
+    outline-offset: 3px;
+  }
+}
+
+.ctaLong {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .ctaLong {
+    display: inline;
+  }
+}
+
+/* Меню відкривається */
+.navWrapper:has([data-menu-open]) .navLinks {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--ew-cream);
+  border-top: 1px solid var(--ew-cream-dark);
+  border-bottom: 1px solid var(--ew-cream-dark);
+  padding: 8px 20px 16px;
+  z-index: 50;
+  animation: slideDown 0.25s ease;
+}
+
+/* Burger лінії — через :global бо вони в NavCloser.module.css */
+.nav[data-menu-open] :global([class*="line"]):nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav[data-menu-open] :global([class*="line"]):nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav[data-menu-open] :global([class*="line"]):nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}

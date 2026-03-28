@@ -1,0 +1,21 @@
+/* SkipLink.module.css */
+.skipLink {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--ew-forest);
+  color: var(--ew-cream);
+  padding: 8px 16px;
+  border-radius: var(--ew-radius);
+  font-family: var(--ew-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+/* З'являється тільки при фокусі клавіатурою */
+.skipLink:focus {
+  top: 8px;
+}
