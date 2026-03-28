@@ -1,0 +1,234 @@
+/* ── Footer ── */
+
+.footer {
+  background-color: var(--ew-forest-deep);
+  padding: 56px 20px 32px;
+  font-family: var(--ew-font-sans);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 72px 40px 36px;
+  }
+}
+
+.inner {
+  max-width: var(--ew-container-wide);
+  margin: 0 auto;
+}
+
+
+/* ── Верхня сітка ─────────────────────────────────────────────
+   Mobile:  1 колонка — все одне під одним
+   Tablet:  2 колонки — brand на всю ширину зверху
+   Desktop: 4 колонки — brand ширша (2.2fr)
+──────────────────────────────────────────────────────────────*/
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2.2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+}
+
+
+/* ── Brand ── */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* На tablet brand займає обидві колонки */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+.logoLink {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.logoLink:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: var(--ew-radius);
+}
+
+.logoImage {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.tagline {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.75;
+  max-width: 280px;
+  margin: 0;
+}
+
+
+/* ── Соціальні іконки ── */
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* WCAG 2.2 — мінімум 44×44px */
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.socialLink:hover {
+  background-color: var(--ew-forest);
+  border-color: var(--ew-forest);
+  color: white;
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+.socialIcon {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* ── Колонки ── */
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnTitle {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ew-gold);
+  margin-bottom: 4px;
+}
+
+.columnList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.columnLink {
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s;
+}
+
+.columnLink:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.columnLink:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+
+/* ── Divider ── */
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin: 0 0 24px;
+}
+
+
+/* ── Bottom bar ── */
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.copyright {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+}
+
+.legal {
+  display: flex;
+  gap: 20px;
+}
+
+.legalLink {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.legalLink:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.legalLink:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
