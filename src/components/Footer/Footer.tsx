@@ -8,6 +8,14 @@ import { ALL_CATEGORIES_QUERY } from "@/sanity/lib/queries";
 import { SubscribeForm } from "./SubscribeForm/SubscribeForm";
 import styles from "./Footer.module.css";
 
+type FooterCategory = {
+  _id: string;
+  title: string | null;
+  slug: {
+    current: string | null;
+  } | null;
+};
+
 export async function Footer() {
   const categories = await sanityFetch({
     query: ALL_CATEGORIES_QUERY,
@@ -23,17 +31,11 @@ export async function Footer() {
 
       <footer className={styles.footer} aria-label="Site footer">
         <div className={styles.inner}>
-
-          {/* ── Верхня сітка ── */}
           <div className={styles.grid}>
 
             {/* Brand */}
             <div className={styles.brand}>
-              <Link
-                href="/"
-                className={styles.logoLink}
-                aria-label="ElderlyWisdom — home"
-              >
+              <Link href="/" className={styles.logoLink} aria-label="ElderlyWisdom — home">
                 <Image
                   src="/logo-white.svg"
                   width={200}
@@ -47,12 +49,7 @@ export async function Footer() {
                 {siteConfig.description}
               </p>
 
-              {/* Соціальні іконки з src/lib/socialLinks.ts */}
-              <div
-                className={styles.socials}
-                role="list"
-                aria-label="Social media links"
-              >
+              <div className={styles.socials} role="list" aria-label="Social media links">
                 {socialLinks.map(({ href, Icon, label }) => (
                   <Link
                     key={label}
@@ -87,16 +84,21 @@ export async function Footer() {
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Topics</p>
                 <ul className={styles.columnList} role="list">
-                  {categories.map((cat: any) => (
-                    <li key={cat._id}>
-                      <Link
-                        href={`/category/${cat.slug.current}`}
-                        className={styles.columnLink}
-                      >
-                        {cat.title}
-                      </Link>
-                    </li>
-                  ))}
+                  {(categories as FooterCategory[]).map((cat) => {
+        
+                    if (!cat.slug?.current || !cat.title) return null;
+
+                    return (
+                      <li key={cat._id}>
+                        <Link
+                          href={`/category/${cat.slug.current}`}
+                          className={styles.columnLink}
+                        >
+                          {cat.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
@@ -106,10 +108,10 @@ export async function Footer() {
               <p className={styles.columnTitle}>Connect</p>
               <ul className={styles.columnList} role="list">
                 {[
-                  { label: "YouTube Channel", href: siteConfig.youtubeLink, external: true },
-                  { label: "Amazon Books",    href: siteConfig.amazonLink,  external: true },
-                  { label: "Pinterest",       href: siteConfig.pinterestLink, external: true },
-                  { label: "Facebook Group",  href: siteConfig.fbLink,      external: true },
+                  { label: "YouTube Channel", href: siteConfig.youtubeLink,   external: true  },
+                  { label: "Amazon Books",    href: siteConfig.amazonLink,    external: true  },
+                  { label: "Pinterest",       href: siteConfig.pinterestLink, external: true  },
+                  { label: "Facebook Group",  href: siteConfig.fbLink,        external: true  },
                   { label: "Email Us",        href: `mailto:${siteConfig.mailLink}`, external: false },
                 ].map(({ label, href, external }) => (
                   <li key={label}>
@@ -128,21 +130,15 @@ export async function Footer() {
 
           </div>
 
-          {/* ── Divider ── */}
           <hr className={styles.divider} />
 
-          {/* ── Bottom bar ── */}
           <div className={styles.bottom}>
             <p className={styles.copyright}>
               ElderlyWisdom.org © {year} · All rights reserved
             </p>
             <div className={styles.legal}>
-              <Link href="/privacy" className={styles.legalLink}>
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className={styles.legalLink}>
-                Terms of Use
-              </Link>
+              <Link href="/privacy" className={styles.legalLink}>Privacy Policy</Link>
+              <Link href="/terms" className={styles.legalLink}>Terms of Use</Link>
             </div>
           </div>
 
