@@ -213,11 +213,53 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
+} */
+
+
+
+/* REDESIGN */
+/* REDESIGN */
+/* Дизайн токени — Variant A "Warm Editorial" */
+:root {
+  /* Кольори */
+  --ew-cream:        #fdf9f2;
+  --ew-cream-mid:    #f5ede0;
+  --ew-cream-dark:   #e8ddd0;
+  --ew-forest:       #2a5f4a;
+  --ew-forest-dark:  #1e4a38;
+  --ew-forest-deep:  #1a2e1f;
+  --ew-gold:         #e8c97e;
+  --ew-brown:        #b08a5c;
+  --ew-text:         #1a2e1f;
+  --ew-text-mid:     #5a5048;
+  --ew-text-light:   #8a8075;
+
+  /* Шрифти — беруться з next/font через layout.tsx */
+  --ew-font-serif: var(--font-serif), Georgia, serif;
+  --ew-font-sans:  var(--font-sans), system-ui, sans-serif;
+
+  /* Контейнери */
+  --ew-container-text:    780px;    /* текст статті */
+  --ew-container-content: 1160px;   /* картки, сітки */
+  --ew-container-wide:    1440px;   /* hero, банери */
+
+  /* Базові розміри */
+  --ew-nav-height: 74px;
+  --ew-radius:     4px;
+
+  /* Тіні */
+  --ew-shadow-nav:  0 2px 24px rgba(42, 95, 74, 0.08);
+  --ew-shadow-card: 0 8px 32px rgba(42, 95, 74, 0.1);
+  --ew-shadow-cta:  0 6px 20px rgba(42, 95, 74, 0.25);
+
+  /* Перевизначаємо Tailwind/shadcn базові кольори */
+  --background: var(--ew-cream);
+  --foreground: var(--ew-text);
 }

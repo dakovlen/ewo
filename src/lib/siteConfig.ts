@@ -21,5 +21,5 @@ export const siteConfig = {
   xLink: "https://x.com/SolanVoss",
   amazonLink: "https://www.amazon.com/stores/Solan-Voss/author/B0F8QWL2FP",
   mailLink: "elderly.wisdom.daily@gmail.com",
-
+  announcementBarLink: "https://www.youtube.com/watch?v=hQlN7JuAXb0&list=PLQ9BkpldciEn87uRFQYMSbj2hOBqqhh4C",
 };
