@@ -81,8 +81,8 @@
 
 .tagline {
   font-size: 14px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.75;
   max-width: 280px;
   margin: 0;
@@ -102,12 +102,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* WCAG 2.2 — мінімум 44×44px */
   min-width: 44px;
   min-height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
@@ -205,8 +204,8 @@
 
 .copyright {
   font-size: 13px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
 }
 
@@ -217,8 +216,8 @@
 
 .legalLink {
   font-size: 13px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: color 0.2s;
 }
