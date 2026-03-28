@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   height: 62px;
-  max-width: var(--ew-container-max);
+  max-width: var(--ew-container-wide);
   margin: 0 auto;
   padding: 0 20px;
   gap: 12px;
@@ -81,10 +81,7 @@
 }
 
 
-/* ── Nav посилання ─────────────────────────────────────────────
-   Селектор змінено з :checked на [aria-expanded="true"].
-   Семантично правильно і screen readers розуміють стан.
-──────────────────────────────────────────────────────────────── */
+/* ── Nav посилання ── */
 
 .navLinks {
   display: none;
@@ -93,7 +90,12 @@
   padding: 0;
 }
 
-.navWrapper:has(#menu-toggle[aria-expanded="true"]) .navLinks {
+/*
+  Меню відкривається через data-menu-open на <nav>.
+  NavCloser.tsx встановлює цей атрибут через btn.closest("nav").
+  Один механізм — один селектор. Без дублювання.
+*/
+.navWrapper:has(.nav[data-menu-open]) .navLinks {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -250,32 +252,21 @@
   }
 }
 
-/* Меню відкривається */
-.navWrapper:has([data-menu-open]) .navLinks {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: var(--ew-cream);
-  border-top: 1px solid var(--ew-cream-dark);
-  border-bottom: 1px solid var(--ew-cream-dark);
-  padding: 8px 20px 16px;
-  z-index: 50;
-  animation: slideDown 0.25s ease;
-}
 
-/* Burger лінії — через :global бо вони в NavCloser.module.css */
-.nav[data-menu-open] :global([class*="line"]):nth-child(1) {
+/* ── Burger анімація ─────────────────────────────────────────
+   Через #menu-toggle span — точно і безпечно.
+   id унікальний на сторінці, не залежить від CSS Modules хешу.
+──────────────────────────────────────────────────────────────*/
+
+.nav[data-menu-open] #menu-toggle span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
 
-.nav[data-menu-open] :global([class*="line"]):nth-child(2) {
+.nav[data-menu-open] #menu-toggle span:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
 
-.nav[data-menu-open] :global([class*="line"]):nth-child(3) {
+.nav[data-menu-open] #menu-toggle span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }

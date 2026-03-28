@@ -11,9 +11,10 @@ export function AnnouncementBar() {
         {" "}— 7 videos on staying close to your adult children.
       </span>
       <Link 
-        href={siteConfig.AnnouncementBarLink}
+        href={siteConfig.announcementBarLink}
         target="_blank"
         className={styles.link}
+        rel="noopener noreferrer"
       >
         Watch now →
       </Link>

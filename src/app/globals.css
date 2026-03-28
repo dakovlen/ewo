@@ -213,21 +213,19 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
 
 
 
 /* REDESIGN */
-/* Підключення шрифтів */
-/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap'); */
-
+/* REDESIGN */
 /* Дизайн токени — Variant A "Warm Editorial" */
 :root {
   /* Кольори */
@@ -243,17 +241,25 @@
   --ew-text-mid:     #5a5048;
   --ew-text-light:   #8a8075;
 
-  /* Шрифти */
-  --ew-font-serif: 'Playfair Display', Georgia, serif;
-  --ew-font-sans:  'DM Sans', system-ui, sans-serif;
+  /* Шрифти — беруться з next/font через layout.tsx */
+  --ew-font-serif: var(--font-serif), Georgia, serif;
+  --ew-font-sans:  var(--font-sans), system-ui, sans-serif;
 
-  /* Розміри */
-  --ew-nav-height:    74px;
-  --ew-container-max: 1400px;
-  --ew-radius:        4px;
+  /* Контейнери */
+  --ew-container-text:    780px;    /* текст статті */
+  --ew-container-content: 1160px;   /* картки, сітки */
+  --ew-container-wide:    1440px;   /* hero, банери */
+
+  /* Базові розміри */
+  --ew-nav-height: 74px;
+  --ew-radius:     4px;
 
   /* Тіні */
   --ew-shadow-nav:  0 2px 24px rgba(42, 95, 74, 0.08);
   --ew-shadow-card: 0 8px 32px rgba(42, 95, 74, 0.1);
   --ew-shadow-cta:  0 6px 20px rgba(42, 95, 74, 0.25);
+
+  /* Перевизначаємо Tailwind/shadcn базові кольори */
+  --background: var(--ew-cream);
+  --foreground: var(--ew-text);
 }
