@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/client";
 import { ALL_CATEGORIES_QUERY } from "@/sanity/lib/queries";
-import { Hero } from "@/components/blocks/Hero";
+import { Hero } from "@/components/blocks/Hero/Hero";
 import Link from "next/link";
 import type { Metadata } from "next";
 

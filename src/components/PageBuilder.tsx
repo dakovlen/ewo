@@ -1,6 +1,6 @@
 "use client";
 
-import { Hero } from "@/components/blocks/Hero";
+import { Hero } from "@/components/blocks/Hero/Hero";
 import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";

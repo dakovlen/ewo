@@ -2,7 +2,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { CATEGORY_QUERY, CATEGORY_POSTS_QUERY } from "@/sanity/lib/queries";
 import { PostCard } from "@/components/PostCard";
 import { notFound } from "next/navigation";
-import { Hero } from "@/components/blocks/Hero";
+import { Hero } from "@/components/blocks/Hero/Hero";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/siteConfig";
 
