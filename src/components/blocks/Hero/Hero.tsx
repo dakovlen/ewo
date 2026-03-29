@@ -41,7 +41,7 @@ export function Hero({ title, text }: HeroProps = {}) {
         )}
 
         {/* CTA кнопки */}
-        {/* <div className={styles.actions}>
+        <div className={styles.actions}>
           <Link
             href={siteConfig.youtubeLink}
             target="_blank"
@@ -53,14 +53,14 @@ export function Hero({ title, text }: HeroProps = {}) {
             Watch on YouTube
           </Link>
 
-          <Link href="/blog" className={styles.ctaSecondary}>
+          {/* <Link href="/blog" className={styles.ctaSecondary}>
             Browse articles
             <span className={styles.ctaArrow} aria-hidden="true">→</span>
-          </Link>
-        </div> */}
+          </Link> */}
+        </div>
 
         {/* Статистика */}
-        <div className={styles.stats} aria-label="Site statistics">
+        {/* <div className={styles.stats} aria-label="Site statistics">
           {[
             { number: "60+",  label: "Articles" },
             { number: "5",    label: "Books"    },
@@ -71,7 +71,7 @@ export function Hero({ title, text }: HeroProps = {}) {
               <span className={styles.statLabel}>{label}</span>
             </div>
           ))}
-        </div>
+        </div> */}
 
       </div>
     </section>

@@ -1,0 +1,73 @@
+.section {
+  background-color: var(--ew-forest-deep);
+  border-top: 3px solid var(--ew-gold);
+  padding: 32px 20px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 36px 40px;
+  }
+}
+
+.inner {
+  max-width: var(--ew-container-content);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 32px;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+@media (min-width: 768px) {
+  .stat {
+    padding: 8px 40px;
+  }
+}
+
+.number {
+  font-family: var(--ew-font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ew-gold);
+  line-height: 1;
+  display: block;
+}
+
+.label {
+  font-family: var(--ew-font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+/* Вертикальний розділювач між цифрами */
+.divider {
+  width: 1px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  /* Ховаємо на мобільному де wrap — виглядає погано */
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .divider {
+    display: block;
+  }
+}
