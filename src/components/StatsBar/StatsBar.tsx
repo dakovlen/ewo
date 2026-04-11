@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import styles from "./StatsBar.module.css";
 
 const stats = [
@@ -12,8 +13,8 @@ export function StatsBar() {
     <section className={styles.section} aria-label="Site statistics">
       <div className={styles.inner}>
         {stats.map(({ number, label }, index) => (
-          <>
-            <div key={number} className={styles.stat}>
+         <Fragment key={number}>
+            <div className={styles.stat}>
               <span className={styles.number}>{number}</span>
               <span className={styles.label}>{label}</span>
             </div>
@@ -22,7 +23,7 @@ export function StatsBar() {
             {index < stats.length - 1 && (
               <div className={styles.divider} aria-hidden="true" />
             )}
-          </>
+          </Fragment>
         ))}
       </div>
     </section>
