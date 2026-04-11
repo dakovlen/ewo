@@ -7,13 +7,17 @@ import { Hero } from "@/components/blocks/Hero/Hero";
 import { LatestPosts } from "@/components/LatestPosts";
 import { WhatWeOffer } from "@/components/WhatWeOffer/WhatWeOffer";
 import { StatsBar } from "@/components/StatsBar/StatsBar";
+import { YouTubeBanner } from "@/components/YouTubeBanner/YouTubeBanner";
+import { getLatestVideo } from "@/lib/getLatestVideo";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = homeMetadata;
 
 export default async function Page() {
-  const { data: latestPosts } = await sanityFetch({
-    query: LATEST_POSTS_QUERY,
-  });
+  const [latestPosts, latestVideo] = await Promise.all([
+    sanityFetch({ query: LATEST_POSTS_QUERY }),
+    getLatestVideo(siteConfig.youtubeChannelId),
+  ]);
 
   return (
     <>
@@ -21,6 +25,7 @@ export default async function Page() {
       <Hero />
       <StatsBar />
       <WhatWeOffer />
+      <YouTubeBanner video={latestVideo} />
       <LatestPosts posts={latestPosts || []} />
     </>
   );
