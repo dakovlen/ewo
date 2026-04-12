@@ -1,0 +1,170 @@
+.section {
+  background-color: var(--ew-cream);
+  padding: 64px 20px 72px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 80px 40px 88px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 96px 40px 104px;
+  }
+}
+
+
+/* ── Inner — центрований контейнер ── */
+
+.inner {
+  /* max-width: 720px; */
+  max-width: var(--ew-container-text);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+}
+
+
+/* ── Overline — дві золоті лінії симетрично ── */
+
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.overlineLine {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.overlineText {
+  font-family: var(--ew-font-sans);
+  font-size: clamp(13px, 5vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-text-mid);
+  white-space: nowrap;
+}
+
+
+/* ── Заголовок ── */
+
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(36px, 5.5vw, 75px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ew-text);
+  margin: 0;
+  /* max-width: 660px; */
+}
+
+
+/* ── Текст ── */
+
+.text {
+  font-family: var(--ew-font-sans);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.5;
+  color: var(--ew-text-mid);
+  margin: 0;
+  /* max-width: 560px; */
+}
+
+.text p {
+  margin: 0;
+}
+
+
+/* ── CTA кнопки ── */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+@media (min-width: 480px) {
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ew-forest);
+  color: var(--ew-cream);
+  text-decoration: none;
+  font-family: var(--ew-font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--ew-radius);
+  white-space: nowrap;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.ctaPrimary:hover {
+  background-color: var(--ew-forest-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--ew-shadow-cta);
+}
+
+.ctaPrimary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.ctaPrimary:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ew-font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ew-forest);
+  text-decoration: none;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--ew-cream-dark);
+  transition: border-color 0.2s;
+}
+
+.ctaSecondary:hover {
+  border-color: var(--ew-forest);
+}
+
+.ctaSecondary:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+.ctaSecondary:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.ctaArrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}

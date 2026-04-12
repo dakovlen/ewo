@@ -1,0 +1,369 @@
+/* ── Section ── */
+
+.section {
+  background-color: var(--ew-forest-deep);
+  padding: 64px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 80px 40px;
+  }
+}
+
+
+/* ── Декоративні кола ── */
+
+.decoRight {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background-color: rgba(232, 201, 126, 0.04);
+  pointer-events: none;
+}
+
+.decoLeft {
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(42, 95, 74, 0.4);
+  pointer-events: none;
+}
+
+
+/* ── Inner ─────────────────────────────────────────────────
+   Mobile:  1 колонка — текст, потім відео
+   Desktop: 2 рівні колонки — текст зліва, відео справа
+            align-items: center — вертикальне вирівнювання
+──────────────────────────────────────────────────────────── */
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--ew-container-content);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+}
+
+
+/* ── Play circle ── */
+
+.playCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--ew-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.playTriangle {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 18px solid var(--ew-forest-deep);
+  margin-left: 4px;
+}
+
+
+/* ── Overline ── */
+
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.overlineLine {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.overlineText {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ew-gold);
+}
+
+
+/* ── Заголовок ── */
+
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-cream);
+  margin: 0 0 20px;
+}
+
+
+/* ── Текст ── */
+
+.text {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-base);
+  color: rgba(253, 249, 242, 0.6);
+  margin: 0 0 36px;
+}
+
+
+/* ── Кнопки ── */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+@media (min-width: 480px) {
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ew-gold);
+  color: var(--ew-forest-deep);
+  text-decoration: none;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: var(--ew-radius);
+  white-space: nowrap;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btnPrimary:hover {
+  background-color: #ddb96a;
+  transform: translateY(-1px);
+}
+
+.btnPrimary:active {
+  transform: translateY(0);
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--ew-cream);
+  outline-offset: 3px;
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: rgba(253, 249, 242, 0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(253, 249, 242, 0.2);
+  padding-bottom: 2px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btnGhost:hover {
+  color: var(--ew-cream);
+  border-color: rgba(253, 249, 242, 0.6);
+}
+
+.btnGhost:focus-visible {
+  outline: 2px solid var(--ew-cream);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+
+/* ── Права колонка ─────────────────────────────────────────
+   Mobile:  показуємо під текстом
+   Desktop: займає рівно половину контейнера (1fr з 1fr 1fr)
+            відео і pill вирівняні по центру колонки
+──────────────────────────────────────────────────────────── */
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+
+/* ── Video thumbnail ────────────────────────────────────────
+   Mobile:  повна ширина колонки
+   Desktop: повна ширина правої колонки (50% контейнера)
+──────────────────────────────────────────────────────────── */
+
+.videoThumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  border: 2px solid rgba(232, 201, 126, 0.2);
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  background-color: var(--ew-forest);
+  transition: border-color 0.2s;
+}
+
+.videoThumb:hover {
+  border-color: rgba(232, 201, 126, 0.5);
+}
+
+.videoThumb:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.videoImage {
+  object-fit: cover;
+}
+
+.videoFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.videoPlay {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: rgba(232, 201, 126, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoTriangle {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 16px solid var(--ew-forest-deep);
+  margin-left: 3px;
+}
+
+.videoLabel {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 500;
+  color: rgba(253, 249, 242, 0.5);
+  letter-spacing: 0.05em;
+}
+
+/* Play overlay — з'являється при hover */
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 46, 31, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.videoThumb:hover .videoOverlay {
+  opacity: 1;
+}
+
+/* Назва відео — gradient overlay внизу */
+.videoTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 12px 12px;
+  background: linear-gradient(
+    to top,
+    rgba(26, 46, 31, 0.92) 0%,
+    transparent 100%
+  );
+  font-family: var(--ew-font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(253, 249, 242, 0.85);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* ── Subscribers pill ── */
+
+.subsPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(232, 201, 126, 0.1);
+  border: 1px solid rgba(232, 201, 126, 0.2);
+  border-radius: 20px;
+  padding: 8px 16px;
+}
+
+.subsDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.subsText {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 500;
+  color: rgba(253, 249, 242, 0.6);
+}
+
+.subsNum {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  color: var(--ew-gold);
+}
