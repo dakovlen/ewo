@@ -1,0 +1,259 @@
+/* ── FreeJournalBanner ── */
+
+.section {
+  background-color: var(--ew-cream);
+  padding: 72px 20px;
+  border-top: 1px solid var(--ew-cream-dark);
+  border-bottom: 1px solid var(--ew-cream-dark);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 96px 40px;
+  }
+}
+
+.inner {
+  max-width: var(--ew-container-content);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .inner {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 72px;
+  }
+}
+
+
+/* ── Content ── */
+
+.content {
+  flex: 1;
+}
+
+.overline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-family: var(--ew-font-sans);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-brown);
+  margin-bottom: 14px;
+}
+
+@media (min-width: 768px) {
+  .overline::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: var(--ew-gold);
+    flex-shrink: 0;
+  }
+}
+
+.heading {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--ew-text);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.description {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  color: var(--ew-text-mid);
+  line-height: var(--ew-leading-base);
+  margin: 0 0 24px;
+  max-width: 520px;
+}
+
+@media (min-width: 900px) {
+  .description {
+    max-width: none;
+  }
+}
+
+
+/* ── Bullets ── */
+
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  color: var(--ew-text-mid);
+  line-height: 1.5;
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .bullet {
+    justify-content: flex-start;
+  }
+}
+
+.bulletIcon {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--ew-forest);
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+
+/* ── Form wrap ── */
+
+.formWrap {
+  width: 100%;
+  max-width: 400px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 900px) {
+  .formWrap {
+    max-width: 360px;
+  }
+}
+
+
+/* ── Form ── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-text);
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  color: var(--ew-text);
+  background-color: white;
+  border: 1.5px solid var(--ew-cream-dark);
+  border-radius: var(--ew-radius);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--ew-text-light);
+}
+
+.input:focus {
+  border-color: var(--ew-forest);
+}
+
+.inputError {
+  border-color: #dc2626;
+}
+
+.button {
+  width: 100%;
+  padding: 15px 24px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ew-cream);
+  background-color: var(--ew-forest);
+  border: none;
+  border-radius: var(--ew-radius);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.button:hover {
+  background-color: var(--ew-forest-dark);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+}
+
+.error {
+  font-family: var(--ew-font-sans);
+  font-size: 13px;
+  color: #dc2626;
+  margin: 0;
+}
+
+.privacy {
+  font-family: var(--ew-font-sans);
+  font-size: 12px;
+  color: var(--ew-text-light);
+  margin: 0;
+  text-align: center;
+}
+
+
+/* ── Success state ── */
+
+.successBox {
+  background-color: var(--ew-cream-mid);
+  border: 1px solid var(--ew-cream-dark);
+  border-radius: var(--ew-radius);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.successTitle {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 700;
+  color: var(--ew-forest);
+  margin: 0 0 10px;
+}
+
+.successText {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  color: var(--ew-text-mid);
+  margin: 0;
+  line-height: var(--ew-leading-base);
+}
