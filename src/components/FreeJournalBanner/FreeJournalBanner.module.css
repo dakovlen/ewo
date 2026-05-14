@@ -1,10 +1,8 @@
 /* ── FreeJournalBanner ── */
 
 .section {
-  background-color: var(--ew-cream);
+  background-color: var(--ew-forest-deep);
   padding: 72px 20px;
-  border-top: 1px solid var(--ew-cream-dark);
-  border-bottom: 1px solid var(--ew-cream-dark);
 }
 
 @media (min-width: 768px) {
@@ -48,7 +46,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ew-brown);
+  color: var(--ew-gold);
   margin-bottom: 14px;
 }
 
@@ -67,7 +65,7 @@
   font-family: var(--ew-font-serif);
   font-size: clamp(26px, 3.5vw, 40px);
   font-weight: 700;
-  color: var(--ew-text);
+  color: var(--ew-cream);
   line-height: 1.2;
   margin: 0 0 16px;
 }
@@ -75,16 +73,9 @@
 .description {
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
-  color: var(--ew-text-mid);
+  color: var(--ew-cream-dark);
   line-height: var(--ew-leading-base);
   margin: 0 0 24px;
-  max-width: 520px;
-}
-
-@media (min-width: 900px) {
-  .description {
-    max-width: none;
-  }
 }
 
 
@@ -105,7 +96,7 @@
   gap: 10px;
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-sm);
-  color: var(--ew-text-mid);
+  color: var(--ew-cream-mid);
   line-height: 1.5;
   justify-content: center;
 }
@@ -119,7 +110,7 @@
 .bulletIcon {
   flex-shrink: 0;
   font-size: 13px;
-  color: var(--ew-forest);
+  color: var(--ew-gold);
   margin-top: 2px;
   font-weight: 700;
 }
@@ -152,7 +143,7 @@
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-sm);
   font-weight: 600;
-  color: var(--ew-text);
+  color: var(--ew-cream);
   text-align: left;
 }
 
@@ -162,8 +153,8 @@
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
   color: var(--ew-text);
-  background-color: white;
-  border: 1.5px solid var(--ew-cream-dark);
+  background-color: var(--ew-cream);
+  border: 2px solid transparent;
   border-radius: var(--ew-radius);
   outline: none;
   transition: border-color 0.2s;
@@ -175,11 +166,11 @@
 }
 
 .input:focus {
-  border-color: var(--ew-forest);
+  border-color: var(--ew-gold);
 }
 
 .inputError {
-  border-color: #dc2626;
+  border-color: #f87171;
 }
 
 .button {
@@ -189,8 +180,8 @@
   font-size: var(--ew-text-base);
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--ew-cream);
-  background-color: var(--ew-forest);
+  color: var(--ew-forest-deep);
+  background-color: var(--ew-gold);
   border: none;
   border-radius: var(--ew-radius);
   cursor: pointer;
@@ -198,7 +189,7 @@
 }
 
 .button:hover {
-  background-color: var(--ew-forest-dark);
+  background-color: #d4b56a;
 }
 
 .button:active {
@@ -212,14 +203,14 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--ew-forest);
+  outline: 2px solid var(--ew-gold);
   outline-offset: 3px;
 }
 
 .error {
   font-family: var(--ew-font-sans);
   font-size: 13px;
-  color: #dc2626;
+  color: #f87171;
   margin: 0;
 }
 
@@ -235,8 +226,8 @@
 /* ── Success state ── */
 
 .successBox {
-  background-color: var(--ew-cream-mid);
-  border: 1px solid var(--ew-cream-dark);
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(232, 201, 126, 0.3);
   border-radius: var(--ew-radius);
   padding: 32px 24px;
   text-align: center;
@@ -246,14 +237,14 @@
   font-family: var(--ew-font-serif);
   font-size: clamp(20px, 2.5vw, 26px);
   font-weight: 700;
-  color: var(--ew-forest);
+  color: var(--ew-gold);
   margin: 0 0 10px;
 }
 
 .successText {
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
-  color: var(--ew-text-mid);
+  color: var(--ew-cream-mid);
   margin: 0;
   line-height: var(--ew-leading-base);
 }

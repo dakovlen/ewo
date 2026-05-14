@@ -27,10 +27,10 @@ export default async function Page() {
       <Hero />
       <StatsBar />
       <WhatWeOffer />
+      <FreeJournalBanner />
       <Author />
       <YouTubeBanner video={latestVideo} />
       <LatestPosts posts={latestPosts || []} />
-      <FreeJournalBanner />
     </>
   );
 }

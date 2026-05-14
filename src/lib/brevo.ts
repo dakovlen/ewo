@@ -8,15 +8,21 @@ export async function addContactToBrevo(email: string) {
     body: JSON.stringify({
       email,
       listIds: [Number(process.env.BREVO_LIST_ID)],
-      updateEnabled: true, // якщо контакт вже є — просто оновить список
+      updateEnabled: true,
     }),
   });
 
-  const data = await res.json();
+  // 204 = success with no body, 201 = created
+  if (res.status === 204 || res.status === 201) {
+    return;
+  }
 
-  // 204 = created, 400 with code "duplicate_parameter" = already exists — обидва ОК
-  if (!res.ok && res.status !== 204) {
-    throw new Error(data.message || 'Failed to add contact to Brevo');
+  // Для інших відповідей парсимо JSON
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : {};
+
+  if (!res.ok) {
+    throw new Error(data.message || `Brevo error: ${res.status}`);
   }
 
   return data;
