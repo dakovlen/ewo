@@ -10,6 +10,8 @@ import { StatsBar } from "@/components/StatsBar/StatsBar";
 import { YouTubeBanner } from "@/components/YouTubeBanner/YouTubeBanner";
 import { getLatestVideo } from "@/lib/getLatestVideo";
 import { siteConfig } from "@/lib/siteConfig";
+import { Author } from "@/components/Author/Author";
+import { FreeJournalBanner } from "@/components/FreeJournalBanner/FreeJournalBanner";
 
 export const metadata: Metadata = homeMetadata;
 
@@ -25,8 +27,10 @@ export default async function Page() {
       <Hero />
       <StatsBar />
       <WhatWeOffer />
+      <Author />
       <YouTubeBanner video={latestVideo} />
       <LatestPosts posts={latestPosts || []} />
+      <FreeJournalBanner />
     </>
   );
 }
