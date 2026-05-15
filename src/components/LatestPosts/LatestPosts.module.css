@@ -1,0 +1,298 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   LatestPosts
+   Фон: --ew-cream-mid  ← ЗМІНЕНО з --ew-cream
+   Причина: після WhatWeOffer (cream-mid) іде cream — майже не відрізняється.
+   Міняємо LatestPosts на cream щоб ритм був: mid → cream → mid → dark...
+   
+   Стоп — дивимось на фактичний ритм:
+   WhatWeOffer   cream-mid
+   LatestPosts   cream      ← різниця є, але слабка
+   Author        forest-deep ← добрий контраст
+   
+   Рішення: LatestPosts залишаємо cream (різниця з cream-mid є)
+   але додаємо border-top для чіткого розділення.
+   Контейнер: --ew-container-content (1160px)
+   Spacing: 96px
+───────────────────────────────────────────────────────────────────────────── */
+
+.section {
+  background-color: var(--ew-cream);
+  padding-block: 96px;
+  padding-inline: 24px;
+  /* Чітке розділення з WhatWeOffer (cream-mid) */
+  border-top: 1px solid var(--ew-cream-dark);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-inline: 40px;
+  }
+}
+
+/* ── Container ────────────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--ew-container-content);
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-block-end: 56px;
+}
+
+.heading {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin-block: 0 12px;
+}
+
+.lead {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-base);
+  color: var(--ew-text-mid);
+  max-width: 480px;
+  margin-inline: auto;
+  margin-block: 0;
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.card {
+  background-color: white;
+  border: 1.5px solid var(--ew-cream-dark);
+  border-radius: calc(var(--ew-radius) * 2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--ew-shadow-card);
+  contain: layout style;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(42, 95, 74, 0.13);
+  }
+}
+
+/* ── Image ────────────────────────────────────────────────────────────────── */
+.imageLink {
+  display: block;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--ew-cream-mid);
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .image {
+    transform: scale(1.03);
+    transition: transform 0.4s ease;
+  }
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.body {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+}
+
+/* ── Category tags ────────────────────────────────────────────────────────── */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.categoryTag {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ew-forest);
+  background-color: rgba(42, 95, 74, 0.08);
+  border-radius: 100px;
+  padding: 4px 12px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+@media (hover: hover) {
+  .categoryTag:hover {
+    background-color: rgba(42, 95, 74, 0.14);
+  }
+}
+
+.categoryTag:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}
+
+/* ── Post title ───────────────────────────────────────────────────────────── */
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 0;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .titleLink:hover {
+    color: var(--ew-forest);
+  }
+}
+
+.titleLink:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Excerpt ──────────────────────────────────────────────────────────────── */
+.excerpt {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  line-height: var(--ew-leading-base);
+  color: var(--ew-text-mid);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Read more ────────────────────────────────────────────────────────────── */
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-forest);
+  text-decoration: none;
+  margin-block-start: auto;
+  padding-block-start: 4px;
+}
+
+.readMore svg {
+  flex-shrink: 0;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .readMore {
+    transition: gap 0.15s ease;
+  }
+
+  .readMore:hover {
+    gap: 10px;
+  }
+}
+
+.readMore:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── CTA ──────────────────────────────────────────────────────────────────── */
+.cta {
+  text-align: center;
+  margin-block-start: 48px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  font-weight: 700;
+  color: var(--ew-forest);
+  text-decoration: none;
+  border: 2px solid var(--ew-forest);
+  border-radius: var(--ew-radius);
+  padding: 14px 36px;
+  letter-spacing: 0.02em;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ctaButton {
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .ctaButton:hover {
+    background-color: var(--ew-forest);
+    color: var(--ew-cream);
+  }
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section {
+    padding-block: 72px;
+  }
+
+  .header {
+    margin-block-end: 40px;
+  }
+
+  .cta {
+    margin-block-start: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 56px;
+    padding-inline: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

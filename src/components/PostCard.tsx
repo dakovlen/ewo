@@ -1,5 +1,5 @@
 import { Author } from '@/components/Author'
-import { Categories } from '@/components/Categories'
+import { Categories } from '@/components/Categories/Categories'
 import { POSTS_QUERYResult } from '@/sanity/types'
 import { PublishedAt } from '@/components/PublishedAt'
 import { urlFor } from '@/sanity/lib/image'

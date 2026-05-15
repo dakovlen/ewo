@@ -1,18 +1,29 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   StatsBar
+   Фон: --ew-forest-deep (без змін)
+   Spacing: compact — sm (56px)
+   Виправлено: number 66px → 48px (не конкурує з Hero h1)
+               label margin-top: 20px → 8px (занадто великий gap)
+               label font-size: 18px → var(--ew-text-xs) 13px (дрібна мітка)
+───────────────────────────────────────────────────────────────────────────── */
+
 .section {
   background-color: var(--ew-forest-deep);
   border-top: 3px solid var(--ew-gold);
-  padding: 32px 20px;
+  padding-block: 40px;
+  padding-inline: 24px;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 36px 40px;
+    padding-block: 48px;
+    padding-inline: 40px;
   }
 }
 
 .inner {
   max-width: var(--ew-container-wide);
-  margin: 0 auto;
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 16px 32px;
+  padding: 12px 32px;
   text-align: center;
   flex: 1;
   min-width: 120px;
@@ -37,33 +48,37 @@
   }
 }
 
+/* Число — менше ніж було (66px → 48px)
+   Великий Hero h1 = clamp(36px, 5vw, 64px).
+   StatsBar число не має конкурувати з h1 — це підтримуючий елемент */
 .number {
   font-family: var(--ew-font-serif);
-  font-size: 66px;
+  font-size: clamp(36px, 4vw, 48px);
   font-weight: 700;
   color: var(--ew-gold);
   line-height: 1;
   display: block;
 }
 
+/* Мітка — мала, uppercase, приглушена */
 .label {
   font-family: var(--ew-font-sans);
-  font-size: 18px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: var(--ew-text-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   display: block;
-  margin-top: 20px;
+  /* Було margin-top: 20px — занадто */
+  margin-block-start: 4px;
 }
 
-/* Вертикальний розділювач між цифрами */
+/* Вертикальний розділювач */
 .divider {
   width: 1px;
-  height: 48px;
-  background-color: rgba(255, 255, 255, 0.1);
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
-  /* Ховаємо на мобільному де wrap — виглядає погано */
   display: none;
 }
 

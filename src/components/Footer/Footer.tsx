@@ -27,7 +27,7 @@ export async function Footer() {
 
   return (
     <>
-      <SubscribeForm />
+      {/* <SubscribeForm /> */}
 
       <footer className={styles.footer} aria-label="Site footer">
         <div className={styles.inner}>

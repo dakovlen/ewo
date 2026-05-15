@@ -48,7 +48,8 @@
 .inner {
   position: relative;
   z-index: 1;
-  max-width: var(--ew-container-content);
+  /* max-width: var(--ew-container-content); */
+  max-width: var(--ew-container-wide);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;

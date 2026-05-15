@@ -35,18 +35,18 @@ export function Author() {
           <div className={styles.photoFrame}>
             {/*
               Поки placeholder.
-              Коли буде реальне фото — замінити на:
+              Коли буде реальне фото — замінити на:*/
               <Image
-                src="/solan-voss.jpg"
+                src="/solan-voss.jpeg"
                 alt="Solan Voss — author of ElderlyWisdom"
                 fill
                 className={styles.photo}
                 sizes="(min-width: 1024px) 380px, 100vw"
               />
-            */}
-            <div className={styles.photoPlaceholder} aria-hidden="true">
+            }
+            {/* <div className={styles.photoPlaceholder} aria-hidden="true">
               <span>🌿</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Floating tag — видимий лейбл автора */}

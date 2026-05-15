@@ -1,7 +1,7 @@
 /* ── Footer ── */
 
 .footer {
-  background-color: var(--ew-forest-deep);
+  background-color: var(--ew-footer-bg);
   padding: 56px 20px 32px;
   font-family: var(--ew-font-sans);
 }

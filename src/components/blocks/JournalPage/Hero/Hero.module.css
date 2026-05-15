@@ -1,0 +1,162 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   JournalPage / Hero
+   Фон: --ew-cream | Контейнер: --ew-container-text (780px)
+   Стиль: копіює Hero з головної — overline + великий serif заголовок + lead
+───────────────────────────────────────────────────────────────────────────── */
+
+.hero {
+  background-color: var(--ew-cream);
+  padding-top: calc(var(--ew-nav-height) + 72px);
+  padding-bottom: 0;
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+}
+
+/* ── Inner container ──────────────────────────────────────────────────────── */
+.inner {
+  max-width: var(--ew-container-text); /* 780px */
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── Overline — дві золоті лінії, ідентично до Hero головної ──────────────── */
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.overlineLine {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.overlineText {
+  font-family: var(--ew-font-sans);
+  font-size: clamp(11px, 1.5vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-text-mid);
+  white-space: nowrap;
+}
+
+/* ── H1 ───────────────────────────────────────────────────────────────────── */
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ew-text);
+  margin: 0;
+  font-style: normal;
+}
+
+/* <em> для акценту — без italic, тільки колір */
+.titleAccent {
+  color: var(--ew-forest);
+  font-style: normal;
+}
+
+/* ── Lead ─────────────────────────────────────────────────────────────────── */
+.lead {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: var(--ew-leading-base);
+  color: var(--ew-text-mid);
+  max-width: 620px;
+  margin: 0;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.body {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);      /* 18px */
+  line-height: var(--ew-leading-loose);
+  color: var(--ew-text-light);
+  max-width: 560px;
+  margin: 0;
+}
+
+/* ── CTA кнопка — scroll anchor ──────────────────────────────────────────── */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ew-forest);
+  color: var(--ew-cream);
+  text-decoration: none;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 16px 32px;
+  border-radius: var(--ew-radius);
+  margin-top: 8px;
+  box-shadow: var(--ew-shadow-cta);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .cta {
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta:hover {
+    background-color: var(--ew-forest-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(42, 95, 74, 0.3);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+  }
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 3px;
+}
+
+/* ── Wave transition ──────────────────────────────────────────────────────── */
+.wave {
+  display: block;
+  line-height: 0;
+  height: 56px;
+  overflow: hidden;
+}
+
+.wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: calc(var(--ew-nav-height) + 48px);
+  }
+
+  .inner {
+    padding-bottom: 60px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding-inline: 16px;
+    padding-bottom: 48px;
+  }
+}
