@@ -3,7 +3,6 @@ import { JournalHero } from "@/components/blocks/JournalPage/Hero/Hero";
 import { JournalTopics } from "@/components/blocks/JournalPage/Topics/Topics";
 import { JournalHowItWorks } from "@/components/blocks/JournalPage/HowItWorks/HowItWorks";
 import { JournalTestimonial } from "@/components/blocks/JournalPage/Testimonial/Testimonial";
-// import { JournalFinalCTA } from "@/components/blocks/JournalPage/FinalCTA/FinalCTA";
 import { FreeJournalBanner } from "@/components/FreeJournalBanner/FreeJournalBanner";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -89,7 +88,7 @@ const jsonLd = {
       author:    { "@type": "Person",       name: "Solan Voss", url: "https://elderlywisdom.org/about" },
       publisher: { "@type": "Organization", name: "ElderlyWisdom", url: "https://elderlywisdom.org" },
       offers:    { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock" },
-      datePublished: "2025-01-01",
+      datePublished: "2026-05-16",
     },
   ],
 };

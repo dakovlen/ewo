@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+
+// Sanity / data layer
 import { sanityFetch } from "@/sanity/lib/live";
 import { LATEST_POSTS_QUERY } from "@/sanity/lib/queries";
+
+// Config / lib
 import { homeMetadata } from "@/lib/metadata/homeMetadata";
+import { getLatestVideo } from "@/lib/getLatestVideo";
+import { siteConfig } from "@/lib/siteConfig";
+
+// Schema
 import { HomeSchema } from "@/components/schema_org/HomeSchema";
+
+// Components — в порядку появи в JSX
 import { Hero } from "@/components/blocks/Hero/Hero";
 import { StatsBar } from "@/components/StatsBar/StatsBar";
 import { WhatWeOffer } from "@/components/WhatWeOffer/WhatWeOffer";
@@ -10,8 +20,6 @@ import { LatestPosts } from "@/components/LatestPosts/LatestPosts";
 import { Author } from "@/components/Author/Author";
 import { FreeJournalBanner } from "@/components/FreeJournalBanner/FreeJournalBanner";
 import { YouTubeBanner } from "@/components/YouTubeBanner/YouTubeBanner";
-import { getLatestVideo } from "@/lib/getLatestVideo";
-import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = homeMetadata;
 
