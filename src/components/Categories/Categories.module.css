@@ -1,0 +1,32 @@
+/* ── Categories ── */
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ew-forest);
+  background-color: rgba(42, 95, 74, 0.08);
+  border-radius: 100px;
+  padding: 4px 12px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+@media (hover: hover) {
+  .tag:hover {
+    background-color: rgba(42, 95, 74, 0.14);
+  }
+}
+
+.tag:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}

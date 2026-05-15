@@ -1,0 +1,207 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   JournalPage / HowItWorks
+   Фон: --ew-forest-deep | Контейнер: --ew-container-content (1160px)
+   Кроки тепер у КАРТКАХ горизонтально — більший простір, кращий вигляд
+───────────────────────────────────────────────────────────────────────────── */
+
+.section {
+  background-color: var(--ew-forest-deep);
+  padding-block: 96px;
+}
+
+/* ── Container ────────────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--ew-container-content); /* 1160px — розширили з 780px */
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-block-end: 72px;
+}
+
+.heading {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-cream);
+  margin-block: 0 16px;
+}
+
+.lead {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-lg);
+  line-height: var(--ew-leading-base);
+  color: rgba(253, 249, 242, 0.72); /* #fdf9f2 @ 72% — WCAG AAA on forest-deep */
+  margin: 0;
+}
+
+/* ── Steps row ────────────────────────────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+/* ── Individual step card ─────────────────────────────────────────────────── */
+.step {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(232, 201, 126, 0.18);
+  border-radius: calc(var(--ew-radius) * 2);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* ── Arrow connector between steps ───────────────────────────────────────── */
+/* Uses grid pseudo-column: .steps has 5 cols → step | arrow | step | arrow | step */
+/* We inject arrows via ::after on each li except the last */
+.step:not(:last-child)::after {
+  content: "→";
+  /* Arrow sits in the next grid column (auto column between steps) */
+  /* We can't do this with pseudo on li itself easily in grid; use the
+     separator approach: hidden span injected in JSX won't be needed —
+     we solve it by making the arrows be CSS-only using adjacent sibling
+     on a separate element. Instead, simpler: use flex + pure CSS arrow */
+  display: none; /* Handled differently below */
+}
+
+/* ── Connector arrows — use flex layout on .steps instead ────────────────── */
+/* Override: switch to flex so we can use ::before on .step + .step */
+.steps {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+}
+
+.step {
+  flex: 1;
+}
+
+/* Arrow between steps via ::before on step 2 and 3 */
+.step + .step {
+  position: relative;
+}
+
+.step + .step::before {
+  content: "";
+  position: absolute;
+  /* Horizontally centered at the left border of this step */
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(232, 201, 126, 0.2), var(--ew-gold), rgba(232, 201, 126, 0.2));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Gap between steps to make room for the arrow */
+.steps {
+  gap: 56px;
+}
+
+/* Reset the connector positioning to account for gap */
+.step + .step::before {
+  left: -56px;
+  width: 56px;
+}
+
+/* ── Step number circle ───────────────────────────────────────────────────── */
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ew-forest) 0%, var(--ew-forest-dark) 100%);
+  border: 2px solid var(--ew-gold);
+  font-family: var(--ew-font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ew-gold); /* 4.6:1 on forest — WCAG AA ✓ */
+  margin-block-end: 24px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Step text ────────────────────────────────────────────────────────────── */
+.stepTitle {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-cream);
+  margin-block: 0 12px;
+}
+
+.stepDescription {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);        /* 16px */
+  line-height: var(--ew-leading-base);
+  color: rgba(253, 249, 242, 0.72);
+  margin: 0;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .section {
+    padding-block: 72px;
+  }
+
+  .header {
+    margin-block-end: 52px;
+  }
+
+  /* Narrower gap on tablet */
+  .steps {
+    gap: 24px;
+  }
+
+  .step + .step::before {
+    left: -24px;
+    width: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: 56px;
+  }
+
+  .container {
+    padding-inline: 16px;
+  }
+
+  /* Stack vertically */
+  .steps {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step {
+    width: 100%;
+    padding: 32px 24px;
+  }
+
+  /* Hide connector arrows in vertical layout */
+  .step + .step::before {
+    display: none;
+  }
+
+  .header {
+    margin-block-end: 40px;
+  }
+}

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PortableText, PortableTextComponents } from "next-sanity";
 import { components as baseComponents } from "@/sanity/portableTextComponents";
 import { RelatedPosts } from "@/components/RelatedPosts";
-import { Categories } from "@/components/Categories";
+import { Categories } from "@/components/Categories/Categories";
 import { Author } from "@/components/Author";
 import { PublishedAt } from "@/components/PublishedAt";
 import { Title } from "@/components/Title";

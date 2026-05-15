@@ -1,86 +1,103 @@
-/* ── FreeJournalBanner ── */
+/* ─────────────────────────────────────────────────────────────────────────────
+   FreeJournalBanner
+   Фон: --ew-cream-mid  ← ЗМІНЕНО з --ew-forest-deep
+   Причина: Author тепер темний. Два темних підряд — погано.
+   cream-mid після forest-deep дає чіткий контраст і "дихання".
+   Текст і акценти адаптовані під світлий фон.
+   Контейнер: --ew-container-content (1160px)
+   Spacing: 96px
+───────────────────────────────────────────────────────────────────────────── */
 
 .section {
-  background-color: var(--ew-forest-deep);
-  padding: 72px 20px;
+  background-color: var(--ew-cream-mid);
+  padding-block: 96px;
+  padding-inline: 24px;
+  border-top: 1px solid var(--ew-cream-dark);
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 96px 40px;
+    padding-inline: 40px;
   }
 }
 
+/* ── Inner ────────────────────────────────────────────────────────────────── */
 .inner {
-  max-width: var(--ew-container-content);
-  margin: 0 auto;
+  max-width: var(--ew-container-wide);
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 48px;
   text-align: center;
 }
 
 @media (min-width: 900px) {
   .inner {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     text-align: left;
-    gap: 72px;
+    gap: 80px;
   }
 }
 
-
-/* ── Content ── */
-
+/* ── Content ──────────────────────────────────────────────────────────────── */
 .content {
   flex: 1;
+  min-width: 0;
 }
 
+/* ── Overline ─────────────────────────────────────────────────────────────── */
 .overline {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11px;
+  gap: 12px;
   font-family: var(--ew-font-sans);
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ew-gold);
-  margin-bottom: 14px;
+  color: var(--ew-brown);
+  margin-block-end: 16px;
 }
 
 @media (min-width: 768px) {
   .overline::before {
     content: '';
     display: block;
-    width: 24px;
+    width: 28px;
     height: 1px;
     background-color: var(--ew-gold);
     flex-shrink: 0;
   }
 }
 
+/* ── Heading ──────────────────────────────────────────────────────────────── */
 .heading {
   font-family: var(--ew-font-serif);
-  font-size: clamp(26px, 3.5vw, 40px);
+  font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 700;
-  color: var(--ew-cream);
-  line-height: 1.2;
-  margin: 0 0 16px;
+  color: var(--ew-text);
+  line-height: 1.15;
+  margin-block: 0 20px;
 }
 
+/* ── Description ──────────────────────────────────────────────────────────── */
 .description {
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
-  color: var(--ew-cream-dark);
+  color: var(--ew-text-mid);
   line-height: var(--ew-leading-base);
-  margin: 0 0 24px;
+  margin-block: 0 28px;
 }
 
+@media (max-width: 899px) {
+  .description {
+    margin-inline: auto;
+  }
+}
 
-/* ── Bullets ── */
-
+/* ── Bullets ──────────────────────────────────────────────────────────────── */
 .bullets {
   list-style: none;
   padding: 0;
@@ -96,8 +113,8 @@
   gap: 10px;
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-sm);
-  color: var(--ew-cream-mid);
-  line-height: 1.5;
+  color: var(--ew-text-mid);
+  line-height: 1.55;
   justify-content: center;
 }
 
@@ -109,15 +126,13 @@
 
 .bulletIcon {
   flex-shrink: 0;
-  font-size: 13px;
-  color: var(--ew-gold);
-  margin-top: 2px;
+  font-size: 12px;
   font-weight: 700;
+  color: var(--ew-forest);
+  margin-block-start: 2px;
 }
 
-
-/* ── Form wrap ── */
-
+/* ── Form wrap ────────────────────────────────────────────────────────────── */
 .formWrap {
   width: 100%;
   max-width: 400px;
@@ -126,38 +141,35 @@
 
 @media (min-width: 900px) {
   .formWrap {
-    max-width: 360px;
+    max-width: 380px;
   }
 }
 
-
-/* ── Form ── */
-
+/* ── Form ─────────────────────────────────────────────────────────────────── */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .label {
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-sm);
   font-weight: 600;
-  color: var(--ew-cream);
+  color: var(--ew-text);
   text-align: left;
 }
 
 .input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 15px 18px;
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
   color: var(--ew-text);
-  background-color: var(--ew-cream);
-  border: 2px solid transparent;
+  background-color: white;
+  border: 1.5px solid var(--ew-cream-dark);
   border-radius: var(--ew-radius);
   outline: none;
-  transition: border-color 0.2s;
   box-sizing: border-box;
 }
 
@@ -166,85 +178,107 @@
 }
 
 .input:focus {
-  border-color: var(--ew-gold);
+  border-color: var(--ew-forest);
 }
 
 .inputError {
-  border-color: #f87171;
+  border-color: #dc2626;
 }
 
+/* ── Button — forest на cream-mid ────────────────────────────────────────── */
 .button {
   width: 100%;
-  padding: 15px 24px;
+  padding: 16px 24px;
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--ew-forest-deep);
-  background-color: var(--ew-gold);
+  color: var(--ew-cream);
+  background-color: var(--ew-forest);
   border: none;
   border-radius: var(--ew-radius);
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: var(--ew-shadow-cta);
 }
 
-.button:hover {
-  background-color: #d4b56a;
-}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button {
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
 
-.button:active {
-  transform: translateY(1px);
+  .button:hover {
+    background-color: var(--ew-forest-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(42, 95, 74, 0.3);
+  }
+
+  .button:active {
+    transform: translateY(0);
+  }
 }
 
 .button:disabled {
   opacity: 0.65;
   cursor: not-allowed;
-  transform: none;
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--ew-gold);
+  outline: 2px solid var(--ew-forest);
   outline-offset: 3px;
 }
 
+/* ── Error / Privacy ──────────────────────────────────────────────────────── */
 .error {
   font-family: var(--ew-font-sans);
   font-size: 13px;
-  color: #f87171;
+  color: #dc2626;
   margin: 0;
 }
 
 .privacy {
   font-family: var(--ew-font-sans);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ew-text-light);
   margin: 0;
   text-align: center;
 }
 
-
-/* ── Success state ── */
-
+/* ── Success ──────────────────────────────────────────────────────────────── */
 .successBox {
-  background-color: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(232, 201, 126, 0.3);
+  background-color: white;
+  border: 1.5px solid var(--ew-cream-dark);
   border-radius: var(--ew-radius);
-  padding: 32px 24px;
+  padding: 36px 28px;
   text-align: center;
+  box-shadow: var(--ew-shadow-card);
 }
 
 .successTitle {
   font-family: var(--ew-font-serif);
-  font-size: clamp(20px, 2.5vw, 26px);
+  font-size: clamp(20px, 2.5vw, 28px);
   font-weight: 700;
-  color: var(--ew-gold);
-  margin: 0 0 10px;
+  color: var(--ew-forest);
+  margin: 0 0 12px;
 }
 
 .successText {
   font-family: var(--ew-font-sans);
   font-size: var(--ew-text-base);
-  color: var(--ew-cream-mid);
+  color: var(--ew-text-mid);
   margin: 0;
   line-height: var(--ew-leading-base);
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section {
+    padding-block: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 56px;
+    padding-inline: 16px;
+  }
 }

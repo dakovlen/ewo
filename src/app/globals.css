@@ -239,6 +239,7 @@
   --ew-text:         #1a2e1f;
   --ew-text-mid:     #5a5048;
   --ew-text-light:   #8a8075;
+  --ew-footer-bg: #0e1a12;
 
   /* Шрифти — беруться з next/font через layout.tsx */
   --ew-font-serif: var(--font-serif), Georgia, serif;
