@@ -67,7 +67,7 @@ export function FreeJournalBanner() {
         strategy="afterInteractive"
       />
 
-      <section className={styles.section} aria-labelledby="journal-heading">
+      <section id="get-journal" className={styles.section} aria-labelledby="journal-heading">
         <div className={styles.inner}>
 
           {/* Текст */}
