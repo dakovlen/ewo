@@ -37,7 +37,7 @@ export function Author() {
               Поки placeholder.
               Коли буде реальне фото — замінити на:*/
               <Image
-                src="/solan-voss.jpeg"
+                src="/solan_pinterest.png"
                 alt="Solan Voss — author of ElderlyWisdom"
                 fill
                 className={styles.photo}
