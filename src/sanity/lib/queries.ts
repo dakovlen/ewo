@@ -146,14 +146,15 @@ export const OG_IMAGE_QUERY = defineQuery(`
 `);
 
 export const SITEMAP_QUERY = defineQuery(`
-*[_type in ["page", "post"] && defined(slug.current)] {
-  "href": select(
-    _type == "page" && slug.current == "/" => "/",
-    _type == "page" => "/" + slug.current,
-    _type == "post" => "/blog/" + slug.current
-  ),
-  _updatedAt
-}
+  *[_type in ["page", "post", "author"] && defined(slug.current)] {
+    "href": select(
+      _type == "page" && slug.current == "/" => "/",
+      _type == "page"   => "/" + slug.current,
+      _type == "post"   => "/blog/" + slug.current,
+      _type == "author" => "/authors/" + slug.current
+    ),
+    _updatedAt
+  }
 `);
 
 export const LATEST_POSTS_QUERY = `
@@ -247,5 +248,81 @@ export const HOMEPAGE_AUTHOR_QUERY = defineQuery(`
     name,
     image,
     "role": coalesce(role, "Author · Content Creator")
+  }
+`);
+
+// Всі автори для /authors
+// defined(slug.current) — автори без slug не потрапляють на сторінку
+export const AUTHORS_QUERY = defineQuery(`
+  *[
+    _type == "author" &&
+    defined(slug.current) &&
+    defined(name)
+  ] | order(_createdAt asc) {
+    _id,
+    name,
+    slug,
+    role,
+    image,
+    shortBio,
+    expertise,
+    "postCount": count(*[
+      _type == "post" &&
+      references(^._id) &&
+      defined(slug.current) &&
+      publishedAt < now()
+    ])
+  }
+`);
+
+// Slug-и для generateStaticParams на /authors/[slug]
+export const AUTHORS_SLUGS_QUERY = defineQuery(`
+  *[_type == "author" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`);
+
+// Один автор для /authors/[slug]
+export const AUTHOR_BY_SLUG_QUERY = defineQuery(`
+  *[_type == "author" && slug.current == $slug][0] {
+    _id,
+    name,
+    slug,
+    role,
+    image,
+    shortBio,
+    bio,
+    pullquote,
+    expertise,
+    socialLinks,
+    "seo": {
+      "title": coalesce(seo.title, name, ""),
+      "description": coalesce(seo.description, shortBio, ""),
+      "image": seo.image,
+      "noIndex": seo.noIndex == true
+    },
+    "featuredPosts": featuredPosts[]-> {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      "excerpt": array::join(string::split(pt::text(body), "")[0..160], ""),
+      "categories": coalesce(categories[]->{ _id, slug, title }, [])
+    },
+    "allPosts": *[
+      _type == "post" &&
+      references(^._id) &&
+      defined(slug.current) &&
+      publishedAt < now()
+    ] | order(publishedAt desc) [0...50] {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      "excerpt": array::join(string::split(pt::text(body), "")[0..120], ""),
+      "categories": coalesce(categories[]->{ _id, slug, title }, [])
+    }
   }
 `);
