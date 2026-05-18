@@ -308,6 +308,65 @@ export type Social = {
   x?: string;
 };
 
+export type Author = {
+  _id: string;
+  _type: "author";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  role?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  shortBio?: string;
+  bio?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  pullquote?: string;
+  expertise?: Array<string>;
+  socialLinks?: {
+    youtube?: string;
+    amazon?: string;
+    pinterest?: string;
+    x?: string;
+    facebook?: string;
+  };
+  featuredPosts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "post";
+  }>;
+  seo?: Seo;
+};
+
 export type Seo = {
   _type: "seo";
   title?: string;
@@ -325,46 +384,6 @@ export type Seo = {
     _type: "image";
   };
   noIndex?: boolean;
-};
-
-export type Author = {
-  _id: string;
-  _type: "author";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  bio?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
 };
 
 export type Category = {
@@ -653,7 +672,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = HtmlBlock | YoutubeEmbed | Redirect | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Seo | Author | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = HtmlBlock | YoutubeEmbed | Redirect | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Author | Seo | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_TOTAL_COUNT_QUERY
@@ -1248,6 +1267,168 @@ export type ALL_CATEGORIES_QUERYResult = Array<{
     noIndex: false;
   };
 }>;
+// Variable: HOMEPAGE_AUTHOR_QUERY
+// Query: *[_type == "author" && defined(slug.current)] | order(_createdAt asc) [0] {    _id,    name,    image,    "role": coalesce(role, "Author · Content Creator")  }
+export type HOMEPAGE_AUTHOR_QUERYResult = {
+  _id: string;
+  name: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  role: string | "Author \xB7 Content Creator";
+} | null;
+// Variable: AUTHORS_QUERY
+// Query: *[    _type == "author" &&    defined(slug.current) &&    defined(name)  ] | order(_createdAt asc) {    _id,    name,    slug,    role,    image,    shortBio,    expertise,    "postCount": count(*[      _type == "post" &&      references(^._id) &&      defined(slug.current) &&      publishedAt < now()    ])  }
+export type AUTHORS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  role: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  shortBio: string | null;
+  expertise: Array<string> | null;
+  postCount: number;
+}>;
+// Variable: AUTHORS_SLUGS_QUERY
+// Query: *[_type == "author" && defined(slug.current)] {    "slug": slug.current  }
+export type AUTHORS_SLUGS_QUERYResult = Array<{
+  slug: string | null;
+}>;
+// Variable: AUTHOR_BY_SLUG_QUERY
+// Query: *[_type == "author" && slug.current == $slug][0] {    _id,    name,    slug,    role,    image,    shortBio,    bio,    pullquote,    expertise,    socialLinks,    "seo": {      "title": coalesce(seo.title, name, ""),      "description": coalesce(seo.description, shortBio, ""),      "image": seo.image,      "noIndex": seo.noIndex == true    },    "featuredPosts": featuredPosts[]-> {      _id,      title,      slug,      mainImage,      publishedAt,      "excerpt": array::join(string::split(pt::text(body), "")[0..160], ""),      "categories": coalesce(categories[]->{ _id, slug, title }, [])    },    "allPosts": *[      _type == "post" &&      references(^._id) &&      defined(slug.current) &&      publishedAt < now()    ] | order(publishedAt desc) [0...50] {      _id,      title,      slug,      mainImage,      publishedAt,      "excerpt": array::join(string::split(pt::text(body), "")[0..120], ""),      "categories": coalesce(categories[]->{ _id, slug, title }, [])    }  }
+export type AUTHOR_BY_SLUG_QUERYResult = {
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  role: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  shortBio: string | null;
+  bio: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h2" | "h3" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  pullquote: string | null;
+  expertise: Array<string> | null;
+  socialLinks: {
+    youtube?: string;
+    amazon?: string;
+    pinterest?: string;
+    x?: string;
+    facebook?: string;
+  } | null;
+  seo: {
+    title: string | "";
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  featuredPosts: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+    mainImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+    publishedAt: string | null;
+    excerpt: string;
+    categories: Array<{
+      _id: string;
+      slug: Slug | null;
+      title: string | null;
+    }> | Array<never>;
+  }> | null;
+  allPosts: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+    mainImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+    publishedAt: string | null;
+    excerpt: string;
+    categories: Array<{
+      _id: string;
+      slug: Slug | null;
+      title: string | null;
+    }> | Array<never>;
+  }>;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1264,5 +1445,9 @@ declare module "@sanity/client" {
     "\n  *[_type == \"category\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\")) &&\n    publishedAt < now() &&\n    $slug in categories[]->slug.current\n  ]\n  | order(publishedAt desc, _createdAt desc)[0...100]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n      categories[]->{\n        _id,\n        slug,\n        title\n      },\n      []\n    ),\n    author->{\n      name,\n      image\n    },\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_POSTS_QUERYResult;
     "\n  *[_type == \"category\" && defined(slug.current)] | order(title asc) {\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": ALL_CATEGORIES_QUERYResult;
+    "\n  *[_type == \"author\" && defined(slug.current)] | order(_createdAt asc) [0] {\n    _id,\n    name,\n    image,\n    \"role\": coalesce(role, \"Author \xB7 Content Creator\")\n  }\n": HOMEPAGE_AUTHOR_QUERYResult;
+    "\n  *[\n    _type == \"author\" &&\n    defined(slug.current) &&\n    defined(name)\n  ] | order(_createdAt asc) {\n    _id,\n    name,\n    slug,\n    role,\n    image,\n    shortBio,\n    expertise,\n    \"postCount\": count(*[\n      _type == \"post\" &&\n      references(^._id) &&\n      defined(slug.current) &&\n      publishedAt < now()\n    ])\n  }\n": AUTHORS_QUERYResult;
+    "\n  *[_type == \"author\" && defined(slug.current)] {\n    \"slug\": slug.current\n  }\n": AUTHORS_SLUGS_QUERYResult;
+    "\n  *[_type == \"author\" && slug.current == $slug][0] {\n    _id,\n    name,\n    slug,\n    role,\n    image,\n    shortBio,\n    bio,\n    pullquote,\n    expertise,\n    socialLinks,\n    \"seo\": {\n      \"title\": coalesce(seo.title, name, \"\"),\n      \"description\": coalesce(seo.description, shortBio, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    },\n    \"featuredPosts\": featuredPosts[]-> {\n      _id,\n      title,\n      slug,\n      mainImage,\n      publishedAt,\n      \"excerpt\": array::join(string::split(pt::text(body), \"\")[0..160], \"\"),\n      \"categories\": coalesce(categories[]->{ _id, slug, title }, [])\n    },\n    \"allPosts\": *[\n      _type == \"post\" &&\n      references(^._id) &&\n      defined(slug.current) &&\n      publishedAt < now()\n    ] | order(publishedAt desc) [0...50] {\n      _id,\n      title,\n      slug,\n      mainImage,\n      publishedAt,\n      \"excerpt\": array::join(string::split(pt::text(body), \"\")[0..120], \"\"),\n      \"categories\": coalesce(categories[]->{ _id, slug, title }, [])\n    }\n  }\n": AUTHOR_BY_SLUG_QUERYResult;
   }
 }

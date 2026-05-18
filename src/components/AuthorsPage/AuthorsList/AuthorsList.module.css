@@ -1,0 +1,209 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   AuthorsList — /authors
+   Фон: --ew-cream (після Hero який теж cream — підхід як на /blog)
+   Контейнер: --ew-container-content (1160px)
+───────────────────────────────────────────────────────────────────────────── */
+
+.section {
+  background-color: var(--ew-cream);
+  padding-block: 80px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 56px;
+    padding-inline: 16px;
+  }
+}
+
+/* ── Порожній стан ────────────────────────────────────────────────────────── */
+.empty {
+  max-width: var(--ew-container-text);
+  margin-inline: auto;
+  text-align: center;
+  padding-block: 48px;
+}
+
+.emptyText {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  color: var(--ew-text-mid);
+}
+
+/* ── Inner ────────────────────────────────────────────────────────────────── */
+.inner {
+  max-width: var(--ew-container-content);
+  margin-inline: auto;
+}
+
+/* sr-only — доступний заголовок для screen readers */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────────── */
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Card — весь <Link> є карткою ────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background-color: var(--ew-cream);
+  border: 1px solid var(--ew-cream-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--ew-shadow-card);
+  height: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(42, 95, 74, 0.15);
+  }
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}
+
+/* ── Photo ────────────────────────────────────────────────────────────────── */
+.photoWrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--ew-cream-mid);
+  /* Фіксована висота фото — всі картки однакові */
+  aspect-ratio: 4 / 5;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.4s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .photo {
+    transform: scale(1.03);
+  }
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  background: linear-gradient(160deg, #a8c4a8 0%, #4a7a5e 60%, #2a5f4a 100%);
+}
+
+/* ── Info ─────────────────────────────────────────────────────────────────── */
+.info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.role {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ew-forest);
+}
+
+.name {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+}
+
+.bio {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  line-height: var(--ew-leading-base);
+  color: var(--ew-text-mid);
+  margin: 4px 0 0;
+  /* Обмежуємо до 3 рядків */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Tags ─────────────────────────────────────────────────────────────────── */
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: var(--ew-forest-dark);
+  background-color: rgba(42, 95, 74, 0.08);
+  border: 1px solid rgba(42, 95, 74, 0.15);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+
+/* ── CTA ──────────────────────────────────────────────────────────────────── */
+.cta {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 700;
+  color: var(--ew-forest);
+  margin-block-start: auto;
+  padding-block-start: 8px;
+}
