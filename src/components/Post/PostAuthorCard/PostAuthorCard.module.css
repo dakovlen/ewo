@@ -1,0 +1,70 @@
+.aside {
+  margin-block-start: 48px;
+}
+
+/* ── Card — як blockquote: золота ліворуч, відступ, без фону ─────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-inline: 28px;
+  border-inline-start: 3px solid var(--ew-gold);
+  text-decoration: none;
+  color: inherit;
+}
+
+a.card:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ── Label ────────────────────────────────────────────────────────────────── */
+.label {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ew-gold);
+}
+
+/* ── Identity: photo + name ───────────────────────────────────────────────── */
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.photo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  min-width: 48px; /* запобігає розтягуванню в flex */
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  background-color: var(--ew-cream-dark);
+}
+
+.name {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+}
+
+/* ── CTA ──────────────────────────────────────────────────────────────────── */
+.cta {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-forest);
+  transition: opacity 0.15s;
+}
+
+a.card:hover .cta {
+  text-decoration: underline;
+}
