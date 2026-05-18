@@ -1,8 +1,8 @@
 import { sanityFetch } from "@/sanity/lib/client";
 import { getPostsQuery, POSTS_TOTAL_COUNT_QUERY } from '@/sanity/lib/queries';
-import { PostCard } from '@/components/PostCard';
+import { PostCard } from '@/components/PostCard/PostCard';
 import { notFound } from "next/navigation";
-import { Pagination } from "@/components/Pagination";
+import { Pagination } from "@/components/Pagination/Pagination";
 import { Hero } from "@/components/blocks/Hero/Hero";
 import { blogMetadata } from "@/lib/metadata/blogMetadata";
 import type { Metadata } from "next";

@@ -25,7 +25,8 @@ export const getPostsQuery = (offset = 0, limit = 12) =>
     ),
     author->{
       name,
-      image
+      image,
+      slug
     },
     "seo": {
       "title": coalesce(seo.title, title, ""),
@@ -70,7 +71,8 @@ export const POST_QUERY =
   ),
   author->{
     name,
-    image
+    image,
+    slug
   },
   relatedPosts[]{
     _key,
@@ -173,7 +175,6 @@ export const LATEST_POSTS_QUERY = `
   }
 `;
 
-
 // Категорія з описом + SEO
 export const CATEGORY_QUERY = defineQuery(`
   *[_type == "category" && slug.current == $slug][0]{
@@ -216,7 +217,8 @@ export const CATEGORY_POSTS_QUERY = defineQuery(`
     ),
     author->{
       name,
-      image
+      image,
+      slug
     },
     "seo": {
       "title": coalesce(seo.title, title, ""),
@@ -252,7 +254,6 @@ export const HOMEPAGE_AUTHOR_QUERY = defineQuery(`
 `);
 
 // Всі автори для /authors
-// defined(slug.current) — автори без slug не потрапляють на сторінку
 export const AUTHORS_QUERY = defineQuery(`
   *[
     _type == "author" &&
@@ -307,22 +308,66 @@ export const AUTHOR_BY_SLUG_QUERY = defineQuery(`
       slug,
       mainImage,
       publishedAt,
-      "excerpt": pt::text(body)[0..160]
+      "excerpt": pt::text(body)[0..160],
       "categories": coalesce(categories[]->{ _id, slug, title }, [])
     },
-    "allPosts": *[
+    "recentPosts": *[
       _type == "post" &&
       references(^._id) &&
       defined(slug.current) &&
       publishedAt < now()
-    ] | order(publishedAt desc) [0...50] {
+    ] | order(publishedAt desc) [0...6] {
       _id,
       title,
       slug,
       mainImage,
       publishedAt,
-      "excerpt": array::join(string::split(pt::text(body), "")[0..120], ""),
+      "excerpt": pt::text(body)[0..160],
       "categories": coalesce(categories[]->{ _id, slug, title }, [])
     }
   }
 `);
+
+// Мінімальні дані автора для /authors/[slug]/articles
+export const AUTHOR_META_QUERY = defineQuery(`
+  *[_type == "author" && slug.current == $slug][0] {
+    _id,
+    name,
+    slug,
+    role,
+    shortBio,
+    "seo": {
+      "title": coalesce(seo.title, name, ""),
+      "description": coalesce(seo.description, shortBio, "")
+    }
+  }
+`);
+
+// Кількість статей автора — для розрахунку сторінок пагінації
+export const AUTHOR_POSTS_COUNT_QUERY = defineQuery(`
+  count(*[
+    _type == "post" &&
+    references($authorId) &&
+    defined(slug.current) &&
+    publishedAt < now()
+  ])
+`);
+
+// Пагінований список статей автора для /authors/[slug]/articles
+export const getAuthorPostsQuery = (offset = 0, limit = 12) =>
+  defineQuery(`
+    *[
+      _type == "post" &&
+      references($authorId) &&
+      defined(slug.current) &&
+      publishedAt < now()
+    ] | order(publishedAt desc) [${offset}...${offset + limit}] {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      "excerpt": pt::text(body)[0..160],
+      "categories": coalesce(categories[]->{ _id, slug, title }, [])
+    }
+  `);

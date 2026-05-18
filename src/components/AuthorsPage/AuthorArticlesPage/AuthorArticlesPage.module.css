@@ -1,0 +1,213 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   AuthorArticlesPage — /authors/[slug]/articles
+   Header: --ew-forest-deep (консистентно зі сторінкою автора)
+   Posts:  --ew-cream-mid
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  background-color: var(--ew-forest-deep);
+  padding-block: 96px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-block: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding-block: 56px;
+    padding-inline: 16px;
+  }
+}
+
+.headerInner {
+  max-width: var(--ew-container-content);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Breadcrumb ───────────────────────────────────────────────────────────── */
+.breadcrumbList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbLink {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: rgba(253, 249, 242, 0.55);
+  text-decoration: none;
+}
+
+.breadcrumbLink:hover {
+  color: var(--ew-cream);
+}
+
+.breadcrumbSep {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: rgba(253, 249, 242, 0.3);
+}
+
+.breadcrumbCurrent {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: rgba(253, 249, 242, 0.55);
+}
+
+/* ── Overline ─────────────────────────────────────────────────────────────── */
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block-start: 8px;
+}
+
+.overlineLine {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.overlineText {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-gold);
+}
+
+/* ── Title ────────────────────────────────────────────────────────────────── */
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-cream);
+  margin: 0;
+}
+
+.authorLink {
+  color: var(--ew-gold);
+  text-decoration: none;
+}
+
+.authorLink:hover {
+  text-decoration: underline;
+}
+
+.role {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  color: rgba(253, 249, 242, 0.55);
+  margin: 0;
+}
+
+/* ══ POSTS ══════════════════════════════════════════════════════════════════════ */
+.postsSection {
+  background-color: var(--ew-cream-mid);
+  padding-block: 80px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .postsSection {
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .postsSection {
+    padding-block: 56px;
+    padding-inline: 16px;
+  }
+}
+
+.postsInner {
+  max-width: var(--ew-container-content);
+  margin-inline: auto;
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.noPosts {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  color: var(--ew-text-mid);
+  text-align: center;
+  padding-block: 48px;
+  margin: 0;
+}
+
+/* ══ BACK LINK ══════════════════════════════════════════════════════════════════ */
+.backWrap {
+  background-color: var(--ew-cream-mid);
+  padding-block-end: 48px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .backWrap {
+    padding-inline: 40px;
+  }
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-forest);
+  text-decoration: none;
+  min-height: 44px;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}
