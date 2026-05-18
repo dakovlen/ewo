@@ -171,6 +171,11 @@ export const LATEST_POSTS_QUERY = `
       _id,
       title,
       slug
+    },
+    author->{ 
+      name, 
+      slug, 
+      image 
     }
   }
 `;

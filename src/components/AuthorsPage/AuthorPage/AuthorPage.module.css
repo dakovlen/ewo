@@ -321,7 +321,7 @@
 }
 
 .bioInner {
-  max-width: var(--ew-container-text);
+  max-width: var(--ew-container-content);
   margin-inline: auto;
 }
 
@@ -468,6 +468,7 @@
 
 /* ══ BACK LINK ══════════════════════════════════════════════════════════════════ */
 .backWrap {
+  /* max-width: var(--ew-container-content); */
   background-color: var(--ew-cream-mid);
   padding-block-end: 48px;
   padding-inline: 24px;

@@ -266,7 +266,6 @@ export function AuthorPage({ author }: Props) {
                 View All Articles by {author.name ?? "this Author"}
               </Link>
             </div>
-
           </div>
         </section>
       )}
@@ -281,13 +280,6 @@ export function AuthorPage({ author }: Props) {
           </div>
         </section>
       )}
-
-      {/* ── Back link ─────────────────────────────────────────────────────────── */}
-      <div className={styles.backWrap}>
-        <Link href="/authors" className={styles.backLink}>
-          ← All Authors
-        </Link>
-      </div>
     </>
   );
 }
