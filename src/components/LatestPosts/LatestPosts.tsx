@@ -11,6 +11,12 @@ type Category = {
   slug?: { current: string | null } | null;
 };
 
+type Author = {
+  name?: string | null;
+  slug?: { current?: string | null } | null;
+  image?: any;
+};
+
 type Post = {
   _id: string;
   title: string | null;
@@ -18,6 +24,7 @@ type Post = {
   excerpt?: string | null;
   mainImage?: any;
   categories?: Category[] | null;
+  author?: Author | null;
 };
 
 type Props = {
@@ -100,27 +107,59 @@ export function LatestPosts({ posts }: Props) {
                     <p className={styles.excerpt}>{post.excerpt}</p>
                   )}
 
-                  {/* Read more */}
-                  <Link
-                    href={`/blog/${post.slug.current}`}
-                    className={styles.readMore}
-                    aria-label={`Read more: ${post.title}`}
-                  >
-                    Read more
-                    <svg
-                      width="14" height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      focusable="false"
+                  {/* Footer — author + read more */}
+                  <div className={styles.footer}>
+                    {/* Author */}
+                    {post.author?.name && (
+                      <div className={styles.author}>
+                        {post.author.image && (
+                          <Image
+                            src={urlFor(post.author.image).width(48).height(48).quality(85).url()}
+                            alt=""
+                            width={32}
+                            height={32}
+                            className={styles.authorPhoto}
+                          />
+                        )}
+                        {post.author.slug?.current ? (
+                          <Link
+                            href={`/authors/${post.author.slug.current}`}
+                            className={styles.authorName}
+                            rel="author"
+                          >
+                            {post.author.name}
+                          </Link>
+                        ) : (
+                          <span className={styles.authorName}>
+                            {post.author.name}
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Read more */}
+                    <Link
+                      href={`/blog/${post.slug.current}`}
+                      className={styles.readMore}
+                      aria-label={`Read more: ${post.title}`}
                     >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
+                      Read more
+                      <svg
+                        width="14" height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+
                 </div>
               </article>
             </li>
