@@ -251,3 +251,38 @@
   border-radius: 6px;
   margin: 1.5em 0;
 }
+
+/* ── Table ─────────────────────────────────────────────────────────────────── */
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  line-height: var(--ew-leading-base);
+  overflow-x: auto;
+  display: block; /* дозволяє горизонтальний скрол на мобільних */
+}
+
+.body thead tr {
+  background-color: var(--ew-cream-mid);
+}
+
+.body th {
+  border: 1px solid var(--ew-cream-dark);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--ew-text);
+}
+
+.body td {
+  border: 1px solid var(--ew-cream-dark);
+  padding: 12px 16px;
+  vertical-align: top;
+  color: var(--ew-text-mid);
+}
+
+.body tbody tr:nth-child(even) {
+  background-color: var(--ew-cream-mid);
+}

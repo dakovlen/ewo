@@ -254,6 +254,7 @@ export const HOMEPAGE_AUTHOR_QUERY = defineQuery(`
     _id,
     name,
     image,
+    slug,
     "role": coalesce(role, "Author · Content Creator")
   }
 `);
