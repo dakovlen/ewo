@@ -240,3 +240,12 @@ export const ALL_CATEGORIES_QUERY = defineQuery(`
     }
   }
 `);
+
+export const HOMEPAGE_AUTHOR_QUERY = defineQuery(`
+  *[_type == "author" && defined(slug.current)] | order(_createdAt asc) [0] {
+    _id,
+    name,
+    image,
+    "role": coalesce(role, "Author · Content Creator")
+  }
+`);

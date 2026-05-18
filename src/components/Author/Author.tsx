@@ -1,87 +1,87 @@
 import Link from "next/link";
 import Image from "next/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { HOMEPAGE_AUTHOR_QUERY } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 import { siteConfig } from "@/lib/siteConfig";
 import { AuthorSchema } from "@/components/schema_org/AuthorSchema";
 import styles from "./Author.module.css";
 
-/*
-  Author — блок про автора.
+const DEFAULT_IMAGE = "/solan_pinterest.png";
+const DEFAULT_NAME = "Solan Voss";
+const DEFAULT_ROLE = "Author · Content Creator";
 
-  Семантика:
-  - <article> з itemScope/itemType Person — мікродані для Google
-  - <h2> — заголовок секції
-  - <blockquote> — цитата автора
-  - rel="author" на посиланні — зв'язок сторінки з автором
-  - AuthorSchema — JSON-LD для структурованих даних
+export async function Author() {
+  let authorImageUrl: string | null = null;
+  let authorName = DEFAULT_NAME;
+  let authorRole = DEFAULT_ROLE;
 
-  Дані захардкоджені — Solan Voss одна конкретна людина.
-  Якщо знадобиться редагування через CMS — легко перейти
-  на fetch з Sanity authorType.
-*/
+  try {
+    const { data: author } = await sanityFetch({
+      query: HOMEPAGE_AUTHOR_QUERY,
+    });
 
-export function Author() {
+    if (author?.name) authorName = author.name;
+    if (author?.role) authorRole = author.role;
+
+    if (author?.image?.asset) {
+      authorImageUrl = urlFor(author.image)
+        .width(760)
+        .height(1013)
+        .quality(90)
+        .auto("format")
+        .url();
+    }
+  } catch {
+    // Sanity недоступний — fallback на defaults, сторінка не падає
+  }
+
+  const imageSrc = authorImageUrl ?? DEFAULT_IMAGE;
+
   return (
     <section className={styles.section} aria-labelledby="author-heading">
-      {/* JSON-LD Schema.org Person */}
       <AuthorSchema />
 
-      {/* Декоративна лапка — aria-hidden бо декоративна */}
       <div className={styles.decorativeQuote} aria-hidden="true">"</div>
 
       <div className={styles.inner}>
-
-        {/* ── Ліва колонка — фото ── */}
         <div className={styles.photoCol}>
           <div className={styles.photoFrame}>
-            {/*
-              Поки placeholder.
-              Коли буде реальне фото — замінити на:*/
-              <Image
-                src="/solan_pinterest.png"
-                alt="Solan Voss — author of ElderlyWisdom"
-                fill
-                className={styles.photo}
-                sizes="(min-width: 1024px) 380px, 100vw"
-              />
-            }
-            {/* <div className={styles.photoPlaceholder} aria-hidden="true">
-              <span>🌿</span>
-            </div> */}
+            <Image
+              src={imageSrc}
+              alt={`${authorName} — author of ElderlyWisdom`}
+              width={380}
+              height={507}
+              className={styles.photo}
+              sizes="(min-width: 1024px) 380px, (min-width: 640px) 340px, calc(100vw - 80px)"
+            />
           </div>
 
-          {/* Floating tag — видимий лейбл автора */}
           <div className={styles.bioTag}>
-            <strong className={styles.bioTagName}>Solan Voss</strong>
-            <span className={styles.bioTagRole}>
-              Author · Content Creator
-            </span>
+            <strong className={styles.bioTagName}>{authorName}</strong>
+            <span className={styles.bioTagRole}>{authorRole}</span>
           </div>
         </div>
 
-        {/* ── Права колонка — текст ── */}
         <article
           className={styles.textCol}
           itemScope
           itemType="https://schema.org/Person"
         >
-          {/* Приховані мікродані для Google */}
-          <meta itemProp="name" content="Solan Voss" />
+          <meta itemProp="name" content={authorName} />
           <meta itemProp="url" content={`${siteConfig.baseUrl}/about`} />
           <link itemProp="sameAs" href={siteConfig.youtubeLink} />
           <link itemProp="sameAs" href={siteConfig.amazonLink} />
 
-          {/* Overline */}
           <div className={styles.overline} aria-hidden="true">
             <span className={styles.overlineLine} />
             <span className={styles.overlineText}>Meet the author</span>
           </div>
 
-          {/* Heading */}
           <h2 id="author-heading" className={styles.title}>
             Written by someone who truly cares
           </h2>
 
-          {/* Bio */}
           <p className={styles.bio} itemProp="description">
             Solan Voss is a thoughtful author and content creator dedicated
             to uplifting adults 60 and over. Through YouTube, Amazon books,
@@ -89,7 +89,6 @@ export function Author() {
             and timeless insights rooted in real life experience.
           </p>
 
-          {/* Pull quote — blockquote семантично правильний для цитати */}
           <blockquote className={styles.pullquote} itemProp="quote">
             <p>
               "My mission is simple: to remind you that your best years
@@ -97,7 +96,6 @@ export function Author() {
             </p>
           </blockquote>
 
-          {/* CTA */}
           <div className={styles.actions}>
             <Link
               href={siteConfig.amazonLink}
