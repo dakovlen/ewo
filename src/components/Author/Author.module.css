@@ -61,7 +61,6 @@
 /* ── Photo col ────────────────────────────────────────────────────────────── */
 .photoCol {
   position: relative;
-  /* Резервує місце для .bioTag (абсолютно позиціонований знизу) */
   padding-bottom: 40px;
   max-width: 320px;
   margin-inline: auto;
@@ -78,6 +77,24 @@
     max-width: none;
     margin: 0;
     padding-bottom: 0;
+  }
+}
+
+/* ── Photo link ───────────────────────────────────────────────────────────── */
+.photoLink {
+  display: block; /* критично — без цього position: absolute дочірніх елементів ламається */
+  text-decoration: none;
+}
+
+.photoLink:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .photoLink:hover .photo {
+    transform: scale(1.02);
   }
 }
 
@@ -102,9 +119,10 @@
   object-fit: cover;
   object-position: center top;
   border-radius: 6px;
+  transition: transform 0.4s ease;
 }
 
-/* ── Floating tag ─────────────────────────────────────────────────────────── */
+/* ── Floating tag (div, aria-hidden) ─────────────────────────────────────── */
 .bioTag {
   position: absolute;
   bottom: 0;
@@ -224,6 +242,7 @@
   .actions {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
   }
 }
 
@@ -286,7 +305,7 @@
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .btnOutline {
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s;
   }
 
   .btnOutline:hover {
@@ -297,4 +316,32 @@
 .btnOutline:focus-visible {
   outline: 2px solid var(--ew-cream);
   outline-offset: 3px;
+}
+
+/* Ghost — текстове посилання на сторінку автора */
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-gold);
+  text-decoration: none;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(232, 201, 126, 0.3);
+  white-space: nowrap;
+  min-height: 44px;
+  transition: border-color 0.2s;
+}
+
+@media (hover: hover) {
+  .btnGhost:hover {
+    border-color: var(--ew-gold);
+  }
+}
+
+.btnGhost:focus-visible {
+  outline: 2px solid var(--ew-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
 }

@@ -56,7 +56,6 @@
   font-size: var(--ew-text-base);
   line-height: var(--ew-leading-base);
   color: var(--ew-text-mid);
-  max-width: 480px;
   margin-inline: auto;
   margin-block: 0;
 }
