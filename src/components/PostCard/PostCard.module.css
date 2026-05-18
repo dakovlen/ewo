@@ -1,0 +1,149 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   PostCard — картка статті в сітці /blog, /category
+   Фон: --ew-cream
+   Тінь: --ew-shadow-card
+───────────────────────────────────────────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ew-cream);
+  border: 1px solid var(--ew-cream-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--ew-shadow-card);
+  height: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(42, 95, 74, 0.15);
+  }
+}
+
+/* ── Image ────────────────────────────────────────────────────────────────── */
+.imageLink {
+  display: block;
+  text-decoration: none;
+}
+
+.imageWrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--ew-cream-mid);
+  aspect-ratio: 16 / 9;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .image {
+    transform: scale(1.03);
+  }
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  gap: 12px;
+}
+
+/* ── Title ────────────────────────────────────────────────────────────────── */
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 0;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .titleLink:hover {
+    color: var(--ew-forest);
+  }
+}
+
+.titleLink:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-block-start: auto;
+  padding-block-start: 16px;
+  border-top: 1px solid var(--ew-cream-dark);
+}
+
+/* ── Author ───────────────────────────────────────────────────────────────── */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.authorPhoto {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: var(--ew-cream-mid);
+}
+
+.authorName {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-text-mid);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Посилання на автора — підкреслення при hover */
+a.authorName:hover {
+  color: var(--ew-forest);
+  text-decoration: underline;
+}
+
+a.authorName:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Date ─────────────────────────────────────────────────────────────────── */
+.date {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: var(--ew-text-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}

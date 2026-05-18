@@ -1,0 +1,56 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-start: 56px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 600;
+  color: var(--ew-forest);
+  background-color: var(--ew-cream);
+  border: 1.5px solid var(--ew-cream-dark);
+  border-radius: var(--ew-radius);
+  padding: 10px 18px;
+  text-decoration: none;
+  /* Мінімальний touch target 44px для аудиторії 65+ */
+  min-height: 44px;
+  min-width: 44px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:hover {
+    border-color: var(--ew-forest);
+    background-color: var(--ew-cream-mid);
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}
+
+/* Активна сторінка */
+.btnActive {
+  background-color: var(--ew-forest);
+  border-color: var(--ew-forest);
+  color: var(--ew-cream);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Недоступна кнопка */
+.btnDisabled {
+  color: var(--ew-text-light);
+  border-color: var(--ew-cream-dark);
+  cursor: not-allowed;
+  pointer-events: none;
+}
