@@ -307,7 +307,7 @@ export const AUTHOR_BY_SLUG_QUERY = defineQuery(`
       slug,
       mainImage,
       publishedAt,
-      "excerpt": array::join(string::split(pt::text(body), "")[0..160], ""),
+      "excerpt": pt::text(body)[0..160]
       "categories": coalesce(categories[]->{ _id, slug, title }, [])
     },
     "allPosts": *[
