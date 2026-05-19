@@ -28,4 +28,25 @@ export const components: PortableTextComponents = {
         <p>Invalid YouTube URL</p>
       ),
   },
+
+  marks: {
+    link: ({ children, value }) => (
+      <a
+        href={value?.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ),
+
+    emailLink: ({ children, value }) =>
+      value?.email ? (
+        <a href={`mailto:${value.email}`}>
+          {children}
+        </a>
+      ) : (
+        <>{children}</>
+      ),
+  },
 };

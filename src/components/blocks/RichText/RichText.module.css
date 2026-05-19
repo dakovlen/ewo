@@ -19,7 +19,7 @@
 }
 
 .inner {
-  max-width: var(--ew-container-text);
+  max-width: var(--ew-container-content);
   margin-inline: auto;
 }
 
@@ -74,6 +74,15 @@
   color: var(--ew-text-mid);
   margin: 0 0 1.5em;
   padding-inline-start: 1.5em;
+  
+}
+
+.inner ul {
+  list-style: disc;
+}
+
+.inner ol {
+  list-style: decimal;
 }
 
 .inner li {

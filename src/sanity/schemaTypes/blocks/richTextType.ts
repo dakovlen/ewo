@@ -31,6 +31,7 @@ export const richTextType = defineType({
               { title: "Emphasis", value: "em" },
             ],
             annotations: [
+              // Звичайне посилання
               {
                 title: "URL",
                 name: "link",
@@ -40,6 +41,24 @@ export const richTextType = defineType({
                     title: "URL",
                     name: "href",
                     type: "url",
+                  },
+                ],
+              },
+              // Email посилання → <a href="mailto:...">
+              {
+                title: "Email",
+                name: "emailLink",
+                type: "object",
+                fields: [
+                  {
+                    title: "Email address",
+                    name: "email",
+                    type: "string",
+                    validation: (Rule) =>
+                      Rule.regex(
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        { name: "email", invert: false }
+                      ).error("Enter a valid email address"),
                   },
                 ],
               },
