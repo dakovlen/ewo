@@ -49,6 +49,28 @@ export type SiteSettings = {
   };
 };
 
+export type RichText = {
+  _type: "richText";
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
 export type SplitImage = {
   _type: "splitImage";
   orientation?: "imageLeft" | "imageRight";
@@ -194,7 +216,9 @@ export type PageBuilder = Array<{
   _key: string;
 } & Features | {
   _key: string;
-} & Faqs>;
+} & Faqs | {
+  _key: string;
+} & RichText>;
 
 export type Page = {
   _id: string;
@@ -672,7 +696,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = HtmlBlock | YoutubeEmbed | Redirect | SiteSettings | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Author | Seo | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = HtmlBlock | YoutubeEmbed | Redirect | SiteSettings | RichText | SplitImage | Hero | Features | Faqs | Faq | PageBuilder | Page | Post | Social | Author | Seo | Category | BlockContent | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_TOTAL_COUNT_QUERY
@@ -899,6 +923,27 @@ export type PAGE_QUERYResult = {
     };
   } | {
     _key: string;
+    _type: "richText";
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
     _type: "splitImage";
     orientation?: "imageLeft" | "imageRight";
     title?: string;
@@ -1064,6 +1109,27 @@ export type HOME_PAGE_QUERYResult = {
         crop?: SanityImageCrop;
         _type: "image";
       };
+    } | {
+      _key: string;
+      _type: "richText";
+      content?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
     } | {
       _key: string;
       _type: "splitImage";
@@ -1270,7 +1336,7 @@ export type ALL_CATEGORIES_QUERYResult = Array<{
   };
 }>;
 // Variable: HOMEPAGE_AUTHOR_QUERY
-// Query: *[_type == "author" && defined(slug.current)] | order(_createdAt asc) [0] {    _id,    name,    image,    "role": coalesce(role, "Author · Content Creator")  }
+// Query: *[_type == "author" && defined(slug.current)] | order(_createdAt asc) [0] {    _id,    name,    image,    slug,    "role": coalesce(role, "Author · Content Creator")  }
 export type HOMEPAGE_AUTHOR_QUERYResult = {
   _id: string;
   name: string | null;
@@ -1286,6 +1352,7 @@ export type HOMEPAGE_AUTHOR_QUERYResult = {
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
+  slug: Slug | null;
   role: string | "Author \xB7 Content Creator";
 } | null;
 // Variable: AUTHORS_QUERY
@@ -1463,7 +1530,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"category\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\")) &&\n    publishedAt < now() &&\n    $slug in categories[]->slug.current\n  ]\n  | order(publishedAt desc, _createdAt desc)[0...100]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n      categories[]->{\n        _id,\n        slug,\n        title\n      },\n      []\n    ),\n    author->{\n      name,\n      image,\n      slug\n    },\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_POSTS_QUERYResult;
     "\n  *[_type == \"category\" && defined(slug.current)] | order(title asc) {\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": ALL_CATEGORIES_QUERYResult;
-    "\n  *[_type == \"author\" && defined(slug.current)] | order(_createdAt asc) [0] {\n    _id,\n    name,\n    image,\n    \"role\": coalesce(role, \"Author \xB7 Content Creator\")\n  }\n": HOMEPAGE_AUTHOR_QUERYResult;
+    "\n  *[_type == \"author\" && defined(slug.current)] | order(_createdAt asc) [0] {\n    _id,\n    name,\n    image,\n    slug,\n    \"role\": coalesce(role, \"Author \xB7 Content Creator\")\n  }\n": HOMEPAGE_AUTHOR_QUERYResult;
     "\n  *[\n    _type == \"author\" &&\n    defined(slug.current) &&\n    defined(name)\n  ] | order(_createdAt asc) {\n    _id,\n    name,\n    slug,\n    role,\n    image,\n    shortBio,\n    expertise,\n    \"postCount\": count(*[\n      _type == \"post\" &&\n      references(^._id) &&\n      defined(slug.current) &&\n      publishedAt < now()\n    ])\n  }\n": AUTHORS_QUERYResult;
     "\n  *[_type == \"author\" && defined(slug.current)] {\n    \"slug\": slug.current\n  }\n": AUTHORS_SLUGS_QUERYResult;
     "\n  *[_type == \"author\" && slug.current == $slug][0] {\n    _id,\n    name,\n    slug,\n    role,\n    image,\n    shortBio,\n    bio,\n    pullquote,\n    expertise,\n    socialLinks,\n    \"seo\": {\n      \"title\": coalesce(seo.title, name, \"\"),\n      \"description\": coalesce(seo.description, shortBio, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    },\n    \"featuredPosts\": featuredPosts[]-> {\n      _id,\n      title,\n      slug,\n      mainImage,\n      publishedAt,\n      \"excerpt\": pt::text(body)[0..160],\n      \"categories\": coalesce(categories[]->{ _id, slug, title }, [])\n    },\n    \"recentPosts\": *[\n      _type == \"post\" &&\n      references(^._id) &&\n      defined(slug.current) &&\n      publishedAt < now()\n    ] | order(publishedAt desc) [0...6] {\n      _id,\n      title,\n      slug,\n      mainImage,\n      publishedAt,\n      \"excerpt\": pt::text(body)[0..160],\n      \"categories\": coalesce(categories[]->{ _id, slug, title }, [])\n    }\n  }\n": AUTHOR_BY_SLUG_QUERYResult;

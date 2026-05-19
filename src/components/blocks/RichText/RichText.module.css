@@ -1,0 +1,114 @@
+.section {
+  background-color: var(--ew-cream);
+  padding-block: 64px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 80px;
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 48px;
+    padding-inline: 16px;
+  }
+}
+
+.inner {
+  max-width: var(--ew-container-text);
+  margin-inline: auto;
+}
+
+/* ── Prose ────────────────────────────────────────────────────────────────── */
+.inner p {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-loose);
+  color: var(--ew-text-mid);
+  margin: 0 0 1.5em;
+}
+
+.inner p:last-child {
+  margin-bottom: 0;
+}
+
+.inner h2 {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 2em 0 0.75em;
+}
+
+.inner h2:first-child {
+  margin-top: 0;
+}
+
+.inner h3 {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-sm);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 1.75em 0 0.6em;
+}
+
+.inner h4 {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  font-weight: 700;
+  color: var(--ew-text);
+  margin: 1.5em 0 0.5em;
+}
+
+.inner ul,
+.inner ol {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-loose);
+  color: var(--ew-text-mid);
+  margin: 0 0 1.5em;
+  padding-inline-start: 1.5em;
+}
+
+.inner li {
+  margin-bottom: 0.5em;
+}
+
+.inner blockquote {
+  border-inline-start: 3px solid var(--ew-gold);
+  padding-inline-start: 20px;
+  margin: 1.5em 0;
+}
+
+.inner blockquote p {
+  font-family: var(--ew-font-serif);
+  font-style: italic;
+  font-size: var(--ew-text-lg);
+  color: var(--ew-text);
+  line-height: 1.65;
+}
+
+.inner a {
+  color: var(--ew-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inner a:hover {
+  color: var(--ew-forest-dark);
+}
+
+.inner strong {
+  font-weight: 700;
+  color: var(--ew-text);
+}
+
+.inner em {
+  font-style: italic;
+}
