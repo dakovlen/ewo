@@ -19,7 +19,7 @@
 }
 
 .inner {
-  max-width: var(--ew-container-text);
+  max-width: var(--ew-container-content);
   margin-inline: auto;
 }
 
