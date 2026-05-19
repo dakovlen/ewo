@@ -1,0 +1,66 @@
+.nav {
+  /* Mobile: не показується */
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: block;
+    position: sticky;
+    top: calc(var(--ew-nav-height) + 32px);
+    max-height: calc(100vh - var(--ew-nav-height) - 64px);
+    overflow-y: auto;
+    padding: 20px;
+    background-color: var(--ew-cream);
+    border: 1px solid var(--ew-cream-dark);
+    border-radius: 8px;
+    /* Thin scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ew-cream-dark) transparent;
+  }
+}
+
+.heading {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ew-text-light);
+  margin: 0 0 12px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  /* padding-inline-start задається через style prop залежно від рівня */
+}
+
+.link {
+  display: block;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-mid);
+  line-height: 1.5;
+  color: var(--ew-text-mid);
+  text-decoration: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.link:hover {
+  background-color: rgba(42, 95, 74, 0.07);
+  color: var(--ew-forest);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: 2px;
+}
