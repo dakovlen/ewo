@@ -4,6 +4,7 @@ import { Hero } from "@/components/blocks/Hero/Hero";
 import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";
+import { RichText } from "@/components/blocks/RichText/RichText";
 import { PAGE_QUERYResult } from "@/sanity/types";
 import { client } from "@/sanity/lib/client";
 import { createDataAttribute } from "next-sanity";
@@ -92,9 +93,16 @@ export function PageBuilder({
                 <FAQs {...block} />
               </DragHandle>
             );
+          case "richText":
+            return (
+              <DragHandle key={block._key}>
+                <RichText {...block} />
+              </DragHandle>
+            );
           default:
-            // This is a fallback for when we don't have a block type
-            return <div key={block._key}>Block not found: {block._type}</div>;
+            return (
+              <div key={block._key}>Block not found: {block._type}</div>
+            );
         }
       })}
     </main>

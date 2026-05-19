@@ -12,6 +12,7 @@ import { faqsType } from "./blocks/faqsType";
 import { featuresType } from "./blocks/featuresType";
 import { heroType } from "./blocks/heroType";
 import { splitImageType } from "./blocks/splitImageType";
+import { richTextType } from "./blocks/richTextType";
 import { siteSettingsType } from "./siteSettingsType";
 import { redirectType } from "./redirectType";
 import { socialType } from './socialType';
@@ -32,6 +33,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     featuresType,
     heroType,
     splitImageType,
+    richTextType,
     siteSettingsType,
     redirectType,
     socialType,
