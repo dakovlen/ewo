@@ -54,7 +54,6 @@ export const richTextType = defineType({
       content: "content",
     },
     prepare({ content }) {
-      // Показуємо перший рядок тексту як preview
       const firstBlock = content?.[0];
       const text = firstBlock?.children
         ?.filter((c: { _type: string }) => c._type === "span")

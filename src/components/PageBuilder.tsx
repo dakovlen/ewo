@@ -4,7 +4,7 @@ import { Hero } from "@/components/blocks/Hero/Hero";
 import { Features } from "@/components/blocks/Features";
 import { SplitImage } from "@/components/blocks/SplitImage";
 import { FAQs } from "@/components/blocks/FAQs";
-import { RichText } from "@/components/blocks/RichText/RichText";  // ← додано
+import { RichText } from "@/components/blocks/RichText/RichText";
 import { PAGE_QUERYResult } from "@/sanity/types";
 import { client } from "@/sanity/lib/client";
 import { createDataAttribute } from "next-sanity";
