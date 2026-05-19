@@ -5,6 +5,7 @@ import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/siteConfig";
+import styles from "./page.module.css";
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
@@ -39,7 +40,6 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
       type: "website",
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
-    // FIX: Twitter cards were missing entirely
     twitter: {
       card: "summary_large_image",
       title: page.seo.title,
@@ -54,11 +54,23 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
 export default async function Page({ params }: RouteProps) {
   const { data: page } = await getPage(params);
 
-  return page?.content ? (
-    <PageBuilder
-      documentId={page._id}
-      documentType={page._type}
-      content={page.content}
-    />
-  ) : null;
+  if (!page) notFound();
+
+  return (
+    <main id="main-content">
+      {page.title && (
+        <div className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>{page.title}</h1>
+        </div>
+      )}
+
+      {page.content && (
+        <PageBuilder
+          documentId={page._id}
+          documentType={page._type}
+          content={page.content}
+        />
+      )}
+    </main>
+  );
 }
