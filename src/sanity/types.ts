@@ -64,6 +64,10 @@ export type RichText = {
       href?: string;
       _type: "link";
       _key: string;
+    } | {
+      email?: string;
+      _type: "emailLink";
+      _key: string;
     }>;
     level?: number;
     _type: "block";
@@ -934,6 +938,10 @@ export type PAGE_QUERYResult = {
       style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
+        email?: string;
+        _type: "emailLink";
+        _key: string;
+      } | {
         href?: string;
         _type: "link";
         _key: string;
@@ -1122,6 +1130,10 @@ export type HOME_PAGE_QUERYResult = {
         style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
+          email?: string;
+          _type: "emailLink";
+          _key: string;
+        } | {
           href?: string;
           _type: "link";
           _key: string;

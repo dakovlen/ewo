@@ -1,0 +1,102 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CookieBanner — фіксована смужка знизу екрану
+   Фон: --ew-forest-deep (як footer і Author hero)
+   Анімація: slide up при появі
+───────────────────────────────────────────────────────────────────────────── */
+
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--ew-forest-deep);
+  border-top: 1px solid rgba(232, 201, 126, 0.2);
+  padding: 16px 24px;
+
+  /* Slide up анімація */
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    animation: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .banner {
+    padding: 16px 40px;
+  }
+}
+
+/* ── Inner ────────────────────────────────────────────────────────────────── */
+.inner {
+  max-width: var(--ew-container-content);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ── Text ─────────────────────────────────────────────────────────────────── */
+.text {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  line-height: var(--ew-leading-base);
+  color: rgba(253, 249, 242, 0.8);
+  margin: 0;
+  flex: 1;
+  min-width: 240px;
+}
+
+.link {
+  color: var(--ew-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.link:hover {
+  color: #f0d898;
+}
+
+/* ── Button ───────────────────────────────────────────────────────────────── */
+.btn {
+  flex-shrink: 0;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-sm);
+  font-weight: 700;
+  color: var(--ew-forest-deep);
+  background-color: var(--ew-gold);
+  border: none;
+  border-radius: var(--ew-radius);
+  padding: 10px 24px;
+  cursor: pointer;
+  min-height: 44px;  /* touch target для 65+ */
+  transition: background-color 0.15s;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background-color: #f0d898;
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ew-cream);
+  outline-offset: 2px;
+}
