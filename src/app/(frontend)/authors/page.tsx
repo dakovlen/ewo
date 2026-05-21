@@ -31,8 +31,6 @@ export default async function AuthorsPage() {
         text={undefined}
       />
       <AuthorsList authors={authors ?? []} />
-
-      <FreeJournalBanner />
     </>
   );
 }

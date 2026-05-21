@@ -112,7 +112,6 @@ export default function FreeJournalPage() {
 
         <JournalTestimonial />
 
-        <FreeJournalBanner />
       </main>
     </>
   );
