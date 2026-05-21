@@ -4,6 +4,7 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { Header } from "@/components/Header/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import { Footer } from "@/components/Footer/Footer";
+import { CookieBanner } from "@/components/CookieBanner/CookieBanner";
 
 export default async function FrontendLayout({
   children,
@@ -19,6 +20,8 @@ export default async function FrontendLayout({
       </main>
 
       <Footer />
+
+      <CookieBanner />
 
       <SanityLive />
       {(await draftMode()).isEnabled && (
