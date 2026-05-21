@@ -7,6 +7,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { ALL_CATEGORIES_QUERY } from "@/sanity/lib/queries";
 import { SubscribeForm } from "./SubscribeForm/SubscribeForm";
 import styles from "./Footer.module.css";
+import { FreeJournalBannerGuard } from "../FreeJournalBanner/FreeJournalBannerGuard";
 
 type FooterCategory = {
   _id: string;
@@ -27,7 +28,7 @@ export async function Footer() {
 
   return (
     <>
-      {/* <SubscribeForm /> */}
+      <FreeJournalBannerGuard />
 
       <footer className={styles.footer} aria-label="Site footer">
         <div className={styles.inner}>
