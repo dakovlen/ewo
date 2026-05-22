@@ -12,6 +12,7 @@
     "typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@sanity/assist": "^4.2.0",
     "@sanity/icons": "^3.7.0",
