@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/siteConfig";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 /*
   next/font завантажує шрифти під час білду — не в runtime.
@@ -58,25 +59,9 @@ export default function RootLayout({
     >
       <head />
       <body>
+        <GoogleAnalytics gaId="G-VZ5KV8LGMJ" />
+
         {children}
-
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-VZ5KV8LGMJ"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VZ5KV8LGMJ');
-            `,
-          }}
-        />
-
         <Toaster position="top-center" richColors closeButton />
       </body>
     </html>
