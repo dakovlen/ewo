@@ -134,7 +134,7 @@ export function Post(props: NonNullable<POST_QUERYResult>) {
               {author.image && (
                 <Image
                   src={urlFor(author.image).width(72).height(72).quality(85).url()}
-                  alt=""
+                  alt={author.name ?? ""} 
                   width={36}
                   height={36}
                   className={styles.bylinePhoto}

@@ -37,7 +37,7 @@ export function PostAuthorCard({ author }: Props) {
         {imageUrl && (
           <Image
             src={imageUrl}
-            alt=""
+            alt={author.name ?? ""}
             width={48}
             height={48}
             className={styles.photo}

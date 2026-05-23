@@ -1,0 +1,192 @@
+/* MissionStatement.module.css
+   Розміщення: між Author і FreeJournalBanner
+   Характер: комбінована — місія + цитата автора
+   Фон: --ew-cream-mid (як WhatWeOffer) — відокремлює від темного Author
+*/
+
+.section {
+  background-color: var(--ew-cream-mid);
+  padding: 96px 24px;
+  border-top: 1px solid var(--ew-cream-dark);
+  border-bottom: 1px solid var(--ew-cream-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 112px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 72px 20px;
+  }
+}
+
+/* Декоративний фоновий елемент */
+.section::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 201, 126, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Внутрішній контейнер ── */
+
+.inner {
+  max-width: var(--ew-container-text); /* 780px — текстова ширина */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ── Overline — той самий паттерн що в Hero ── */
+
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.overlineLine {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.overlineText {
+  font-family: var(--ew-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-text-mid);
+  white-space: nowrap;
+}
+
+/* ── Місія — текстовий блок ── */
+
+.missionBlock {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heading {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--ew-text);
+  margin: 0;
+}
+
+.lead {
+  font-family: var(--ew-font-sans);
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: var(--ew-leading-base); /* 1.75 */
+  color: var(--ew-text-mid);
+  margin: 0;
+  max-width: 640px;
+  align-self: center;
+}
+
+.body {
+  font-family: var(--ew-font-sans);
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: var(--ew-leading-loose); /* 1.85 */
+  color: var(--ew-text-mid);
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Розділювач ── */
+
+.divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ew-gold), var(--ew-brown));
+  border: none;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Блок цитати ── */
+
+.quoteBlock {
+  width: 100%;
+  background-color: var(--ew-forest-deep);
+  border-radius: 8px;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .quoteBlock {
+    padding: 36px 28px;
+  }
+}
+
+/* Декоративна велика лапка */
+.quoteBlock::before {
+  content: "\201C";
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  font-family: var(--ew-font-serif);
+  font-size: 160px;
+  line-height: 1;
+  color: rgba(232, 201, 126, 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+.quote {
+  font-family: var(--ew-font-serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ew-cream);
+  margin: 0 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.quoteFooter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.quoteLine {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--ew-gold);
+  flex-shrink: 0;
+}
+
+.quoteAuthor {
+  font-family: var(--ew-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ew-gold);
+}

@@ -67,7 +67,7 @@ export async function Author() {
             <div className={styles.photoFrame}>
               <Image
                 src={imageSrc}
-                alt=""
+                alt={`${authorName}, ${authorRole}`}
                 width={380}
                 height={507}
                 className={styles.photo}
