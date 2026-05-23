@@ -20,7 +20,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
           src={urlFor(image).width(800).height(600).url()}
           width={800}
           height={600}
-          alt=""
+          alt={title || 'Split image'}
         />
       ) : null}
       <div className="w-1/3 flex items-center">

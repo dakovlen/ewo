@@ -58,7 +58,7 @@ export function Hero({ title, text, image }: HeroProps) {
             src={urlFor(image).width(1600).height(800).url()}
             width={1600}
             height={800}
-            alt=""
+            alt="Hero"
           />
         ) : null}
       </div> */}

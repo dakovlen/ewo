@@ -115,7 +115,7 @@ export function LatestPosts({ posts }: Props) {
                         {post.author.image && (
                           <Image
                             src={urlFor(post.author.image).width(48).height(48).quality(85).url()}
-                            alt=""
+                            alt={post.author.name || ""}
                             width={32}
                             height={32}
                             className={styles.authorPhoto}

@@ -20,6 +20,7 @@ import { LatestPosts } from "@/components/LatestPosts/LatestPosts";
 import { Author } from "@/components/Author/Author";
 import { FreeJournalBanner } from "@/components/FreeJournalBanner/FreeJournalBanner";
 import { YouTubeBanner } from "@/components/YouTubeBanner/YouTubeBanner";
+import { MissionStatement } from "@/components/MissionStatement/MissionStatement";
 
 export const metadata: Metadata = homeMetadata;
 
@@ -37,6 +38,7 @@ export default async function Page() {
       <WhatWeOffer />
       <LatestPosts posts={latestPosts || []} />
       <Author />
+      <MissionStatement />
       <FreeJournalBanner />
       <YouTubeBanner video={latestVideo} />
     </>
