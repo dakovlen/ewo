@@ -19,6 +19,10 @@ export const menuItems: MenuItem[] = [
     href: "/contact",
     label: "Contact"
   },
+  { 
+    href: "/authors",
+    label: "Authors"
+  },
 
   // { href: "/studio", label: "Studio" }, // закоментовано поки немає авторизації
 ];
