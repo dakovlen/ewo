@@ -712,7 +712,7 @@ export type POSTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "excerpt": pt::text(body)[0..159],  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description, pt::text(body)[0..159], ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image,    slug  },  relatedPosts[]{    _key,    ...@->{_id, title, slug}  }}
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "excerpt": pt::text(body)[0..159],  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description, pt::text(body)[0..159], ""),    "image": coalesce(seo.image, mainImage),    "noIndex": seo.noIndex == true  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image,    slug  },  relatedPosts[]{    _key,    ...@->{_id, title, slug}  }}
 export type POST_QUERYResult = {
   _id: string;
   title: string | null;
@@ -770,6 +770,18 @@ export type POST_QUERYResult = {
     title: string | "";
     description: string | "";
     image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1218,7 +1230,7 @@ export type OG_IMAGE_QUERYResult = {
   } | null;
 } | null;
 // Variable: SITEMAP_QUERY
-// Query: *[_type in ["page", "post", "author"] && defined(slug.current)] {    "href": select(      _type == "page" && slug.current == "/" => "/",      _type == "page"   => "/" + slug.current,      _type == "post"   => "/blog/" + slug.current,      _type == "author" => "/authors/" + slug.current    ),    _updatedAt  }
+// Query: *[    _type in ["page", "post", "author", "category"] &&    defined(slug.current) &&    !(_id in path("drafts.**"))  ] {    "href": select(      _type == "page" && slug.current == "home" => "/",      _type == "page" => "/" + slug.current,      _type == "post" && defined(publishedAt)   => "/blog/" + slug.current,      _type == "author" => "/authors/" + slug.current,      _type == "category" => "/category/" + slug.current    ),    _updatedAt  }[defined(href)]
 export type SITEMAP_QUERYResult = Array<{
   href: string | "/" | null;
   _updatedAt: string;
@@ -1534,12 +1546,12 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "count(*[\n  _type == \"post\" &&\n  defined(slug.current) &&\n  !(_id in path(\"drafts.**\")) &&\n  publishedAt < now()\n])": POSTS_TOTAL_COUNT_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"excerpt\": pt::text(body)[0..159],\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description, pt::text(body)[0..159], \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image,\n    slug\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"excerpt\": pt::text(body)[0..159],\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description, pt::text(body)[0..159], \"\"),\n    \"image\": coalesce(seo.image, mainImage),\n    \"noIndex\": seo.noIndex == true\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image,\n    slug\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n    \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->{\n        _id,\n        title,\n        body,\n        \"text\": pt::text(body)\n      }\n    }\n  }\n}": PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      \"seo\": {\n        \"title\": coalesce(seo.title, title, \"\"),\n        \"description\": coalesce(seo.description,  \"\"),\n        \"image\": seo.image,\n        \"noIndex\": seo.noIndex == true\n      },\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->{\n            _id,\n            title,\n            body,\n            \"text\": pt::text(body)\n          }\n        }\n      }\n    }\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
     "\n  *[_id == $id][0]{\n    title,\n    \"image\": mainImage.asset->{\n      url,\n      metadata {\n        palette\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
-    "\n  *[_type in [\"page\", \"post\", \"author\"] && defined(slug.current)] {\n    \"href\": select(\n      _type == \"page\" && slug.current == \"/\" => \"/\",\n      _type == \"page\"   => \"/\" + slug.current,\n      _type == \"post\"   => \"/blog/\" + slug.current,\n      _type == \"author\" => \"/authors/\" + slug.current\n    ),\n    _updatedAt\n  }\n": SITEMAP_QUERYResult;
+    "\n  *[\n    _type in [\"page\", \"post\", \"author\", \"category\"] &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\"))\n  ] {\n    \"href\": select(\n      _type == \"page\" && slug.current == \"home\" => \"/\",\n      _type == \"page\" => \"/\" + slug.current,\n      _type == \"post\" && defined(publishedAt)   => \"/blog/\" + slug.current,\n      _type == \"author\" => \"/authors/\" + slug.current,\n      _type == \"category\" => \"/category/\" + slug.current\n    ),\n    _updatedAt\n  }[defined(href)]\n": SITEMAP_QUERYResult;
     "\n  *[_type == \"category\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug.current) &&\n    !(_id in path(\"drafts.**\")) &&\n    publishedAt < now() &&\n    $slug in categories[]->slug.current\n  ]\n  | order(publishedAt desc, _createdAt desc)[0...100]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n      categories[]->{\n        _id,\n        slug,\n        title\n      },\n      []\n    ),\n    author->{\n      name,\n      image,\n      slug\n    },\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description,  \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": CATEGORY_POSTS_QUERYResult;
     "\n  *[_type == \"category\" && defined(slug.current)] | order(title asc) {\n    _id,\n    title,\n    slug,\n    description,\n    \"seo\": {\n      \"title\": coalesce(seo.title, title, \"\"),\n      \"description\": coalesce(seo.description, description, \"\"),\n      \"image\": seo.image,\n      \"noIndex\": seo.noIndex == true\n    }\n  }\n": ALL_CATEGORIES_QUERYResult;

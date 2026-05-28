@@ -149,15 +149,20 @@ export const OG_IMAGE_QUERY = defineQuery(`
 `);
 
 export const SITEMAP_QUERY = defineQuery(`
-  *[_type in ["page", "post", "author"] && defined(slug.current)] {
+  *[
+    _type in ["page", "post", "author", "category"] &&
+    defined(slug.current) &&
+    !(_id in path("drafts.**"))
+  ] {
     "href": select(
-      _type == "page" && slug.current == "/" => "/",
-      _type == "page"   => "/" + slug.current,
-      _type == "post"   => "/blog/" + slug.current,
-      _type == "author" => "/authors/" + slug.current
+      _type == "page" && slug.current == "home" => "/",
+      _type == "page" => "/" + slug.current,
+      _type == "post" && defined(publishedAt)   => "/blog/" + slug.current,
+      _type == "author" => "/authors/" + slug.current,
+      _type == "category" => "/category/" + slug.current
     ),
     _updatedAt
-  }
+  }[defined(href)]
 `);
 
 export const LATEST_POSTS_QUERY = `
