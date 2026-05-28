@@ -155,7 +155,6 @@ export const SITEMAP_QUERY = defineQuery(`
     !(_id in path("drafts.**"))
   ] {
     "href": select(
-      _type == "page" && slug.current == "home" => "/",
       _type == "page" => "/" + slug.current,
       _type == "post" && defined(publishedAt)   => "/blog/" + slug.current,
       _type == "author" => "/authors/" + slug.current,

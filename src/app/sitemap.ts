@@ -5,44 +5,7 @@ import { siteConfig } from "@/lib/siteConfig";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-const STATIC_ROUTES: SitemapEntry[] = [
-  {
-    url: `${siteConfig.baseUrl}/`,
-    changeFrequency: "daily",
-    priority: 1.0,
-    lastModified: new Date(),
-  },
-  {
-    url: `${siteConfig.baseUrl}/blog`,
-    changeFrequency: "daily",
-    priority: 0.8,
-    lastModified: new Date(),
-  },
-  {
-    url: `${siteConfig.baseUrl}/authors`,
-    changeFrequency: "monthly",
-    priority: 0.7,
-    lastModified: new Date(),
-  },
-  {
-    url: `${siteConfig.baseUrl}/category`,
-    changeFrequency: "weekly",
-    priority: 0.6,
-    lastModified: new Date(),
-  },
-  {
-    url: `${siteConfig.baseUrl}/contact`,
-    changeFrequency: "monthly",
-    priority: 0.5,
-    lastModified: new Date(),
-  },
-  {
-    url: `${siteConfig.baseUrl}/free-7-day-family-journal`,
-    changeFrequency: "monthly",
-    priority: 0.5,
-    lastModified: new Date(),
-  },
-];
+
 
 function getPriority(href: string): number {
   if (href.startsWith("/blog/"))     return 0.7;
@@ -59,6 +22,47 @@ function getChangeFrequency(href: string): SitemapEntry["changeFrequency"] {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
+  const staticRoutes: SitemapEntry[] = [
+    {
+      url: `${siteConfig.baseUrl}/`,
+      changeFrequency: "daily",
+      priority: 1.0,
+      lastModified: now,
+    },
+    {
+      url: `${siteConfig.baseUrl}/free-7-day-family-journal`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      lastModified: now,
+    },
+    {
+      url: `${siteConfig.baseUrl}/blog`,
+      changeFrequency: "daily",
+      priority: 0.8,
+      lastModified: now,
+    },
+    {
+      url: `${siteConfig.baseUrl}/authors`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      lastModified: now,
+    },
+    {
+      url: `${siteConfig.baseUrl}/category`,
+      changeFrequency: "weekly",
+      priority: 0.6,
+      lastModified: now,
+    },
+    {
+      url: `${siteConfig.baseUrl}/contact`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+      lastModified: now,
+    },
+  ];
+
   try {
     const paths: Array<{ href: string; _updatedAt: string }> =
       await client.fetch(SITEMAP_QUERY);
@@ -70,10 +74,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: getPriority(path.href),
     }));
 
-    return [...STATIC_ROUTES, ...dynamicEntries];
+    return [...staticRoutes, ...dynamicEntries];
   } catch (error) {
     console.error("Failed to generate sitemap:", error);
     // Якщо Sanity недоступний — повертаємо хоча б статичні сторінки
-    return STATIC_ROUTES;
+    return staticRoutes;
   }
 }
