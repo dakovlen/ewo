@@ -55,10 +55,11 @@ export const POST_QUERY =
   body,
   mainImage,
   publishedAt,
+  "excerpt": pt::text(body)[0..159],
   "seo": {
     "title": coalesce(seo.title, title, ""),
-    "description": coalesce(seo.description,  ""),
-    "image": seo.image,
+    "description": coalesce(seo.description, pt::text(body)[0..159], ""),
+    "image": coalesce(seo.image, mainImage),
     "noIndex": seo.noIndex == true
   },
   "categories": coalesce(
