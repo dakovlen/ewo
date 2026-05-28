@@ -1,24 +1,48 @@
 import { sanityFetch } from "@/sanity/lib/client";
-import { getPostsQuery, POSTS_TOTAL_COUNT_QUERY } from '@/sanity/lib/queries';
-import { PostCard } from '@/components/PostCard/PostCard';
+import { getPostsQuery, POSTS_TOTAL_COUNT_QUERY } from "@/sanity/lib/queries";
+import { PostCard } from "@/components/PostCard/PostCard";
 import { notFound } from "next/navigation";
 import { Pagination } from "@/components/Pagination/Pagination";
 import { Hero } from "@/components/blocks/Hero/Hero";
 import { blogMetadata } from "@/lib/metadata/blogMetadata";
+import { siteConfig } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 const POSTS_PER_PAGE = 12;
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = {
+  searchParams?: Promise<{ page?: string }>;
+};
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const params = await searchParams;
+  const currentPage = parseInt(params?.page || "1", 10);
+
+  /*
+    Сторінка 1 — повний metadata з blogMetadata.
+    Сторінки 2+ — noindex щоб Google не вважав їх дублікатами.
+    follow: true — Google все одно слідує посиланням і знаходить статті.
+    canonical завжди вказує на /blog (перша сторінка).
+  */
+  if (currentPage > 1) {
+    return {
+      ...blogMetadata,
+      robots: {
+        index: false,
+        follow: true,
+      },
+      alternates: {
+        canonical: `${siteConfig.baseUrl}/blog`,
+      },
+    };
+  }
+
   return blogMetadata;
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string };
-}) {
-  const currentPage = parseInt((await searchParams)?.page || "1", 10);
+export default async function Page({ searchParams }: Props) {
+  const params = await searchParams;
+  const currentPage = parseInt(params?.page || "1", 10);
   if (isNaN(currentPage) || currentPage < 1) notFound();
 
   const offset = (currentPage - 1) * POSTS_PER_PAGE;
@@ -27,7 +51,7 @@ export default async function Page({
     sanityFetch({
       query: getPostsQuery(offset, POSTS_PER_PAGE),
       revalidate: 3600,
-      tags: ['post', 'author', 'category'],
+      tags: ["post", "author", "category"],
     }),
     sanityFetch({ query: POSTS_TOTAL_COUNT_QUERY }),
   ]);
@@ -50,8 +74,7 @@ export default async function Page({
             children: [
               {
                 _type: "span",
-                text:
-                  "Discover a wealth of thoughtful articles dedicated to enriching life after 60. Explore engaging pieces on cultivating new hobbies and interests, fostering a sense of purpose, and finding joy in everyday moments. Delve into articles specifically designed to support brain health, with tips on maintaining cognitive vitality and sharpness. Our goal is to uplift, inform, and inspire, ensuring you feel empowered to live your fullest, most vibrant life.",
+                text: "Discover a wealth of thoughtful articles dedicated to enriching life after 60. Explore engaging pieces on cultivating new hobbies and interests, fostering a sense of purpose, and finding joy in everyday moments.",
                 _key: "span1",
               },
             ],
@@ -59,6 +82,7 @@ export default async function Page({
         ]}
         image={undefined}
       />
+
       <main className="container mx-auto px-5 py-8 md:p-10 flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
@@ -66,7 +90,11 @@ export default async function Page({
           ))}
         </div>
 
-        <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/blog" />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          basePath="/blog"
+        />
       </main>
     </>
   );

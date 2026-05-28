@@ -712,7 +712,7 @@ export type POSTS_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image,    slug  },  relatedPosts[]{    _key,    ...@->{_id, title, slug}  }}
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "excerpt": pt::text(body)[0..159],  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description, pt::text(body)[0..159], ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image,    slug  },  relatedPosts[]{    _key,    ...@->{_id, title, slug}  }}
 export type POST_QUERYResult = {
   _id: string;
   title: string | null;
@@ -765,6 +765,7 @@ export type POST_QUERYResult = {
     _type: "image";
   } | null;
   publishedAt: string | null;
+  excerpt: null;
   seo: {
     title: string | "";
     description: string | "";
@@ -1533,7 +1534,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "count(*[\n  _type == \"post\" &&\n  defined(slug.current) &&\n  !(_id in path(\"drafts.**\")) &&\n  publishedAt < now()\n])": POSTS_TOTAL_COUNT_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image,\n    slug\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"excerpt\": pt::text(body)[0..159],\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description, pt::text(body)[0..159], \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image,\n    slug\n  },\n  relatedPosts[]{\n    _key,\n    ...@->{_id, title, slug}\n  }\n}": POST_QUERYResult;
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n    \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->{\n        _id,\n        title,\n        body,\n        \"text\": pt::text(body)\n      }\n    }\n  }\n}": PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      \"seo\": {\n        \"title\": coalesce(seo.title, title, \"\"),\n        \"description\": coalesce(seo.description,  \"\"),\n        \"image\": seo.image,\n        \"noIndex\": seo.noIndex == true\n      },\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->{\n            _id,\n            title,\n            body,\n            \"text\": pt::text(body)\n          }\n        }\n      }\n    }\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;

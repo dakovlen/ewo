@@ -29,15 +29,17 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   const canonicalUrl = `${siteConfig.baseUrl}/blog/${slug}`;
   const ogImageUrl = post.seo?.image
     ? urlFor(post.seo.image).width(1200).height(630).url()
+    : post.mainImage
+    ? urlFor(post.mainImage).width(1200).height(630).url()
     : `${siteConfig.baseUrl}/og-image.jpg`;
 
   return {
     title: post.seo?.title || post.title,
-    description: post.seo?.description || "",
+    description: post.seo?.description || post.title || "",
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title: post.seo?.title || post.title,
-      description: post.seo?.description || "",
+      description: post.seo?.description || post.title || "",
       url: canonicalUrl,
       siteName: siteConfig.name,
       locale: siteConfig.locale,
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     twitter: {
       card: "summary_large_image",
       title: post.seo?.title || post.title,
-      description: post.seo?.description || "",
+      description: post.seo?.description || post.title || "",
       site: siteConfig.twitterHandle,
       images: [ogImageUrl],
     },
