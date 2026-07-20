@@ -39,6 +39,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
+  other: {
+    "google-adsense-account": "ca-pub-8987348164338302",
+  },
 };
 
 export default function RootLayout({
