@@ -23,6 +23,11 @@ export const menuItems: MenuItem[] = [
     href: "/authors",
     label: "Authors"
   },
+  { 
+    href: "/free-7-day-family-journal",
+    label: "Free Journal"
+  },
+  
 
   // { href: "/studio", label: "Studio" }, // закоментовано поки немає авторизації
 ];
