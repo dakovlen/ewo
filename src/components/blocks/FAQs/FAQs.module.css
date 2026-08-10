@@ -1,0 +1,167 @@
+.section {
+  background-color: var(--ew-cream);
+  padding: 88px 20px;
+  border-top: 1px solid var(--ew-cream-dark);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 100px 40px;
+  }
+}
+
+
+/* ── Inner ── */
+
+.inner {
+  max-width: var(--ew-container-text);
+  margin: 0 auto;
+}
+
+
+/* ── Section head ── */
+
+.head {
+  text-align: center;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrow {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-text-mid);
+  border-bottom: 1px solid var(--ew-gold);
+  padding-bottom: 6px;
+}
+
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 0;
+}
+
+
+/* ── Список ── */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* ── Кожен item — <details> ── */
+
+.item {
+  background-color: white;
+  border: 1px solid var(--ew-cream-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.item:hover {
+  border-color: var(--ew-brown);
+}
+
+.item[open] {
+  border-color: var(--ew-forest);
+}
+
+
+/* ── Question — <summary> ─────────────────────────────────
+   Прибираємо дефолтний маркер браузера і робимо свій icon.
+──────────────────────────────────────────────────────────── */
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-text-lg);
+  font-weight: 600;
+  color: var(--ew-text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.question:focus-visible {
+  outline: 2px solid var(--ew-forest);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+
+/* ── Icon — plus/minus анімація ─────────────────────────────
+   Два псевдо-елементи: горизонтальна і вертикальна риска.
+   При open вертикальна повертається на 90° і зникає.
+──────────────────────────────────────────────────────────── */
+
+.icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  background-color: var(--ew-forest);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.icon::before {
+  top: 8px;
+  left: 0;
+  width: 18px;
+  height: 2px;
+}
+
+.icon::after {
+  top: 0;
+  left: 8px;
+  width: 2px;
+  height: 18px;
+}
+
+.item[open] .icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+
+/* ── Answer ── */
+
+.answer {
+  padding: 0 24px 24px;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-loose);
+  color: var(--ew-text-mid);
+}
+
+.answer p {
+  margin: 0 0 12px;
+}
+
+.answer p:last-child {
+  margin-bottom: 0;
+}
