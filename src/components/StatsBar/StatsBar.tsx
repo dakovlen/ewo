@@ -2,9 +2,9 @@ import { Fragment } from "react";
 import styles from "./StatsBar.module.css";
 
 const stats = [
-  { number: "70+",  label: "Articles published"  },
-  { number: "5",    label: "Books on Amazon"      },
-  { number: "3+",   label: "Years of wisdom"      },
+  { number: "Weekly",  label: "New content"       },
+  { number: "Free",    label: "Articles & videos" },
+  { number: "60+",     label: "Written for ages"  },
 ];
 
 export function StatsBar() {
