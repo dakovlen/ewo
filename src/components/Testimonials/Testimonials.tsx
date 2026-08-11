@@ -6,12 +6,6 @@ type Testimonial = {
   detail: string;
 };
 
-/*
-  ВАЖЛИВО: заміни на РЕАЛЬНІ відгуки перед деплоєм.
-  Джерела: коментарі під YouTube відео, email від читачів,
-  повідомлення в соцмережах. Fake відгуки шкодять AdSense
-  і довірі — Google їх виявляє.
-*/
 const testimonials: Testimonial[] = [
   {
     quote:
