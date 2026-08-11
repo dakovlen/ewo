@@ -3,7 +3,7 @@ export const siteConfig = {
   name: "Elderly Wisdom",
   shortName: "ElderlyWisdom",
   logo: "https://elderlywisdom.org/logo.svg",
-  description: "Inspiring books, videos, and articles for seniors seeking meaning and joy after 60.",
+  description: "ElderlyWisdom.org offers weekly articles, YouTube videos, and books created for adults 60 and over. Discover practical advice on family relationships, health, and purpose, plus a free 7-day family journal. Warm, uplifting wisdom for a joyful life after 60 — from author Solan Voss.",
   twitterHandle: "@SolanVoss",
   locale: "en_US",
   creator: "Solan Voss",

@@ -1,0 +1,138 @@
+.section {
+  background-color: var(--ew-cream);
+  padding: 88px 20px;
+  border-top: 1px solid var(--ew-cream-dark);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 100px 40px;
+  }
+}
+
+.inner {
+  max-width: var(--ew-container-content);
+  margin: 0 auto;
+}
+
+
+/* ── Head ── */
+
+.head {
+  text-align: center;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ew-text-mid);
+  border-bottom: 1px solid var(--ew-gold);
+  padding-bottom: 6px;
+}
+
+.title {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-heading-md);
+  font-weight: 700;
+  line-height: var(--ew-leading-tight);
+  color: var(--ew-text);
+  margin: 0;
+}
+
+
+/* ── Grid ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ── Card ── */
+
+.card {
+  position: relative;
+  background-color: white;
+  border: 1px solid var(--ew-cream-dark);
+  border-radius: 10px;
+  padding: 40px 28px 28px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ew-shadow-card);
+}
+
+
+/* Велика декоративна лапка */
+.quoteMark {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  font-family: var(--ew-font-serif);
+  font-size: 72px;
+  line-height: 1;
+  color: var(--ew-gold);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+
+/* ── Quote ── */
+
+.quote {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-base);
+  line-height: var(--ew-leading-loose);
+  color: var(--ew-text-mid);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+
+/* ── Author ── */
+
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ew-cream-dark);
+}
+
+.authorName {
+  font-family: var(--ew-font-serif);
+  font-size: var(--ew-text-base);
+  font-weight: 700;
+  color: var(--ew-text);
+}
+
+.authorDetail {
+  font-family: var(--ew-font-sans);
+  font-size: var(--ew-text-xs);
+  color: var(--ew-text-light);
+  letter-spacing: 0.02em;
+}
