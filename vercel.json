@@ -97,6 +97,16 @@
       "source": "/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life/",
       "destination": "/blog/4-deadly-morning-mistakes-seniors-make-that-quietly-damage-health-and-shorten-life",
       "permanent": true
+    },
+    {
+      "source": "/blog/top-5-superfoods-to-boost-energy-after-60",
+      "destination": "/blog/5-foods-that-turn-back-the-clock-after-65",
+      "permanent": true
+    },
+    {
+      "source": "/blog/top-5-senior-friendly-snacks-that-boost-brain-power",
+      "destination": "/blog/5-foods-that-turn-back-the-clock-after-65",
+      "permanent": true
     }
   ]
 }
