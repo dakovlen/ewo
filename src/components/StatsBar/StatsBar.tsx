@@ -2,9 +2,8 @@ import { Fragment } from "react";
 import styles from "./StatsBar.module.css";
 
 const stats = [
-  { number: "60+",  label: "Articles published"  },
+  { number: "70+",  label: "Articles published"  },
   { number: "5",    label: "Books on Amazon"      },
-  { number: "12K+", label: "Monthly readers"      },
   { number: "3+",   label: "Years of wisdom"      },
 ];
 

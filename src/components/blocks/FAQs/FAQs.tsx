@@ -16,10 +16,6 @@ type FAQsProps = {
   faqs?: FAQItem[];
 };
 
-/*
-  Витягує plain text з PortableText масиву.
-  Fallback коли поле text порожнє але body заповнене.
-*/
 function ptToPlainText(blocks: PortableTextBlock[]): string {
   return blocks
     .map((block) => {
@@ -32,10 +28,6 @@ function ptToPlainText(blocks: PortableTextBlock[]): string {
     .trim();
 }
 
-/*
-  Генерує FAQ Schema.org для SEO.
-  Google використовує це щоб показувати FAQ прямо в результатах пошуку.
-*/
 function generateFaqSchema(faqs: FAQItem[] | undefined): WithContext<FAQPage> {
   const mainEntity = (faqs ?? [])
     .map((f) => {
