@@ -107,6 +107,21 @@
       "source": "/blog/top-5-senior-friendly-snacks-that-boost-brain-power",
       "destination": "/blog/5-foods-that-turn-back-the-clock-after-65",
       "permanent": true
+    },
+    {
+      "source": "/blog/word-search-book-benefits-that-will-transform-your-mental-health",
+      "destination": "/blog/why-word-searches-keep-seniors-mentally-sharp-after-60",
+      "permanent": true
+    },
+    {
+      "source": "/blog/why-word-search-books-are-quietly-saving-senior-minds",
+      "destination": "/blog/why-word-searches-keep-seniors-mentally-sharp-after-60",
+      "permanent": true
+    },
+    {
+      "source": "/blog/discover-how-books-can-boost-senior-mental-health",
+      "destination": "/blog/why-word-searches-keep-seniors-mentally-sharp-after-60",
+      "permanent": true
     }
   ]
 }
