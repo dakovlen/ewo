@@ -122,7 +122,21 @@
       "source": "/blog/discover-how-books-can-boost-senior-mental-health",
       "destination": "/blog/why-word-searches-keep-seniors-mentally-sharp-after-60",
       "permanent": true
+    },
+    {
+      "source": "/blog/why-adult-child-stopped-calling",
+      "destination": "/blog/why-your-adult-children-don-t-call-anymore-and-how-to-fix-it",
+      "permanent": true
+    },
+    {
+      "source": "/blog/never-say-these-3-words-to-your-adult-children-it-destroys-relationships",
+      "destination": "/blog/things-not-to-say-to-adult-children",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-reconnect-with-estranged-loved-ones-over-60-your-guide-to-healing-and-new-beginnings",
+      "destination": "/blog/how-to-reconnect-with-estranged-adult-child",
+      "permanent": true
     }
   ]
 }
-
